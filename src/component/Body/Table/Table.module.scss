@@ -1,0 +1,6 @@
+.component{
+    display: grid;
+    --squareSide:40px;
+    grid-template-columns: repeat(8,--squareSide);
+    grid-template-rows: repeat(8,--squareSide);
+}
