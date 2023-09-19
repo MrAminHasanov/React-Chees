@@ -1,6 +1,61 @@
-.component{
-    display: grid;
-    --squareSide:40px;
-    grid-template-columns: repeat(8,--squareSide);
-    grid-template-rows: repeat(8,--squareSide);
+.component {
+    --squareSide: 85px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+    .table {
+        display: grid;
+        grid-template-columns: repeat(8, var(--squareSide));
+        grid-template-rows: repeat(8, var(--squareSide));
+        border: 3px solid black;
+    }
+
+    --borderWidth:calc(var(--squareSide) * 8 + var(--borderGap));
+
+    .tableBorder {
+        --borderGap: 60px;
+        position: absolute;
+        z-index: -2;
+        border: 2px solid black;
+        width: calc(var(--squareSide) * 8 + var(--borderGap));
+        height: calc(var(--squareSide) * 8 + var(--borderGap));
+        background-color: rgb(255, 219, 143);
+    }
+
+    --borderGap: 130px;
+
+    .secondTableBorder {
+        position: absolute;
+        z-index: -3;
+        width: var(--borderWidth);
+        height: var(--borderWidth);background: rgb(255,255,255);
+        background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgb(207, 170, 90) 82%);
+        border-radius: 10px;
+    }
+
+    .tableCorners {
+        position: absolute;
+        z-index: -1;
+        width: var(--borderWidth);
+        height: var(--borderWidth);
+
+        .corner {
+            background-color: black;
+            width: calc(var(--borderWidth) * 1.401);
+            height: 2px;
+            position: absolute;
+            top: 50%;
+        }
+
+        .leftCorner {
+            left: -20%;
+            transform: rotate(225deg);
+        }
+
+        .rightCorner {
+            left: -20%;
+            transform: rotate(-45deg);
+        }
+    }
 }
