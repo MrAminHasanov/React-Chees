@@ -83,6 +83,7 @@ export const squearesSlice = createSlice({
         state.content[choosedFigureId] = {};
         state.turn = !state.turn
       }
+      state.choosedFigure = null;
       state.moveableSquares = {};
     }
   }
