@@ -23,7 +23,7 @@ function Square({ figure, id, moveableSquare, turn, choosedFigure }) {
     figure?.side === turn ? selectFigure(id) : moveFigure(id),
     [figure.side, turn, id, moveFigure, selectFigure]);
 
-  const figureColor = useMemo(() =>
+  const figureColor = useMemo(() => 
     ({ "--figureColor": figure?.side === false ? "rgb(78, 78, 78)" : "white" }),
     [figure.side]);
 
