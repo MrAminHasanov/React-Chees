@@ -1,27 +1,29 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = { content: {}, choosedFigure: null, turn: "white" };
+const sides = { white: true, black: false };
+const figures = { pawn: "Pawn" };
+const initialState = { content: {}, choosedFigure: null, turn: sides.white, moveableSquares: {} };
 for (let i = 0; i < 64; ++i) {
   if (i < 16) {
     if (i > 7) {
       initialState.content[i] = {
-        type: "Pawn",
-        side: "black"
+        type: figures.pawn,
+        side: sides.black
       }
     } else {
-      initialState.content[i] = ""
+      initialState.content[i] = {}
     }
   } else if (i > 47) {
     if (i < 56) {
       initialState.content[i] = {
-        type: "Pawn",
-        side: "white"
+        type: figures.pawn,
+        side: sides.white
       }
     } else {
-      initialState.content[i] = ""
+      initialState.content[i] = {}
     }
   } else {
-    initialState.content[i] = ""
+    initialState.content[i] = {}
   }
 };
 
@@ -30,65 +32,58 @@ const squaresPosition = {};
 for (let i = 0; i < 64; ++i) {
   squaresPosition[i] = { x: (i % 8) + 1, y: Math.floor(i / 8) + 1 }
 };
-const posToId = (pos) => ((pos.y - 1) * 8 + pos.x - 1);
-// const squereGetter = (X, Y, state) => state.content[posToId({ x: X, y: Y })];
+const posToId = (x, y) => ((y - 1) * 8 + x - 1);
 
 export const squearesSlice = createSlice({
   name: "squaresList",
   initialState,
   reducers: {
-    // setSquareContent: (state, { payload }) => {
-    //   state[payload.id].content = payload.content;
-    // },
-    // removeSquareContent: (state, { payload: id }) => {
-    //   state[id].content = "";
-    // },
-    restartSquares: (state) => {
-      state = initialState;
-    },
     selectFigure: (state, { payload: id }) => {
       const contents = state.content;
-      if (contents[id].side === state.turn) {
+      const turn = state.turn;
+      if (contents[id].side === turn) {
+        state.moveableSquares = {};
         state.choosedFigure = id;
         const choosedFigure = {
           ...contents[id],
           pos: squaresPosition[id]
         }
         switch (choosedFigure.type) {
-          case "Pawn":
+          case figures.pawn:
             {
               //переменая для коректировки напраления движения в зависимости от стороны
-              const sideCoefficient = choosedFigure.side === "black" ? 1 : -1;
-              const nextSquareId = posToId(choosedFigure.pos.x, choosedFigure.pos.y + 1 * sideCoefficient);
-              if (
-                choosedFigure.side === "black" &&
-                contents[nextSquareId].side !== "white"
-              ) {
-                state.content[nextSquareId] = "potentialSquare"
-                if (choosedFigure.pos.y === 2) {
-                  const subsequentSquareId = posToId(choosedFigure.pos.x, 4);
-                  if (contents[subsequentSquareId] !== "white") {
-                    state.content[subsequentSquareId] = "potentialSquare"
+              const pawnDirection = choosedFigure.side === sides.black ? 1 : -1;
+              const nextSquareId = posToId(choosedFigure.pos.x, choosedFigure.pos.y + 1 * pawnDirection);
+              if (contents[nextSquareId]?.side === undefined) {
+                state.moveableSquares[nextSquareId] = true;
+                if ((choosedFigure.pos.y === 2 && turn === sides.black) ||
+                  (choosedFigure.pos.y === 7 && turn === sides.white)) {
+                  const subsequentSquareId = posToId(choosedFigure.pos.x, choosedFigure.pos.y + (2 * pawnDirection));
+                  if (contents[subsequentSquareId]?.side === undefined) {
+                    state.moveableSquares[subsequentSquareId] = true;
                   }
                 }
               }
+              const leftDioganalSquareId = posToId(choosedFigure.pos.x + 1, choosedFigure.pos.y + 1 * pawnDirection)
+              const rightDioganalSquareId = posToId(choosedFigure.pos.x - 1, choosedFigure.pos.y + 1 * pawnDirection)
+              if (contents[leftDioganalSquareId]?.side === !turn)
+                state.moveableSquares[leftDioganalSquareId] = true;
+              if (contents[rightDioganalSquareId]?.side === !turn)
+                state.moveableSquares[rightDioganalSquareId] = true;
             }
             break
           default: break
         }
       }
-    }
-  },
-  moveFigure: (state, { payload: id }) => {
-    const choosedFigure = {
-      id: state.selectedFigure,
-      position: squaresPosition[state.selectedFigure],
-      ...state.content[state.selectedFigure]
-    };
-    const chosedSquare = {
-      id: id,
-      content: state.content[id],
-      position: squaresPosition[id]
+    },
+    moveFigure: (state, { payload: id }) => {
+      if (state.moveableSquares[id]) {
+        const choosedFigureId = state.choosedFigure;
+        state.content[id] = state.content[choosedFigureId];
+        state.content[choosedFigureId] = {};
+        state.turn = !state.turn
+      }
+      state.moveableSquares = {};
     }
   }
 }
@@ -97,3 +92,4 @@ export const squearesSlice = createSlice({
 
 
 export const { actions, reducer } = squearesSlice;
+export const squaresList = state => state.squaresList
