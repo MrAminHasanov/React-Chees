@@ -5,7 +5,6 @@ import { squaresList } from '../../../../Store/square.slice';
 
 function TableContent() {
   const { moveableSquares, content: squeares, turn, choosedFigure } = useSelector(squaresList);
-  console.log(choosedFigure);
 
   return (
     <div className={c.component}>
