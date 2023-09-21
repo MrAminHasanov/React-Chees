@@ -1,15 +1,19 @@
 import c from './TableContent.module.scss'
 import Square from './Square/Square'
-import { useSelector } from 'react-redux'
-import { squaresList } from '../../../../Store/square.slice';
 
 function TableContent() {
-  const { moveableSquares, content: squeares, turn, choosedFigure } = useSelector(squaresList);
-
+  const generateSquares = () => {
+    const squares = []
+    for (let i = 0; i < 64; i++) {
+      const squeMathColor = (i + (Math.floor(i / 8) % 2)) % 2;
+      squares.push(<Square id={i} key={i} squeMathColor={squeMathColor} />)
+    }
+    return squares
+  }
   return (
     <div className={c.component}>
       {
-        Object.values(squeares).map((figure, i) => <Square id={i} key={i} figure={figure} turn={turn} moveableSquare={moveableSquares[i]} choosedFigure={choosedFigure} />)
+        generateSquares()
       }
     </div>
   )

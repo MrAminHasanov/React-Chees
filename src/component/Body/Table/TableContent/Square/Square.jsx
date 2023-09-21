@@ -1,46 +1,47 @@
 import classNames from 'classnames'
-import { useCallback, useMemo } from 'react';
 import { useActions } from '../../../../../Hooks/useActions/useActions';
 
 import c from './Square.module.scss'
 import Pawn from './Figures/Pawn/Pawn'
+import { useSelector } from 'react-redux';
 
-function Square({ figure, id, moveableSquare, turn, choosedFigure }) {
-  const { selectFigure, moveFigure } = useActions()
-  const squeColor = useMemo(() => {
-    const squeMathColor = (id + (Math.floor(id / 8) % 2)) % 2;
-    return squeMathColor === 0 ? c.blackSquare : c.whiteSquare;
-  }, [id])
-  
-  const squaeClassNames = useMemo(() =>
-    classNames(c.component, squeColor,
-      choosedFigure === id && c.activeSquare,
-      (moveableSquare && figure?.type === undefined) && c.potentialSquare),
+function Square({ id, squeMathColor }) {
+  const isChoosedFigure = useSelector(state => state.squaresList.choosedFigure === id);
+  const isMoveableSquare = useSelector(state => state.squaresList.moveableSquares[id]);
+  const figure = useSelector(state => state.squaresList.content[id]);
+  const isTurn = useSelector(state => state.squaresList.turn === figure?.side);
 
-    [squeColor, choosedFigure, id, moveableSquare, figure?.type]);
+  const isEmptySquare = figure?.type === undefined;
+  const isEnemyFigure = !isTurn && !isEmptySquare;
 
-  const squareOnClick = useCallback(() =>
-    figure?.side === turn ? selectFigure(id) : moveFigure(id),
-    [figure.side, turn, id, moveFigure, selectFigure]);
+  const { selectFigure, moveFigure } = useActions();
 
-  const figureColor = useMemo(() => 
-    ({ "--figureColor": figure?.side === false ? "rgb(78, 78, 78)" : "white" }),
-    [figure.side]);
+  const squeColor = squeMathColor === 0 ? c.blackSquare : c.whiteSquare;
+  const squaeClassNames = classNames(c.component, squeColor,
+    isChoosedFigure && c.activeSquare,
+    (isMoveableSquare && isEmptySquare) && c.potentialSquare,
+    (isMoveableSquare && isEnemyFigure) && c.potentialFigureSquare)
 
-  const figureSelector = useCallback(() => {
+  const squareOnClick = () => isTurn ? selectFigure(id) : moveFigure(id);
+
+  const figureColor = ({ "--figureColor": figure?.side === false ? "rgb(78, 78, 78)" : "white" })
+
+  const figureSelector = () => {
     switch (figure.type) {
-      case "Pawn":
+      case "Pawn": {
         return <Pawn squeColor={squeColor} figureColor={figureColor} />
+      }
       default:
         return "";
     }
-  }, [figure, squeColor, figureColor])
-
+  }
   return (
-    <div id={id} className={squaeClassNames} onClick={() => squareOnClick()}>
-      {
-        figureSelector()
-      }
+    <div id={id} className={squaeClassNames} >
+      <div onClick={() => squareOnClick()} className={c.figureContainer}>
+        {
+          figureSelector()
+        }
+      </div>
     </div>
   )
 }
