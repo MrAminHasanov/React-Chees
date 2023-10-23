@@ -1,49 +1,69 @@
 import classNames from 'classnames'
 import { useActions } from '../../../../../Hooks/useActions/useActions';
 
-import c from './Square.module.scss'
+import styles from './Square.module.scss'
 import Pawn from './Figures/Pawn/Pawn'
 import { useSelector } from 'react-redux';
+import Knight from './Figures/Knight/Knight';
+import Rook from './Figures/Rook/Rook';
 
 function Square({ id, squeMathColor }) {
-  const isChoosedFigure = useSelector(state => state.squaresList.choosedFigure === id);
+  const square = useSelector(state => state.squaresList.content[id]);
+  const isChoosedFigure = useSelector(state => state.squaresList.choosedFigureId === id);
   const isMoveableSquare = useSelector(state => state.squaresList.moveableSquares[id]);
-  const figure = useSelector(state => state.squaresList.content[id]);
-  const isTurn = useSelector(state => state.squaresList.turn === figure?.side);
-
-  const isEmptySquare = figure?.type === undefined;
-  const isEnemyFigure = !isTurn && !isEmptySquare;
-
+  const isThisFigureSideTurn = useSelector(state => state.squaresList.figureTurn === square?.side);
   const { selectFigure, moveFigure } = useActions();
 
-  const squeColor = squeMathColor === 0 ? c.blackSquare : c.whiteSquare;
-  const squaeClassNames = classNames(c.component, squeColor,
-    isChoosedFigure && c.activeSquare,
-    (isMoveableSquare && isEmptySquare) && c.potentialSquare,
-    (isMoveableSquare && isEnemyFigure) && c.potentialFigureSquare)
+  const squeColor = squeMathColor === 0 ? styles.blackSquare : styles.whiteSquare;
+  const isEmptySquare = square?.type === undefined;
 
-  const squareOnClick = () => isTurn ? selectFigure(id) : moveFigure(id);
+  let squaeClassNames = classNames(styles.component, squeColor);
+  let squareOnClick = () => "";
 
-  const figureColor = ({ "--figureColor": figure?.side === false ? "rgb(78, 78, 78)" : "white" })
-
-  const figureSelector = () => {
-    switch (figure.type) {
-      case "Pawn": {
-        return <Pawn squeColor={squeColor} figureColor={figureColor} />
-      }
-      default:
-        return "";
+    if (isChoosedFigure) {
+      squaeClassNames += " " + styles.choosedFigure
     }
-  }
-  return (
-    <div id={id} className={squaeClassNames} >
-      <div onClick={() => squareOnClick()} className={c.figureContainer}>
-        {
-          figureSelector()
-        }
-      </div>
-    </div>
-  )
-}
+    else if (isThisFigureSideTurn) {
+      squareOnClick = () => selectFigure(id);
+    }
+    else {
+      if (isEmptySquare) {
+        if (isMoveableSquare)
+          squaeClassNames += " " + styles.moveableSquare;
+      }
+      else {//this enemyFigure
+        if (isMoveableSquare)
+          squaeClassNames += " " + styles.takeableFigure;
+      }
+      squareOnClick = () => moveFigure(id);
+    }
 
-export default Square
+    const figureColor = ({ "--figureColor": square?.side === false ? "rgb(78, 78, 78)" : "white" })
+
+    const figureSelector = () => {
+      switch (square.type) {
+        case "Pawn": {
+          return <Pawn squeColor={squeColor} figureColor={figureColor} />
+        }
+        case "Knight": {
+          return <Knight />
+        }
+        case "Rook": {
+          return <Rook />
+        }
+        default:
+          return "";
+      }
+    }
+    return (
+      <div id={id} className={squaeClassNames} >
+        <div onClick={() => squareOnClick()} className={styles.figureContainer}>
+          {
+            figureSelector()
+          }
+        </div>
+      </div>
+    )
+  }
+
+  export default Square

@@ -1,13 +1,24 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const sides = { white: true, black: false };
-const figures = { pawn: "Pawn" };
-const initialState = { content: {}, choosedFigure: null, turn: sides.white, moveableSquares: {} };
+const figures = { pawn: "Pawn", knight: "Knight", rook: "Rook" };
+const initialState = { content: {}, choosedFigureId: null, figureTurn: sides.white, moveableSquares: {}, moveHistory: [] };
 for (let i = 0; i < 64; ++i) {
   if (i < 16) {
     if (i > 7) {
       initialState.content[i] = {
         type: figures.pawn,
+        side: sides.black
+      }
+    } else if (i === 0 || i === 7) {
+      initialState.content[i] = {
+        type: figures.rook,
+        side: sides.black
+      }
+    }
+    else if (i === 1 || i === 6) {
+      initialState.content[i] = {
+        type: figures.knight,
         side: sides.black
       }
     } else {
@@ -19,18 +30,33 @@ for (let i = 0; i < 64; ++i) {
         type: figures.pawn,
         side: sides.white
       }
-    } else {
+    }
+    else if (i === 57 || i === 62) {
+      initialState.content[i] = {
+        type: figures.knight,
+        side: sides.white
+      }
+    }
+    else if (i === 56 || i === 63) {
+      initialState.content[i] = {
+        type: figures.rook,
+        side: sides.white
+      }
+    }
+    else {
       initialState.content[i] = {}
     }
   } else {
     initialState.content[i] = {}
   }
 };
-
-
-const moveHistory = [initialState.content];
+initialState.content[35] = {
+  type: figures.rook,
+  side: sides.white
+}
+initialState.moveHistory.push(initialState.content);
 const idToPos = (id) => ({ x: (id % 8) + 1, y: Math.floor(id / 8) + 1 })
-const posToId = (x, y) => ((y - 1) * 8 + x - 1);
+const posToId = (x, y) => ((x > 0 && x < 9) && (y > 0 && y < 9)) ? ((y - 1) * 8 + x - 1) : null;
 
 export const squearesSlice = createSlice({
   name: "squaresList",
@@ -38,12 +64,12 @@ export const squearesSlice = createSlice({
   reducers: {
     selectFigure: (state, { payload: id }) => {
       const contents = state.content;
-      const turn = state.turn;
-      if (contents[id].side === turn) {
+      const figureTurn = state.figureTurn;
+      if (contents[id].side === figureTurn) {
         state.moveableSquares = {};
-        state.choosedFigure = id;
+        state.choosedFigureId = id;
         const choosedFigure = {
-          side: turn,
+          side: figureTurn,
           type: contents[id].type,
           pos: idToPos(id)
         }
@@ -54,7 +80,7 @@ export const squearesSlice = createSlice({
               const pawnDirection = choosedFigure.side === sides.black ? 1 : -1;
               // #region verifyMoveDirectly
               const nextSquareId = posToId(choosedFigure.pos.x, choosedFigure.pos.y + 1 * pawnDirection);
-              if (contents[nextSquareId]?.side === undefined) {
+              if (contents[nextSquareId]?.side === undefined && nextSquareId !== null) {
                 state.moveableSquares[nextSquareId] = nextSquareId;
                 if ((choosedFigure.pos.y === 2 && choosedFigure.side === sides.black) ||
                   (choosedFigure.pos.y === 7 && choosedFigure.side === sides.white)) {
@@ -76,30 +102,77 @@ export const squearesSlice = createSlice({
               // #region verifySpecialBeat
               const leftSquarePos = { x: choosedFigure.pos.x - 1, y: choosedFigure.pos.y };
               const rightSquarePos = { x: choosedFigure.pos.x + 1, y: choosedFigure.pos.y };
-              const leftSquareId = posToId(leftSquarePos);
-              const rightSquareId = posToId(rightSquarePos);
+              const leftSquareId = posToId(leftSquarePos.x, leftSquarePos.y);
+              const rightSquareId = posToId(rightSquarePos.x, rightSquarePos.y);
               const leftSquare = contents[leftSquareId];
               const rightSquare = contents[rightSquareId];
 
               if (leftSquare?.type === figures.pawn && leftSquare?.side === !choosedFigure.side) {
-                const prevMove = Object.values(moveHistory[moveHistory.length - 1]);
+                const prevMove = state.moveHistory[state.moveHistory.length - 2];
                 const pawnStartPosId = posToId(leftSquarePos.x, leftSquarePos.y + 2 * pawnDirection);
                 const wasPawnInStart = prevMove[pawnStartPosId]?.type === figures.pawn;
                 if (wasPawnInStart) {
-                  state.moveableSquares[idToPos(leftSquarePos.x, leftSquarePos.y + 1 * pawnDirection)] = leftSquareId;
+                  state.moveableSquares[posToId(leftSquarePos.x, leftSquarePos.y + 1 * pawnDirection)] = leftSquareId;
                 }
               }
               if (rightSquare?.type === figures.pawn && rightSquare?.side === !choosedFigure.side) {
-                const prevMove = Object.values(moveHistory[moveHistory.length - 2]);
+                const prevMove = state.moveHistory[state.moveHistory.length - 2];
                 const pawnStartPosId = posToId(rightSquarePos.x, rightSquarePos.y + 2 * pawnDirection);
                 const wasPawnInStart = prevMove[pawnStartPosId]?.type === figures.pawn;
                 if (wasPawnInStart) {
-                  state.moveableSquares[idToPos(rightSquarePos.x, rightSquarePos.y + 1 * pawnDirection)] = rightSquareId;
+                  state.moveableSquares[posToId(rightSquarePos.x, rightSquarePos.y + 1 * pawnDirection)] = rightSquareId;
                 }
               }
               //#endregion
             }
             break
+          case figures.knight:
+            {
+              const potentaileSquaresId = [];
+              for (let xDrt = -1; xDrt <= 1; xDrt += 2) {
+                for (let yDrt = -1; yDrt <= 1; yDrt += 2) {
+                  for (let diogDrt = -1; diogDrt <= 1; diogDrt += 2) {
+                    const xTest = choosedFigure.pos.x + ((1.5 + (diogDrt * 0.5)) * xDrt);
+                    const yTest = choosedFigure.pos.y + ((1.5 - (diogDrt * 0.5)) * yDrt);
+                    const testId = posToId(xTest, yTest);
+                    if (testId !== null) {
+                      potentaileSquaresId.push(testId);
+                    }
+                  }
+                }
+              }
+              for (let squareId of potentaileSquaresId) {
+                if (contents[squareId]?.side !== choosedFigure.side) {
+                  state.moveableSquares[squareId] = squareId;
+                }
+              }
+              break
+            }
+          case figures.rook: {
+            const startX = choosedFigure.pos.x;
+            const startY = choosedFigure.pos.y;
+            for (let corOrder = -1; corOrder <= 1; corOrder += 2) {
+              for (let yxDrt = -1; yxDrt <= 1; yxDrt += 2) {
+                let xCounter = startX;
+                let yCounter = startY;
+                while ((xCounter > 0 && xCounter < 9) && (yCounter > 0 && yCounter < 9)) {
+                  xCounter += ((1 + corOrder) / 2) * yxDrt;
+                  yCounter += ((-1 + corOrder) / -2) * yxDrt;
+                  const potentialSquareId = posToId(xCounter, yCounter);
+                  const square = contents[[potentialSquareId]];
+                  if (square?.side === undefined) {
+                    state.moveableSquares[potentialSquareId] = potentialSquareId
+                  } else {
+                    if (square.side === !choosedFigure.side) {
+                      state.moveableSquares[potentialSquareId] = potentialSquareId
+                    }
+                    break
+                  }
+                }
+              }
+            }
+            break
+          }
           default: break
         }
       }
@@ -107,13 +180,14 @@ export const squearesSlice = createSlice({
     moveFigure: (state, { payload: id }) => {
       const moveableSquare = state.moveableSquares[id]
       if (moveableSquare) {
-        const choosedFigureId = state.choosedFigure;
-        state.content[moveableSquare] = state.content[choosedFigureId];
+        const choosedFigureId = state.choosedFigureId;
+        state.content[moveableSquare] = {}
+        state.content[id] = state.content[choosedFigureId];
         state.content[choosedFigureId] = {};
-        state.turn = !state.turn
-        moveHistory.push = state.content;
+        state.figureTurn = !state.figureTurn
+        state.moveHistory.push(state.content);
       }
-      state.choosedFigure = null;
+      state.choosedFigureId = null;
       state.moveableSquares = {};
     }
   }

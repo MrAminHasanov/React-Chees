@@ -14,15 +14,15 @@
     background-color: #edeed1;
 }
 
-.activeSquare {
+.choosedFigure {
     border: 3px solid rgb(0, 0, 0);
 }
 
-.potentialFigureSquare {
+.takeableFigure {
     border: 3px solid rgb(85, 255, 43);
 }
 
-.potentialSquare {
+.moveableSquare {
     .figureContainer::after {
         background-color: rgb(123, 123, 123);
         content: " ";

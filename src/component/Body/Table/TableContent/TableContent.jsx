@@ -10,6 +10,7 @@ function TableContent() {
     }
     return squares
   }
+  
   return (
     <div className={c.component}>
       {

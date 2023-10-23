@@ -4,7 +4,6 @@ import c from './Table.module.scss'
 import TableContent from './TableContent/TableContent'
 
 function Table() {
-
   return (
     <div className={c.component}>
       <div className={c.tableCorners}>
