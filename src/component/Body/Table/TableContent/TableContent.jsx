@@ -5,8 +5,8 @@ function TableContent() {
   const generateSquares = () => {
     const squares = []
     for (let i = 0; i < 64; i++) {
-      const squeMathColor = (i + (Math.floor(i / 8) % 2)) % 2;
-      squares.push(<Square id={i} key={i} squeMathColor={squeMathColor} />)
+      const squareMathColor = (i + (Math.floor(i / 8) % 2)) % 2;
+      squares.push(<Square id={i} key={i} squareMathColor={squareMathColor} />)
     }
     return squares
   }

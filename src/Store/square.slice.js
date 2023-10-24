@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const sides = { white: true, black: false };
-const figures = { pawn: "Pawn", knight: "Knight", rook: "Rook" };
+const figures = { pawn: "Pawn", knight: "Knight", rook: "Rook", bishop: "Bishop", queen: "Queen", king: "King" };
 const initialState = { content: {}, choosedFigureId: null, figureTurn: sides.white, moveableSquares: {}, moveHistory: [] };
 for (let i = 0; i < 64; ++i) {
   if (i < 16) {
@@ -21,19 +21,26 @@ for (let i = 0; i < 64; ++i) {
         type: figures.knight,
         side: sides.black
       }
-    } else {
-      initialState.content[i] = {}
+    } else if (i === 2 || i === 5) {
+      initialState.content[i] = {
+        type: figures.bishop,
+        side: sides.black
+      }
+    } else if (i === 4) {
+      initialState.content[i] = {
+        type: figures.queen,
+        side: sides.black
+      }
+    } else if (i === 3) {
+      initialState.content[i] = {
+        type: figures.king,
+        side: sides.black
+      }
     }
   } else if (i > 47) {
     if (i < 56) {
       initialState.content[i] = {
         type: figures.pawn,
-        side: sides.white
-      }
-    }
-    else if (i === 57 || i === 62) {
-      initialState.content[i] = {
-        type: figures.knight,
         side: sides.white
       }
     }
@@ -43,15 +50,34 @@ for (let i = 0; i < 64; ++i) {
         side: sides.white
       }
     }
-    else {
-      initialState.content[i] = {}
+    else if (i === 57 || i === 62) {
+      initialState.content[i] = {
+        type: figures.knight,
+        side: sides.white
+      }
+    }
+    else if (i === 58 || i === 61) {
+      initialState.content[i] = {
+        type: figures.bishop,
+        side: sides.white
+      }
+    } else if (i === 60) {
+      initialState.content[i] = {
+        type: figures.queen,
+        side: sides.white
+      }
+    } else if (i === 59) {
+      initialState.content[i] = {
+        type: figures.king,
+        side: sides.white
+      }
     }
   } else {
     initialState.content[i] = {}
   }
 };
 initialState.content[35] = {
-  type: figures.rook,
+  type: figures.bishop,
   side: sides.white
 }
 initialState.moveHistory.push(initialState.content);
@@ -167,6 +193,77 @@ export const squearesSlice = createSlice({
                       state.moveableSquares[potentialSquareId] = potentialSquareId
                     }
                     break
+                  }
+                }
+              }
+            }
+            break
+          }
+          case figures.bishop: {
+            const startX = choosedFigure.pos.x;
+            const startY = choosedFigure.pos.y;
+            for (let xDrt = -1; xDrt <= 1; xDrt += 2) {
+              for (let yDrt = -1; yDrt <= 1; yDrt += 2) {
+                let xCounter = startX;
+                let yCounter = startY;
+                while ((xCounter > 0 && xCounter < 9) && (yCounter > 0 && yCounter < 9)) {
+                  xCounter += xDrt;
+                  yCounter += yDrt;
+                  const potentialSquareId = posToId(xCounter, yCounter);
+                  const square = contents[[potentialSquareId]];
+                  if (square?.side === undefined) {
+                    state.moveableSquares[potentialSquareId] = potentialSquareId
+                  } else {
+                    if (square.side === !choosedFigure.side) {
+                      state.moveableSquares[potentialSquareId] = potentialSquareId
+                    }
+                    break
+                  }
+                }
+              }
+            }
+            break
+          }
+          case figures.queen: {
+            const startX = choosedFigure.pos.x;
+            const startY = choosedFigure.pos.y;
+            for (let corOrder = -1; corOrder <= 1; corOrder += 2) {
+              for (let yxDrt = -1; yxDrt <= 1; yxDrt += 2) {
+                let xCounter = startX;
+                let yCounter = startY;
+                while ((xCounter > 0 && xCounter < 9) && (yCounter > 0 && yCounter < 9)) {
+                  xCounter += ((1 + corOrder) / 2) * yxDrt;
+                  yCounter += ((-1 + corOrder) / -2) * yxDrt;
+                  const potentialSquareId = posToId(xCounter, yCounter);
+                  const square = contents[[potentialSquareId]];
+                  if (square?.side === undefined) {
+                    state.moveableSquares[potentialSquareId] = potentialSquareId
+                  } else {
+                    if (square.side === !choosedFigure.side) {
+                      state.moveableSquares[potentialSquareId] = potentialSquareId
+                    }
+                    break
+                  }
+                }
+              }
+              for (let xDrt = -1; xDrt <= 1; xDrt += 2) {
+                for (let yDrt = -1; yDrt <= 1; yDrt += 2) {
+                  let xCounter = startX;
+                  let yCounter = startY;
+                  while ((xCounter > 0 && xCounter < 9) && (yCounter > 0 && yCounter < 9)) {
+                    xCounter += xDrt;
+                    yCounter += yDrt;
+                    const potentialSquareId = posToId(xCounter, yCounter);
+                    const square = contents[[potentialSquareId]];
+                    if (square?.side === undefined) {
+                      state.moveableSquares[potentialSquareId] = potentialSquareId
+                    } else {
+                      if (square.side === !choosedFigure.side) {
+                        state.moveableSquares[potentialSquareId] = potentialSquareId
+                      }
+                      break
+                    }
+
                   }
                 }
               }

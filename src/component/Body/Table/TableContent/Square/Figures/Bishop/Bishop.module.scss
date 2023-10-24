@@ -6,43 +6,37 @@
     transform: translateY(-2px);
     --borderColor: rgb(0, 0, 0);
 
-    .crown {
-        position: absolute;
-        width: calc(100% + 4px);
-        height: 5px;
-        display: flex;
-        justify-content: space-evenly;
-        transform: translate(-2px, -2px);
-
-        .block {
-            width: 6px;
-            background-color: var(--squareColor);
-            height: 100%;
-            border: 2px solid black;
-            border-top: transparent;
-        }
+    &>* {
+        border: 2px solid var(--borderColor);
+        background-color: var(--figureColor);
     }
 
     .top {
-        width: 26px;
-        height: 12px;
-        transform: translateY(3px);
-        border: 2px solid var(--borderColor);
-        background-color: var(--figureColor);
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        transform: translateY(4px);
+    }
+
+    .topRounde {
+        transform: translateY(2px);
+        width: 18px;
+        height: 6px;
+        border-radius: 14px;
     }
 
     .body {
         overflow: hidden;
         display: flex;
-        transform: translateY(3px);
+        transform: translateY(2px);
         justify-content: space-evenly;
         border: none;
-        height: 20px;
+        height: 16px;
         background-color: transparent;
         position: relative;
 
         .midle {
-            width: 24px;
+            width: 19px;
             background-color: var(--figureColor);
             height: 100%;
         }
@@ -52,13 +46,13 @@
             z-index: 1;
             width: 6px;
             height: 100%;
-            border-bottom: 1px solid var(--borderColor);
             background-color: var(--squareColor);
+            border-bottom: 1px solid var(--borderColor);
         }
 
         --distance:-1px;
         --top:0px;
-        --bottomRadiuse:70%;
+        --bottomRadiuse:90%;
 
         .leftRounde {
             top: var(--top);
@@ -77,22 +71,17 @@
 
     .bottomRounde {
         --borderRadiuse: 4px;
-        width: 33px;
-        height: 6px;
         border-top-left-radius: var(--borderRadiuse);
         border-top-right-radius: var(--borderRadiuse);
+        width: 28px;
+        height: 6px;
         transform: translateY(2px);
-        border: 2px solid var(--borderColor);
-        background-color: var(--figureColor);
     }
 
     .bottom {
-        --borderRadiuse: 12px;
-        width: 45px;
-        height: 12px;
-        border-top-right-radius: var(--borderRadiuse);
-        border-top-left-radius: var(--borderRadiuse);
-        border: 2px solid var(--borderColor);
-        background-color: var(--figureColor);
+        width: 38px;
+        height: 10px;
+        border-top-right-radius: 12px;
+        border-top-left-radius: 12px;
     }
 }

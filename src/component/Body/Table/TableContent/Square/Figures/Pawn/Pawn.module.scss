@@ -1,84 +1,86 @@
     .component {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    cursor: pointer;
-    transform: translateY(-2px);
-    --borderColor: rgb(0, 0, 0);
-
-    &>* {
-        border: 2px solid var(--borderColor);
-        background-color: var(--figureColor);
-    }
-
-    .top {
-        width: 19px;
-        height: 19px;
-        border-radius: 50%;
-        transform: translateY(4px);
-    }
-
-    .topRounde {
-        transform: translateY(2px);
-        width: 25px;
-        height: 7px;
-        border-radius: 14px;
-    }
-
-    .body {
-        overflow: hidden;
         display: flex;
-        transform: translateY(2px);
-        justify-content: space-evenly;
-        border: none;
-        height: 8px;
-        background-color: transparent;
-        position: relative;
+        flex-direction: column;
+        align-items: center;
+        cursor: pointer;
+        transform: translateY(-2px);
+        --borderColor: rgb(0, 0, 0);
 
-        .midle {
-            width: 19px;
+        &>* {
+            border: 2px solid var(--borderColor);
             background-color: var(--figureColor);
-            height: 100%;
         }
 
-        .rounde {
-            position: absolute;
-            z-index: 1;
-            width: 6px;
-            height: 100%;
-            border-bottom: 1px solid var(--borderColor);
+        .top {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            transform: translateY(4px);
         }
 
-        --distance:-1px;
-        --top:0px;
-        --bottomRadiuse:50%;
-
-        .leftRounde {
-            top: var(--top);
-            left: var(--distance);
-            border-right: 2px solid var(--borderColor);
-            border-bottom-right-radius: var(--bottomRadiuse);
+        .topRounde {
+            transform: translateY(2px);
+            width: 21px;
+            height: 6px;
+            border-radius: 14px;
         }
 
-        .rightRounde {
-            top: var(--top);
-            right: var(--distance);
-            border-left: 2px solid var(--borderColor);
-            border-bottom-left-radius: var(--bottomRadiuse);
+        .body {
+            overflow: hidden;
+            display: flex;
+            transform: translateY(2px);
+            justify-content: space-evenly;
+            border: none;
+            height: 9px;
+            background-color: transparent;
+            position: relative;
+
+            .midle {
+                width: 19px;
+                background-color: var(--figureColor);
+                height: 100%;
+            }
+
+            .rounde {
+                position: absolute;
+                z-index: 1;
+                width: 6px;
+                height: 100%;
+                background-color: var(--squareColor);
+                border-bottom: 1px solid var(--borderColor);
+            }
+
+            --distance:-1px;
+            --top:0px;
+            --bottomRadiuse:50%;
+
+            .leftRounde {
+                top: var(--top);
+                left: var(--distance);
+                border-right: 2px solid var(--borderColor);
+                border-bottom-right-radius: var(--bottomRadiuse);
+            }
+
+            .rightRounde {
+                top: var(--top);
+                right: var(--distance);
+                border-left: 2px solid var(--borderColor);
+                border-bottom-left-radius: var(--bottomRadiuse);
+            }
+        }
+
+        .bottomRounde {
+            width: 29px;
+            height: 7px;
+            border-radius: 14px;
+            transform: translateY(1px);
+        }
+
+        .bottom {
+            transform: translateY(-1px);
+            width: 40px;
+            height: 12px;
+            border-top-right-radius: 12px;
+            border-top-left-radius: 12px;
         }
     }
-
-    .bottomRounde {
-        width: 33px;
-        height: 7px;
-        border-radius: 14px;
-        transform: translateY(2px);
-    }
-
-    .bottom {
-        width: 45px;
-        height: 14px;
-        border-top-right-radius: 12px;
-        border-top-left-radius: 12px;
-    }
-}

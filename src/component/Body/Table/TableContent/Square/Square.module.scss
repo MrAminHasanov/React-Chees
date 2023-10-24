@@ -4,14 +4,7 @@
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-}
-
-.blackSquare {
-    background-color: #995252;
-}
-
-.whiteSquare {
-    background-color: #edeed1;
+    background-color: var(--squareColor);
 }
 
 .choosedFigure {
