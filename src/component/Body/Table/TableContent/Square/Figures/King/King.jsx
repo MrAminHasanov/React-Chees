@@ -1,9 +1,9 @@
-import c from './King.module.scss'
+// import c from './King.module.scss';
 
 function King() {
-  return (
-    <div className={c.component}>King</div>
-  )
+    return (
+        <div>King</div>
+    )
 }
 
 export default King

@@ -76,10 +76,7 @@ for (let i = 0; i < 64; ++i) {
     initialState.content[i] = {}
   }
 };
-initialState.content[35] = {
-  type: figures.bishop,
-  side: sides.white
-}
+
 initialState.moveHistory.push(initialState.content);
 const idToPos = (id) => ({ x: (id % 8) + 1, y: Math.floor(id / 8) + 1 })
 const posToId = (x, y) => ((x > 0 && x < 9) && (y > 0 && y < 9)) ? ((y - 1) * 8 + x - 1) : null;
@@ -268,6 +265,10 @@ export const squearesSlice = createSlice({
                 }
               }
             }
+            break
+          }
+          case figures.king: {
+
             break
           }
           default: break
