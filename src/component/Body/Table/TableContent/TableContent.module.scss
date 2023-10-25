@@ -2,5 +2,5 @@
     display: grid;
     grid-template-columns: repeat(8, var(--squareSide));
     grid-template-rows: repeat(8, var(--squareSide));
-    border: 3px solid black;
+    border: 2px solid rgb(0, 0, 0);
 }

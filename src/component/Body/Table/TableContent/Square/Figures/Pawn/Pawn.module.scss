@@ -12,8 +12,8 @@
         }
 
         .top {
-            width: 18px;
-            height: 18px;
+            width: 16px;
+            height: 16px;
             border-radius: 50%;
             transform: translateY(4px);
         }
@@ -21,7 +21,7 @@
         .topRounde {
             transform: translateY(2px);
             width: 21px;
-            height: 6px;
+            height: 3px;
             border-radius: 14px;
         }
 
@@ -36,7 +36,7 @@
             position: relative;
 
             .midle {
-                width: 19px;
+                width: 22px;
                 background-color: var(--figureColor);
                 height: 100%;
             }
@@ -71,7 +71,7 @@
 
         .bottomRounde {
             width: 29px;
-            height: 7px;
+            height: 5px;
             border-radius: 14px;
             transform: translateY(1px);
         }
@@ -79,7 +79,7 @@
         .bottom {
             transform: translateY(-1px);
             width: 40px;
-            height: 12px;
+            height: 10px;
             border-top-right-radius: 12px;
             border-top-left-radius: 12px;
         }
