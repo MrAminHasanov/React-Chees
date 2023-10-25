@@ -1,11 +1,10 @@
 .component {
     width: calc(100% - 6px);
     height: calc(100% - 6px);
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
     background-color: var(--squareColor);
     border: 3px solid var(--squareColor);
+    transition: .2s ease border-color;
+    position: relative;
 }
 
 .choosedFigure {
@@ -23,6 +22,8 @@
         opacity: 0.5;
         width: 35px;
         height: 35px;
+        bottom: 50%;
+        transform: translateY(50%);
         border-radius: 50%;
         position: absolute;
     }
@@ -34,5 +35,5 @@
     height: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: end;
 }

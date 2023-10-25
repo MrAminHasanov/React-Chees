@@ -15,7 +15,7 @@
         transform: translate(-2px, -2px);
 
         .block {
-            width: 3px;
+            width: 2px;
             background-color: var(--squareColor);
             height: 100%;
             border: 2px solid black;
@@ -24,7 +24,7 @@
     }
 
     .top {
-        width: 26px;
+        width: 24px;
         height: 12px;
         transform: translateY(3px);
         border: 2px solid var(--borderColor);
@@ -77,7 +77,7 @@
 
     .bottomRounde {
         --borderRadiuse: 4px;
-        width: 33px;
+        width: 31px;
         height: 6px;
         border-top-left-radius: var(--borderRadiuse);
         border-top-right-radius: var(--borderRadiuse);
@@ -88,8 +88,8 @@
 
     .bottom {
         --borderRadiuse: 12px;
-        width: 45px;
-        height: 12px;
+        width: 42px;
+        height: 10px;
         border-top-right-radius: var(--borderRadiuse);
         border-top-left-radius: var(--borderRadiuse);
         border: 2px solid var(--borderColor);

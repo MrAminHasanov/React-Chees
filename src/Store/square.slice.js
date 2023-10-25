@@ -28,12 +28,12 @@ for (let i = 0; i < 64; ++i) {
       }
     } else if (i === 4) {
       initialState.content[i] = {
-        type: figures.queen,
+        type: figures.king,
         side: sides.black
       }
     } else if (i === 3) {
       initialState.content[i] = {
-        type: figures.king,
+        type: figures.queen,
         side: sides.black
       }
     }
@@ -63,12 +63,12 @@ for (let i = 0; i < 64; ++i) {
       }
     } else if (i === 60) {
       initialState.content[i] = {
-        type: figures.queen,
+        type: figures.king,
         side: sides.white
       }
     } else if (i === 59) {
       initialState.content[i] = {
-        type: figures.king,
+        type: figures.queen,
         side: sides.white
       }
     }
@@ -268,7 +268,7 @@ export const squearesSlice = createSlice({
             break
           }
           case figures.king: {
-
+            
             break
           }
           default: break
