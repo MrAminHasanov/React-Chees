@@ -1,0 +1,112 @@
+.component {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transform: translateY(-2px);
+  --borderColor: rgb(0, 0, 0);
+}
+.component > * {
+  border: 2px solid var(--borderColor);
+  background-color: var(--figureColor);
+}
+.component .head {
+  position: absolute;
+  width: 32px;
+  height: 14px;
+  transform: translate(-8.6px, 5px) rotateZ(-29.8deg);
+  border-bottom-color: transparent;
+  border-top-right-radius: 100%;
+}
+.component .head .nose {
+  width: 6px;
+  height: 6px;
+  background-color: var(--squareColor);
+  position: absolute;
+  border: 2px solid;
+  border-color: transparent transparent black transparent;
+  left: 10px;
+  top: -6px;
+  transform: rotateZ(-17deg);
+}
+.component .head .noseDown {
+  width: 5px;
+  height: 2px;
+  position: absolute;
+  border: 2px solid;
+  border-color: transparent transparent black transparent;
+  left: 8px;
+  top: 4px;
+  transform: rotateZ(-55deg) rotateX(220deg);
+}
+.component .head .mouthe {
+  border-radius: 2px;
+  height: 3px;
+  width: 17px;
+  background-color: var(--figureColor);
+  border: 2px solid;
+  border-color: transparent transparent black black;
+  position: absolute;
+  top: 65%;
+  left: -1px;
+}
+.component .body {
+  width: 22px;
+  height: 45px;
+  border: none;
+  background-color: transparent;
+  transform: rotateZ(0deg) translate(-1px, 3px);
+}
+.component .body .rightRounde {
+  position: absolute;
+  width: 22px;
+  height: 42px;
+  border-radius: 50%;
+  border: 2px solid;
+  border-color: transparent black transparent transparent;
+  z-index: 1;
+  left: 1px;
+  top: 3px;
+}
+.component .body .backgrounde {
+  z-index: 1;
+  background-color: var(--figureColor);
+  width: 10px;
+  height: 32px;
+  bottom: 100%;
+  left: 55%;
+  position: absolute;
+}
+.component .body .sheya {
+  width: 13px;
+  position: absolute;
+  height: 2px;
+  background-color: black;
+  transform: rotate(-50.8deg) translate(-16px, 15px);
+}
+.component .body .leftRounde {
+  position: absolute;
+  width: 22px;
+  height: 26px;
+  border-radius: 50%;
+  border: 2px solid;
+  border-color: transparent transparent transparent black;
+  top: 22px;
+  z-index: 2;
+}
+.component .bottomRounde {
+  width: 28px;
+  height: 4px;
+  border-bottom: 4px;
+  border-bottom-right-radius: 4px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  transform: translateY(1px);
+}
+.component .bottom {
+  transform: translateY(-1px);
+  width: 40px;
+  height: 10px;
+  border-top-right-radius: 12px;
+  border-top-left-radius: 12px;
+}/*# sourceMappingURL=Knight.module.css.map */

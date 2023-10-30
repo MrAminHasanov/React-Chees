@@ -1,0 +1,94 @@
+.component {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transform: translateY(-2px);
+  --borderColor: rgb(0, 0, 0);
+}
+.component > * {
+  border: 2px solid var(--borderColor);
+  background-color: var(--figureColor);
+}
+.component .top {
+  width: 10px;
+  height: 14px;
+  border-top-left-radius: 50%;
+  border-top-right-radius: 50%;
+  border-bottom-left-radius: 30%;
+  border-bottom-right-radius: 30%;
+  transform: translateY(4px);
+}
+.component .top::after {
+  content: " ";
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border: 2px solid black;
+  background-color: var(--figureColor);
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 8px;
+}
+.component .topRounde {
+  transform: translateY(2px);
+  width: 16px;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  height: 4px;
+}
+.component .body {
+  overflow: hidden;
+  display: flex;
+  transform: translateY(2px);
+  justify-content: space-evenly;
+  border: none;
+  height: 20px;
+  background-color: transparent;
+  position: relative;
+  --distance:-1px;
+  --top:0px;
+  --bottomRadiuse:90%;
+}
+.component .body .midle {
+  width: 21px;
+  background-color: var(--figureColor);
+  height: 100%;
+}
+.component .body .rounde {
+  position: absolute;
+  z-index: 1;
+  width: 6px;
+  height: 100%;
+  background-color: var(--squareColor);
+  border-bottom: 1px solid var(--borderColor);
+}
+.component .body .leftRounde {
+  top: var(--top);
+  left: var(--distance);
+  border-right: 2px solid var(--borderColor);
+  border-bottom-right-radius: var(--bottomRadiuse);
+}
+.component .body .rightRounde {
+  top: var(--top);
+  right: var(--distance);
+  border-left: 2px solid var(--borderColor);
+  border-bottom-left-radius: var(--bottomRadiuse);
+}
+.component .bottomRounde {
+  --borderRadiuse: 7px;
+  border-top-left-radius: var(--borderRadiuse);
+  border-top-right-radius: var(--borderRadiuse);
+  width: 28px;
+  height: 5px;
+  transform: translateY(2px);
+}
+.component .bottom {
+  width: 38px;
+  height: 10px;
+  border-top-right-radius: 12px;
+  border-top-left-radius: 12px;
+}/*# sourceMappingURL=Bishop.module.css.map */

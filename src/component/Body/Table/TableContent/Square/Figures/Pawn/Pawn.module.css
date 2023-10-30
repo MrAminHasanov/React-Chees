@@ -1,0 +1,75 @@
+.component {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transform: translateY(-2px);
+  --borderColor: rgb(0, 0, 0);
+}
+.component > * {
+  border: 2px solid var(--borderColor);
+  background-color: var(--figureColor);
+}
+.component .top {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  transform: translateY(4px);
+}
+.component .topRounde {
+  transform: translateY(2px);
+  width: 21px;
+  height: 3px;
+  border-radius: 14px;
+}
+.component .body {
+  overflow: hidden;
+  display: flex;
+  transform: translateY(2px);
+  justify-content: space-evenly;
+  border: none;
+  height: 9px;
+  background-color: transparent;
+  position: relative;
+  --distance:-1px;
+  --top:0px;
+  --bottomRadiuse:50%;
+}
+.component .body .midle {
+  width: 22px;
+  background-color: var(--figureColor);
+  height: 100%;
+}
+.component .body .rounde {
+  position: absolute;
+  z-index: 1;
+  width: 6px;
+  height: 100%;
+  background-color: var(--squareColor);
+  border-bottom: 1px solid var(--borderColor);
+}
+.component .body .leftRounde {
+  top: var(--top);
+  left: var(--distance);
+  border-right: 2px solid var(--borderColor);
+  border-bottom-right-radius: var(--bottomRadiuse);
+}
+.component .body .rightRounde {
+  top: var(--top);
+  right: var(--distance);
+  border-left: 2px solid var(--borderColor);
+  border-bottom-left-radius: var(--bottomRadiuse);
+}
+.component .bottomRounde {
+  width: 29px;
+  height: 5px;
+  border-radius: 14px;
+  transform: translateY(1px);
+}
+.component .bottom {
+  transform: translateY(-1px);
+  width: 40px;
+  height: 10px;
+  border-top-right-radius: 12px;
+  border-top-left-radius: 12px;
+}/*# sourceMappingURL=Pawn.module.css.map */

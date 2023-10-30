@@ -1,0 +1,53 @@
+.component {
+  --squareSide: 82px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  --borderWidth:calc(var(--squareSide) * 8 + var(--borderGap));
+  --borderGap: 115px;
+}
+.component .table {
+  display: grid;
+  grid-template-columns: repeat(8, var(--squareSide));
+  grid-template-rows: repeat(8, var(--squareSide));
+  border: 3px solid black;
+}
+.component .tableBorder {
+  --borderGap: 50px;
+  position: absolute;
+  z-index: -2;
+  border: 2px solid black;
+  width: calc(var(--squareSide) * 8 + var(--borderGap));
+  height: calc(var(--squareSide) * 8 + var(--borderGap));
+  background-color: rgb(255, 219, 143);
+}
+.component .secondTableBorder {
+  position: absolute;
+  z-index: -3;
+  width: var(--borderWidth);
+  height: var(--borderWidth);
+  background: rgb(255, 255, 255);
+  background: radial-gradient(circle, rgb(255, 255, 255) 0%, rgb(207, 170, 90) 82%);
+  border-radius: 10px;
+}
+.component .tableCorners {
+  position: absolute;
+  z-index: -1;
+  width: var(--borderWidth);
+  height: var(--borderWidth);
+}
+.component .tableCorners .corner {
+  background-color: black;
+  width: calc(var(--borderWidth) * 1.401);
+  height: 2px;
+  position: absolute;
+  top: 50%;
+}
+.component .tableCorners .leftCorner {
+  left: -20%;
+  transform: rotate(225deg);
+}
+.component .tableCorners .rightCorner {
+  left: -20%;
+  transform: rotate(-45deg);
+}/*# sourceMappingURL=Table.module.css.map */

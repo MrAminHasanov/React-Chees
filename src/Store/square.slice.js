@@ -260,7 +260,6 @@ export const squearesSlice = createSlice({
                       }
                       break
                     }
-
                   }
                 }
               }
@@ -268,7 +267,23 @@ export const squearesSlice = createSlice({
             break
           }
           case figures.king: {
-            
+            const startX = choosedFigure.pos.x;
+            const startY = choosedFigure.pos.y;
+            for (let xCof = -1; xCof <= 1; ++xCof) {
+              for (let yCof = -1; yCof <= 1; ++yCof) {
+                const xCounter = startX + xCof;
+                const yCounter = startY + yCof;
+                const potentialSquareId = posToId(xCounter, yCounter);
+                const square = contents[[potentialSquareId]];
+                if (square?.side === undefined) {
+                  state.moveableSquares[potentialSquareId] = potentialSquareId
+                } else {
+                  if (square.side === !choosedFigure.side) {
+                    state.moveableSquares[potentialSquareId] = potentialSquareId
+                  }
+                }
+              }
+            }
             break
           }
           default: break

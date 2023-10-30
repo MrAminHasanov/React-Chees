@@ -37,12 +37,12 @@
         transform: translateY(3px);
         justify-content: space-evenly;
         border: none;
-        height: 20px;
+        height: 24px;
         background-color: transparent;
         position: relative;
 
         .midle {
-            width: 24px;
+            width: 29px;
             background-color: var(--figureColor);
             height: 100%;
         }
@@ -77,8 +77,8 @@
 
     .bottomRounde {
         --borderRadiuse: 4px;
-        width: 31px;
-        height: 6px;
+        width: 27px;
+        height: 4px;
         border-top-left-radius: var(--borderRadiuse);
         border-top-right-radius: var(--borderRadiuse);
         transform: translateY(2px);
