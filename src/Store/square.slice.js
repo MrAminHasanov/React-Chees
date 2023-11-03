@@ -1,90 +1,21 @@
 import { createSlice } from "@reduxjs/toolkit";
+import squareContent from "./figuresStart.json";
 
 const sides = { white: true, black: false };
 const figures = { pawn: "Pawn", knight: "Knight", rook: "Rook", bishop: "Bishop", queen: "Queen", king: "King" };
-const initialState = { content: {}, choosedFigureId: null, figureTurn: sides.white, moveableSquares: {}, moveHistory: [] };
-for (let i = 0; i < 64; ++i) {
-  if (i < 16) {
-    if (i > 7) {
-      initialState.content[i] = {
-        type: figures.pawn,
-        side: sides.black
-      }
-    } else if (i === 0 || i === 7) {
-      initialState.content[i] = {
-        type: figures.rook,
-        side: sides.black
-      }
-    }
-    else if (i === 1 || i === 6) {
-      initialState.content[i] = {
-        type: figures.knight,
-        side: sides.black
-      }
-    } else if (i === 2 || i === 5) {
-      initialState.content[i] = {
-        type: figures.bishop,
-        side: sides.black
-      }
-    } else if (i === 4) {
-      initialState.content[i] = {
-        type: figures.king,
-        side: sides.black
-      }
-    } else if (i === 3) {
-      initialState.content[i] = {
-        type: figures.queen,
-        side: sides.black
-      }
-    }
-  } else if (i > 47) {
-    if (i < 56) {
-      initialState.content[i] = {
-        type: figures.pawn,
-        side: sides.white
-      }
-    }
-    else if (i === 56 || i === 63) {
-      initialState.content[i] = {
-        type: figures.rook,
-        side: sides.white
-      }
-    }
-    else if (i === 57 || i === 62) {
-      initialState.content[i] = {
-        type: figures.knight,
-        side: sides.white
-      }
-    }
-    else if (i === 58 || i === 61) {
-      initialState.content[i] = {
-        type: figures.bishop,
-        side: sides.white
-      }
-    } else if (i === 60) {
-      initialState.content[i] = {
-        type: figures.king,
-        side: sides.white
-      }
-    } else if (i === 59) {
-      initialState.content[i] = {
-        type: figures.queen,
-        side: sides.white
-      }
-    }
-  } else {
-    initialState.content[i] = {}
-  }
+const initialState = {
+  content: squareContent, choosedFigureId: null, figureTurn: sides.white, moveableSquares: {}, moveHistory: []
 };
 
 initialState.moveHistory.push(initialState.content);
-const idToPos = (id) => ({ x: (id % 8) + 1, y: Math.floor(id / 8) + 1 })
-const posToId = (x, y) => ((x > 0 && x < 9) && (y > 0 && y < 9)) ? ((y - 1) * 8 + x - 1) : null;
 
 export const squearesSlice = createSlice({
   name: "squaresList",
   initialState,
   reducers: {
+    __updateMoves: (state) => {
+
+    },
     selectFigure: (state, { payload: id }) => {
       const contents = state.content;
       const figureTurn = state.figureTurn;
@@ -307,6 +238,9 @@ export const squearesSlice = createSlice({
 }
 );
 
+
+const idToPos = (id) => ({ x: (id % 8) + 1, y: Math.floor(id / 8) + 1 })
+const posToId = (x, y) => ((x > 0 && x < 9) && (y > 0 && y < 9)) ? ((y - 1) * 8 + x - 1) : null;
 
 
 export const { actions, reducer } = squearesSlice;
