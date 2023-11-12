@@ -21,8 +21,10 @@ const figures = {
 function Square({ id, squareMathColor }) {
   const square = useSelector(state => state.squaresList.content[id]);
   const isChoosedFigure = useSelector(state => state.squaresList.choosedFigureId === id);
-  const isMoveableSquare = useSelector(state => state.squaresList.moveableSquares[id]);
+  const isMoveableSquare = {}
+  //  useSelector(state => state.squaresList.moveableSquares[id]);
   const isThisFigureSideTurn = useSelector(state => state.squaresList.figureTurn === square?.side);
+
   const { selectFigure, moveFigure } = useActions();
   const squareContent = figures[square.type];
 

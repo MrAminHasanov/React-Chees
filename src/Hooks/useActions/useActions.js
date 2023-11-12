@@ -1,10 +1,10 @@
 import { useMemo } from "react";                                    
 import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
-import { actions as squaresList } from "../../Store/square.slice"
+import { actions as squaresListActions } from "../../Store/square.slice"
 
 const rootActions = {
-    ...squaresList
+    ...squaresListActions
 };
 
 export const useActions = () => {
