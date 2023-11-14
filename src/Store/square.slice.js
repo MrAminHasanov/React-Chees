@@ -24,12 +24,20 @@ export const squearesSlice = createSlice({
       state.moveableSquares = state.figureMove[id]
     },
     moveFigure: (state, { payload: id }) => {
-      const movedSquare = state.moveableSquares[id]
-      if (movedSquare) {
+      const moveInformation = state.moveableSquares[id];
+      const isMoveExis = moveInformation !== undefined;
+      
+      if (isMoveExis) {
         const choosedFigureId = state.choosedFigureId;
-        state.content[id] = {}
-        state.content[movedSquare] = state.content[choosedFigureId];
+        state.content[id] = state.content[choosedFigureId];
         state.content[choosedFigureId] = {};
+
+        const needDeleteFrom = moveInformation.deleteFrom !== undefined;
+        if (needDeleteFrom) {
+          const needDeleteFigureId = moveInformation.deleteFrom;
+          state.content[needDeleteFigureId] = {};
+        }
+
         state.figureTurn = !state.figureTurn
         state.moveHistory = [...state.moveHistory, state.content];
         updateFigureMove(state);

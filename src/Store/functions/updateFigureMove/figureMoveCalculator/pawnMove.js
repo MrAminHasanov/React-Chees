@@ -34,22 +34,29 @@ export const pawnMove = (state, choosedFigure, id, contents) => {
     const leftSquare = contents[leftSquareId];
     const rightSquare = contents[rightSquareId];
 
-    if (leftSquare?.type === figures.pawn && leftSquare?.side === !choosedFigure.side) {
-        const prevMove = state.moveHistory[state.moveHistory.length - 2];
-        const pawnStartPosId = posToId(leftSquarePos.x, leftSquarePos.y + 2 * pawnDirection);
-        const wasPawnInStart = prevMove[pawnStartPosId]?.type === figures.pawn;
-        if (wasPawnInStart) {
-            const beatedPawnId = posToId(leftSquarePos.x, leftSquarePos.y + 1 * pawnDirection);
-            addFigureMove(state, id, leftSquareId, beatedPawnId);
+    const isLeftSquareHaveEnemyPawn =
+        leftSquare?.type === figures.pawn &&
+        leftSquare?.side === !choosedFigure.side;
+    const isRightSquareHaveEnemyPawn =
+        rightSquare?.type === figures.pawn &&
+        rightSquare?.side === !choosedFigure.side;
+
+    if (isLeftSquareHaveEnemyPawn || isRightSquareHaveEnemyPawn) {
+        let PawnPos, PawnId;
+        if (isLeftSquareHaveEnemyPawn) {
+            PawnPos = leftSquarePos;
+            PawnId = leftSquareId;
+        } else {
+            PawnPos = rightSquarePos;
+            PawnId = rightSquareId;
         }
-    }
-    if (rightSquare?.type === figures.pawn && rightSquare?.side === !choosedFigure.side) {
+
         const prevMove = state.moveHistory[state.moveHistory.length - 2];
-        const pawnStartPosId = posToId(rightSquarePos.x, rightSquarePos.y + 2 * pawnDirection);
+        const pawnStartPosId = posToId(PawnPos.x, PawnPos.y + 2 * pawnDirection);
         const wasPawnInStart = prevMove[pawnStartPosId]?.type === figures.pawn;
         if (wasPawnInStart) {
-            const beatedPawnId = posToId(rightSquarePos.x, rightSquarePos.y + 1 * pawnDirection);
-            addFigureMove(state, id, rightSquareId, beatedPawnId)
+            const DioganalSquareId = posToId(PawnPos.x, PawnPos.y + 1 * pawnDirection);
+            addFigureMove(state, id, DioganalSquareId, PawnId);
         }
     }
     //#endregion
