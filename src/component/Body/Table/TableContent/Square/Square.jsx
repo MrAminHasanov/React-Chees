@@ -9,6 +9,7 @@ import Rook from './Figures/Rook/Rook';
 import Bishop from './Figures/Bishop/Bishop';
 import Queen from "./Figures/Queen/Queen";
 import King from './Figures/King/King';
+
 const figures = {
   "Pawn": <Pawn />,
   "Knight": <Knight />,
@@ -21,8 +22,9 @@ const figures = {
 function Square({ id, squareMathColor }) {
   const square = useSelector(state => state.squaresList.content[id]);
   const isChoosedFigure = useSelector(state => state.squaresList.choosedFigureId === id);
-  const isMoveableSquare = useSelector(state => state.squaresList.moveableSquares[id]);
+  const isMoveableSquare = useSelector(state => !!state.squaresList.moveableSquares[id])
   const isThisFigureSideTurn = useSelector(state => state.squaresList.figureTurn === square?.side);
+
   const { selectFigure, moveFigure } = useActions();
   const squareContent = figures[square.type];
 
@@ -30,25 +32,20 @@ function Square({ id, squareMathColor }) {
   const isEmptySquare = square?.type === undefined;
 
   let squareClassNames = classNames(styles.component);
-  let squareOnClick = () => "";
+  let squareOnClick = () => moveFigure(id);
 
   if (isChoosedFigure) {
-    squareClassNames += " " + styles.choosedFigure
+    squareClassNames += " " + styles.choosedFigure;
+    squareOnClick = () => "";
   }
   else if (isThisFigureSideTurn) {
     squareOnClick = () => selectFigure(id);
   }
-  else {
-    if (isEmptySquare) {
-      if (isMoveableSquare)
-        squareClassNames += " " + styles.moveableSquare;
-    }
-    else {
-      //this enemyFigure
-      if (isMoveableSquare)
-        squareClassNames += " " + styles.takeableFigure;
-    }
-    squareOnClick = () => moveFigure(id);
+  else if (isMoveableSquare) {
+    if (isEmptySquare)
+      squareClassNames += " " + styles.moveableSquare;
+    else
+      squareClassNames += " " + styles.takeableFigure;
   }
 
   const figureColor = (square?.side === false ? "rgb(78, 78, 78)" : "white")
