@@ -6,11 +6,14 @@ export const knightMove = (state, choosedFigure, id, contents) => {
             for (let diogDrt = -1; diogDrt <= 1; diogDrt += 2) {
                 const xTest = choosedFigure.pos.x + ((1.5 + (diogDrt * 0.5)) * xDrt);
                 const yTest = choosedFigure.pos.y + ((1.5 - (diogDrt * 0.5)) * yDrt);
-                const potentialMobeableSquareId = posToId(xTest, yTest);
-                if (potentialMobeableSquareId !== null && contents[potentialMobeableSquareId]?.side !== choosedFigure.side) {
-                    addFigureMove(state, id, potentialMobeableSquareId)
+                const moveableSquareId = posToId(xTest, yTest);
+
+                const isInSquareNotAlliedFigure = contents[moveableSquareId]?.side !== choosedFigure.side;
+                const isSquareExist = moveableSquareId !== null;
+
+                if (isInSquareNotAlliedFigure && isSquareExist) {
+                    addFigureMove(state, id, moveableSquareId)
                 }
-                //возможна Оптимизация
             }
         }
     }

@@ -10,14 +10,17 @@ export const bishopMove = (state, choosedFigure, id, contents) => {
             while ((xCounter > 0 && xCounter < 9) && (yCounter > 0 && yCounter < 9)) {
                 xCounter += xDrt;
                 yCounter += yDrt;
-                const potentialSquareId = posToId(xCounter, yCounter);
-                const square = contents[potentialSquareId];
-                if (square?.side === undefined) {
-                    addFigureMove(state, id, potentialSquareId);
+                const testSquareId = posToId(xCounter, yCounter);
+                const square = contents[testSquareId];
+                const isSquareEmpty = square?.side === undefined;
+                if (isSquareEmpty) {
+                    addFigureMove(state, id, testSquareId);
                     continue
                 }
-                if (square.side === !choosedFigure.side) {
-                    addFigureMove(state, id, potentialSquareId)
+
+                const isInSquareEnemyFigure = square.side === !choosedFigure.side;
+                if (isInSquareEnemyFigure) {
+                    addFigureMove(state, id, testSquareId)
                 }
                 break
             }
