@@ -7,7 +7,7 @@ export const pawnMove = (state, choosedFigure, id, contents) => {
     const pawnDirection = choosedFigure.side === sides.black ? 1 : -1;
     // #region verifyMoveDirectly
     const nextSquareId = posToId(choosedFigure.pos.x, choosedFigure.pos.y + 1 * pawnDirection);
-    const isNextSquareEmpty = contents[nextSquareId]?.side === undefined && nextSquareId !== null;
+    const isNextSquareEmpty = contents[nextSquareId]?.side === undefined;
     if (isNextSquareEmpty) {
         addFigureMove(state, id, nextSquareId);
         const isThisPawnFirstMove =

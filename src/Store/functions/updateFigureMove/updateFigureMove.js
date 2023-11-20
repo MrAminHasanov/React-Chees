@@ -1,6 +1,6 @@
 import { bishopMove } from "./figureMoveCalculator/bishopMove";
 import { kingMove } from "./figureMoveCalculator/kingMove";
-import { knightMove } from "./figureMoveCalculator/knightMove";
+import { knightMove } from "./figureMoveCalculator/knightMove.ts";
 import { pawnMove } from "./figureMoveCalculator/pawnMove";
 import { queenMove } from "./figureMoveCalculator/queenMove";
 import { rookMove } from "./figureMoveCalculator/rookMove";

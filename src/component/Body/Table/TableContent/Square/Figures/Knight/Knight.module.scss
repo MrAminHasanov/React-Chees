@@ -11,113 +11,63 @@
         background-color: var(--figureColor);
     }
 
-    .head {
-        position: absolute;
-        width: 32px;
+    .neekLine {
+        width: 5px;
+        color: var(--figureColor);
         height: 14px;
-        transform: translate(-8.6px, 5px) rotateZ(-29.8deg);
-        border-bottom-color: transparent;
-        // border-bottom-left-radius: 50%;
-        // border-top-left-radius: 490%;
-        border-top-right-radius: 100%;
-        // border-bottom-right-radius: 0px;
+        border: none;
+        position: absolute;
+        z-index: 2;
+        left: 10px;
+        top: 17px;
+        border-top-left-radius: 2px;
 
-        // &::after {
-        //     width: 6px;
-        //     height: 1px;
-        //     border-radius: 40%;
-        //     background-color: black;
-        //     content: " ";
-        //     position: absolute;
-        //     left: 16px;
-        //     top: 4px;
-        // }
-
-        .nose {
-            width: 6px;
-            height: 6px;
-            background-color: var(--squareColor);
-            position: absolute;
-            border: 2px solid;
-            border-color: transparent transparent black transparent;
-            left: 10px;
-            top: -6px;
-            transform: rotateZ(-17deg);
-        }
-
-        .noseDown {
-            width: 5px;
+        &::before {
+            width: 4px;
             height: 2px;
             position: absolute;
-            border: 2px solid;
-            border-color: transparent transparent black transparent;
-            left: 8px;
+            content: " ";
+            background-color: black;
+            right: 3px;
+            z-index: 4;
             top: 4px;
-            transform: rotateZ(-55deg) rotateX(220deg);
+            border-radius: 40%;
+            transform: rotateZ(-32deg);
         }
+    }
 
-        .mouthe {
-            border-radius: 2px;
-            height: 3px;
-            width: 17px;
-            background-color: var(--figureColor);
-            border: 2px solid;
-            border-color: transparent transparent black black;
+    .head {
+        width: 22px;
+        height: 12px;
+        position: absolute;
+        transform: translate(-14px, 18px) rotateZ(-30deg);
+        border-right-color: transparent;
+        border-top-left-radius: 7px;
+        border-bottom-left-radius: 12px;;
+
+        &::after {
+            content: " ";
             position: absolute;
-            top: 65%;
-            left: -1px;
+            left: 0px;
+            top: 8px;
+            border-radius: 10px;
+            width: 7px;
+            height: 1px;
+            background-color: black;
         }
     }
 
     .body {
-        width: 22px;
-        height: 45px;
-        border: none;
-        background-color: transparent;
-        transform: rotateZ(0deg) translate(-1px, 3px);
-
-        .rightRounde {
-            position: absolute;
-            width: 22px;
-            height: 42px;
-            border-radius: 50%;
-            border: 2px solid;
-            border-color: transparent black transparent transparent;
-            z-index: 1;
-            left: 1px;
-            top: 3px;
-        }
-
-        .backgrounde {
-            z-index: 1;
-            background-color: var(--figureColor);
-            width: 10px;
-            height: 32px;
-            bottom: 100%;
-            left: 55%;
-            position: absolute;
-        }
-
-        .sheya {
-            width: 13px;
-            position: absolute;
-            height: 2px;
-            background-color: black;
-            transform: rotate(-50.8deg) translate(-16px, 15px);
-        }
-
-        .leftRounde {
-            position: absolute;
-            width: 22px;
-            height: 26px;
-            border-radius: 50%;
-            // background-color: var(--figureColor);
-            border: 2px solid;
-            border-color: transparent transparent transparent black;
-            top: 22px;
-            z-index: 2;
-        }
+        height: 40px;
+        width: 17px;
+        transform: translateY(12px);
+        border-top-left-radius: 6px;
+        border-top-right-radius: 30px;
+        border-bottom-right-radius:30px;
+        border-top: 4px solid black;
+        border-right: 3px solid black;
     }
+
 
     .bottomRounde {
         width: 28px;

@@ -26,7 +26,7 @@ export const squearesSlice = createSlice({
     moveFigure: (state, { payload: id }) => {
       const moveInformation = state.moveableSquares[id];
       const isMoveExis = moveInformation !== undefined;
-      
+
       if (isMoveExis) {
         const choosedFigureId = state.choosedFigureId;
         state.content[id] = state.content[choosedFigureId];
