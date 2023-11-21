@@ -6,6 +6,10 @@
     transform: translateY(-2px);
     --borderColor: rgb(0, 0, 0);
 
+    & * {
+        box-sizing: content-box;
+    }
+
     &>* {
         border: 2px solid var(--borderColor);
         background-color: var(--figureColor);

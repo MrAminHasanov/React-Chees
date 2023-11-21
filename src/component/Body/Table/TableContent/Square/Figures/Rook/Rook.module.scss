@@ -6,6 +6,10 @@
     transform: translateY(-2px);
     --borderColor: rgb(0, 0, 0);
 
+    & * {
+        box-sizing: content-box;
+    }
+
     .crown {
         position: absolute;
         width: calc(100% + 4px);
