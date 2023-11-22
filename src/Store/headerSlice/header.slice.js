@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = { selectedSkin: "Classic-Chess" }
+const initialState = { selectedSkin: "Pixel-Chess" }
 
 export const squearesSlice = createSlice({
     name: "squaresList",

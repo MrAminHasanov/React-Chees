@@ -1,6 +1,6 @@
-import c from './Knight.module.scss'
+import c from './ClassicKnight.module.scss'
 
-function Knight() {
+function ClassicKnight() {
     return (
         <div className={c.component}>
             <div className={c.neekLine}></div>
@@ -12,4 +12,4 @@ function Knight() {
     )
 }
 
-export default Knight
+export default ClassicKnight

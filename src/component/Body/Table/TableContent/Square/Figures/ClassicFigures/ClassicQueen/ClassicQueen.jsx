@@ -1,12 +1,12 @@
-import classNames from 'classnames'
-import c from './Bishop.module.scss'
+import classNames from 'classnames';
+import c from './ClassicQueen.module.scss';
 
-function Bishop() {
+function ClassicQueen() {
   return (
     <div className={c.component}>
       <div className={c.top}>
-        <div className={c.cap}></div>
       </div>
+      <div className={c.cap}></div>
       <div className={c.topRounde}></div>
       <div className={c.body}>
         <div className={classNames(c.leftRounde, c.rounde)}></div>
@@ -15,8 +15,7 @@ function Bishop() {
       </div>
       <div className={c.bottomRounde}></div>
       <div className={c.bottom}></div>
-    </div >
-  )
+    </div >)
 }
 
-export default Bishop
+export default ClassicQueen

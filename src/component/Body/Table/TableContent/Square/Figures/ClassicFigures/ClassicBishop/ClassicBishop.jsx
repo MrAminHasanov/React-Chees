@@ -1,15 +1,13 @@
 import classNames from 'classnames'
-import c from './Rook.module.scss'
+import c from './ClassicBishop.module.scss'
 
-function Rook() {
+function ClassicBishop() {
   return (
-    <div className={c.component} >
+    <div className={c.component}>
       <div className={c.top}>
-        <div className={c.crown}>
-          <div className={c.block}></div>
-          <div className={c.block}></div>
-        </div>
-      </div >
+        <div className={c.cap}></div>
+      </div>
+      <div className={c.topRounde}></div>
       <div className={c.body}>
         <div className={classNames(c.leftRounde, c.rounde)}></div>
         <div className={c.midle}></div>
@@ -21,4 +19,4 @@ function Rook() {
   )
 }
 
-export default Rook
+export default ClassicBishop

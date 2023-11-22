@@ -1,7 +1,7 @@
 import classNames from 'classnames'
-import c from './Pawn.module.scss'
+import c from './ClassicPawn.module.scss'
 
-function Pawn() {
+function ClassicPawn() {
     return (
         <div className={c.component}>
             <div className={c.top} ></div >
@@ -17,4 +17,4 @@ function Pawn() {
     )
 }
 
-export default Pawn
+export default ClassicPawn

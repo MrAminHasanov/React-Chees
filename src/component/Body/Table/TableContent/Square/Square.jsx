@@ -1,41 +1,27 @@
 import classNames from 'classnames';
 import { useActions } from '../../../../../Hooks/useActions/useActions';
 import { useSelector } from 'react-redux';
+import c from './Square.module.scss';
 
-import styles from './Square.module.scss';
-import Pawn from './Figures/Pawn/Pawn';
-import Knight from './Figures/Knight/Knight';
-import Rook from './Figures/Rook/Rook';
-import Bishop from './Figures/Bishop/Bishop';
-import Queen from "./Figures/Queen/Queen";
-import King from './Figures/King/King';
-
-const figures = {
-  "Pawn": <Pawn />,
-  "Knight": <Knight />,
-  "Rook": <Rook />,
-  "Bishop": <Bishop />,
-  "Queen": <Queen />,
-  "King": <King />,
-}
+import Figures from './Figures/Figures';
 
 function Square({ id, squareMathColor }) {
-  const square = useSelector(state => state.squaresList.content[id]);
+  const activeSkin = useSelector(state => state.header.selectedSkin)
+  const squareContent = useSelector(state => state.squaresList.content[id]);
   const isChoosedFigure = useSelector(state => state.squaresList.choosedFigureId === id);
   const isMoveableSquare = useSelector(state => !!state.squaresList.moveableSquares[id])
-  const isThisFigureSideTurn = useSelector(state => state.squaresList.figureTurn === square?.side);
+  const isThisFigureSideTurn = useSelector(state => state.squaresList.figureTurn === squareContent?.side);
 
   const { selectFigure, moveFigure } = useActions();
-  const squareContent = figures[square.type];
 
   const squareColor = (squareMathColor === 0 ? "#995252" : "#edeed1");
-  const isEmptySquare = square?.type === undefined;
+  const isEmptySquare = squareContent?.type === undefined;
 
-  let squareClassNames = classNames(styles.component);
+  let squareClassNames = classNames(c.component);
   let squareOnClick = () => moveFigure(id);
 
   if (isChoosedFigure) {
-    squareClassNames += " " + styles.choosedFigure;
+    squareClassNames += " " + c.choosedFigure;
     squareOnClick = () => "";
   }
   else if (isThisFigureSideTurn) {
@@ -43,18 +29,18 @@ function Square({ id, squareMathColor }) {
   }
   else if (isMoveableSquare) {
     if (isEmptySquare)
-      squareClassNames += " " + styles.moveableSquare;
+      squareClassNames += " " + c.moveableSquare;
     else
-      squareClassNames += " " + styles.takeableFigure;
+      squareClassNames += " " + c.takeableFigure;
   }
-
-  const figureColor = (square?.side === false ? "rgb(78, 78, 78)" : "white")
-
+  
+  const figureColor = (squareContent?.side === false ? "rgb(78, 78, 78)" : "white")
+  
   return (
     <div id={id} className={squareClassNames} style={{ "--squareColor": squareColor, "--figureColor": figureColor }} >
-      <div onClick={() => squareOnClick()} className={styles.figureContainer}>
+      <div onClick={() => squareOnClick()} className={c.figureContainer}>
         {
-          squareContent
+          <Figures activeSkin={activeSkin} squareContent={squareContent} />
         }
       </div>
     </div>
