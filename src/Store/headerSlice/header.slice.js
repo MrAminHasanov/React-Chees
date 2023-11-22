@@ -13,4 +13,3 @@ export const squearesSlice = createSlice({
 });
 
 export const { actions, reducer } = squearesSlice;
-export const squaresList = state => state.squaresList
