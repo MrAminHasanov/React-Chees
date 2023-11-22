@@ -4,6 +4,10 @@ import { useSelector } from 'react-redux';
 import c from './Square.module.scss';
 
 import Figures from './Figures/Figures';
+const figuresSkinsSquareColor = {
+  "Classic-Chess":"#995252",
+  "Pixel-Chess":"rgb(102, 154, 23)"
+}
 
 function Square({ id, squareMathColor }) {
   const activeSkin = useSelector(state => state.header.selectedSkin)
@@ -14,7 +18,8 @@ function Square({ id, squareMathColor }) {
 
   const { selectFigure, moveFigure } = useActions();
 
-  const squareColor = (squareMathColor === 0 ? "#995252" : "#edeed1");
+  const squareColor = (squareMathColor === 0 ? figuresSkinsSquareColor[activeSkin] : "#edeed1");
+
 
   const isEmptySquare = squareContent?.type === undefined;
 
