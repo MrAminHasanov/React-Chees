@@ -15,6 +15,7 @@ function Square({ id, squareMathColor }) {
   const { selectFigure, moveFigure } = useActions();
 
   const squareColor = (squareMathColor === 0 ? "#995252" : "#edeed1");
+
   const isEmptySquare = squareContent?.type === undefined;
 
   let squareClassNames = classNames(c.component);
@@ -33,9 +34,9 @@ function Square({ id, squareMathColor }) {
     else
       squareClassNames += " " + c.takeableFigure;
   }
-  
+
   const figureColor = (squareContent?.side === false ? "rgb(78, 78, 78)" : "white")
-  
+
   return (
     <div id={id} className={squareClassNames} style={{ "--squareColor": squareColor, "--figureColor": figureColor }} >
       <div onClick={() => squareOnClick()} className={c.figureContainer}>

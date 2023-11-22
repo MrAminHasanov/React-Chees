@@ -13,7 +13,7 @@ function SkinList() {
             >
                 Pixel-Chess
             </li>
-            <li className={activeSkin === "Classic-Chess" && c.activeLi}
+            <li className={activeSkin === "Classic-Chess" ? c.activeLi : null}
                 onClick={() => setTableSkin("Classic-Chess")}
             >
                 Classic-Chess
