@@ -1,13 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = { tableSkins: "Classic" }
+const initialState = { selectedSkin: "Classic-Chess" }
 
 export const squearesSlice = createSlice({
     name: "squaresList",
     initialState,
     reducers: {
         setTableSkin: (state, { payload: selectedSkin }) => {
-            state.tableSkins = selectedSkin;
+            state.selectedSkin = selectedSkin;
         },
     }
 });
