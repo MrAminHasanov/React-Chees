@@ -1,4 +1,5 @@
-import { addFigureMove, posToId } from "../toolFunction/toolFunctions";
+import { addFigureMove } from "../toolFunction/addFigureMove";
+import { posToId } from "../toolFunction/id_posFunctions";
 
 export const kingMove = (state, choosedFigure, id, contents) => {
     const startX = choosedFigure.pos.x;
@@ -10,7 +11,7 @@ export const kingMove = (state, choosedFigure, id, contents) => {
             const potentialSquareId = posToId(xCounter, yCounter);
             const square = contents[potentialSquareId];
             if (square?.side !== choosedFigure.side) {
-                addFigureMove(state, id, potentialSquareId)
+                addFigureMove(state, id, potentialSquareId, { changeKingPos: { kingSide: choosedFigure.side } })
             }
         }
     }

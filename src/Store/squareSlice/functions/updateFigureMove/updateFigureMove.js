@@ -5,7 +5,8 @@ import { pawnMove } from "./figureMoveCalculator/pawnMove";
 import { queenMove } from "./figureMoveCalculator/queenMove";
 import { rookMove } from "./figureMoveCalculator/rookMove";
 
-import { idToPos, figures } from "./toolFunction/toolFunctions";
+import { figures } from "./toolFunction/addFigureMove";
+import { idToPos } from "./toolFunction/id_posFunctions";
 
 const figureMovesCalculator = {
     [figures.pawn]: (state, choosedFigure, id, contents) => pawnMove(state, choosedFigure, id, contents),

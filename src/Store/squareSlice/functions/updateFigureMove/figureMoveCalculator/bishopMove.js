@@ -1,4 +1,5 @@
-import { addFigureMove, posToId } from "../toolFunction/toolFunctions";
+import { addFigureMove } from "../toolFunction/addFigureMove";
+import { posToId } from "../toolFunction/id_posFunctions";
 
 export const bishopMove = (state, choosedFigure, id, contents) => {
     const startX = choosedFigure.pos.x;

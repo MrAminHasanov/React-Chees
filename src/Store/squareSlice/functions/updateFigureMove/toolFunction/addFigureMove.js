@@ -1,4 +1,5 @@
 import isKingCanBeated from "./isKingCanBeated";
+import { idToPos } from "./id_posFunctions";
 
 export const figures = { pawn: "Pawn", knight: "Knight", rook: "Rook", bishop: "Bishop", queen: "Queen", king: "King" };
 
@@ -19,7 +20,7 @@ export const addFigureMove = (state, figureId, canMoveTo, specialMoves = {}) => 
 
     if (specialMoves.changeKingPos !== undefined) {
         potentialMove.changeKingPos = {
-            kingSide: specialMoves.kingSide
+            kingSide: specialMoves.changeKingPos.kingSide
         };
     }
 
@@ -53,9 +54,8 @@ const buildMoveVariattion = (state, figureId, canMoveTo, potentailMove) => {
         tableContent: moveVariattion,
         kingPos: kingPos,
         kingSide: state.figureTurn,
+        figureId: figureId
     }
-}
 
-export const idToPos = (id) => ({ x: (id % 8) + 1, y: Math.floor(id / 8) + 1 })
-export const posToId = (x, y) => ((x > 0 && x < 9) && (y > 0 && y < 9)) ? ((y - 1) * 8 + x - 1) : "squareNotExists";
+}
 

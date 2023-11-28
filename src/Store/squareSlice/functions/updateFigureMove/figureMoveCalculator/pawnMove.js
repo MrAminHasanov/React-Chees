@@ -1,4 +1,5 @@
-import { addFigureMove, posToId, figures } from "../toolFunction/toolFunctions";
+import { addFigureMove, figures } from "../toolFunction/addFigureMove";
+import { posToId } from "../toolFunction/id_posFunctions";
 
 const sides = { white: true, black: false };
 
@@ -40,16 +41,16 @@ export const pawnMove = (state, choosedFigure, id, contents) => {
     const leftSquare = contents[leftSquareId];
     const rightSquare = contents[rightSquareId];
 
-    const isLeftSquareHaveEnemyPawn =
+    const isInLeftSquareEnemyPawn =
         leftSquare?.type === figures.pawn &&
         leftSquare?.side === !choosedFigure.side;
-    const isRightSquareHaveEnemyPawn =
+    const isInRightSquareEnemyPawn =
         rightSquare?.type === figures.pawn &&
         rightSquare?.side === !choosedFigure.side;
 
-    if (isLeftSquareHaveEnemyPawn || isRightSquareHaveEnemyPawn) {
+    if (isInLeftSquareEnemyPawn || isInRightSquareEnemyPawn) {
         let pawnPos, pawnId;
-        if (isLeftSquareHaveEnemyPawn) {
+        if (isInLeftSquareEnemyPawn) {
             pawnPos = leftSquarePos;
             pawnId = leftSquareId;
         } else {
