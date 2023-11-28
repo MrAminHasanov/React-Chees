@@ -62,7 +62,7 @@ export const pawnMove = (state, choosedFigure, id, contents) => {
         const wasPawnInStart = prevMove[pawnStartPosId]?.type === figures.pawn;
         if (wasPawnInStart) {
             const DioganalSquareId = posToId(pawnPos.x, pawnPos.y + 1 * pawnDirection);
-            addFigureMove(state, id, DioganalSquareId, pawnId);
+            addFigureMove(state, id, DioganalSquareId, { deleteFrom: pawnId });
         }
     }
     //#endregion

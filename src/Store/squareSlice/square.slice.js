@@ -11,7 +11,11 @@ const initialState = {
   figureMove: figureStartMove,
   moveableSquares: {},
   choosedFigureId: null,
-  moveHistory: [tableStartContent]
+  moveHistory: [tableStartContent],
+  kingsId: {
+    [sides.white]: 60,
+    [sides.black]: 4
+  }
 };
 
 
@@ -23,19 +27,25 @@ export const squearesSlice = createSlice({
       state.choosedFigureId = id;
       state.moveableSquares = state.figureMove[id]
     },
-    moveFigure: (state, { payload: id }) => {
-      const moveInformation = state.moveableSquares[id];
+    moveFigure: (state, { payload: goTo }) => {
+      const moveInformation = state.moveableSquares[goTo];
       const isMoveExis = moveInformation !== undefined;
 
       if (isMoveExis) {
         const choosedFigureId = state.choosedFigureId;
-        state.content[id] = state.content[choosedFigureId];
+        state.content[goTo] = state.content[choosedFigureId];
         state.content[choosedFigureId] = {};
 
         const needDeleteFrom = moveInformation.deleteFrom !== undefined;
+        const needChangeKingPos = moveInformation.changeKingPos !== undefined;
+
         if (needDeleteFrom) {
           const needDeleteFigureId = moveInformation.deleteFrom;
           state.content[needDeleteFigureId] = {};
+        }
+        else if (needChangeKingPos) {
+          const kingSide = moveInformation.changeKingPos.kingSide;
+          state.kingsId[kingSide] = goTo;
         }
 
         state.figureTurn = !state.figureTurn

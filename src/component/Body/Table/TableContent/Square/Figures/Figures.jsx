@@ -1,14 +1,13 @@
-import ClassicFigures from "./ClassicFigures/ClassicFigures";
-import PixelFigures from "./PixelFigures/PixelFigures";
+import { useSelector } from "react-redux";
 
-const figuresSkins = {
-    "Classic-Chess": (squareContent) => <ClassicFigures figureType={squareContent?.type} />,
-    "Pixel-Chess": (squareContent) => <PixelFigures squareContent={squareContent} />
-}
+function Figures({ figureType, figureSide }) {
+    const figureSvg = useSelector(state =>
+        state.skinManagment.selectedSkin.
+            figures[figureType][figureSide])
 
-function Figures({ activeSkin, squareContent }) {
     return (
-        figuresSkins[activeSkin](squareContent)
+        figureSvg !== undefined &&
+        (<img src={figureSvg} alt={figureType} />)
     )
 }
 

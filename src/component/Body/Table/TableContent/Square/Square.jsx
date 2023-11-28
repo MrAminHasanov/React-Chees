@@ -4,22 +4,19 @@ import { useSelector } from 'react-redux';
 import c from './Square.module.scss';
 
 import Figures from './Figures/Figures';
-const figuresSkinsSquareColor = {
-  "Classic-Chess":"#995252",
-  "Pixel-Chess":"rgb(102, 154, 23)"
-}
+
 
 function Square({ id, squareMathColor }) {
-  const activeSkin = useSelector(state => state.header.selectedSkin)
   const squareContent = useSelector(state => state.squaresList.content[id]);
   const isChoosedFigure = useSelector(state => state.squaresList.choosedFigureId === id);
   const isMoveableSquare = useSelector(state => !!state.squaresList.moveableSquares[id])
   const isThisFigureSideTurn = useSelector(state => state.squaresList.figureTurn === squareContent?.side);
+  // const test = useSelector(state => state.squaresList)
+
+  const squareColorOrder = squareMathColor === 0 ? "white" : "black";
+  const squareSkin = useSelector(state => state.skinManagment.selectedSkin.squares[squareColorOrder]);
 
   const { selectFigure, moveFigure } = useActions();
-
-  const squareColor = (squareMathColor === 0 ? figuresSkinsSquareColor[activeSkin] : "#edeed1");
-
 
   const isEmptySquare = squareContent?.type === undefined;
 
@@ -40,13 +37,14 @@ function Square({ id, squareMathColor }) {
       squareClassNames += " " + c.takeableFigure;
   }
 
-  const figureColor = (squareContent?.side === false ? "rgb(78, 78, 78)" : "white")
-
   return (
-    <div id={id} className={squareClassNames} style={{ "--squareColor": squareColor, "--figureColor": figureColor }} >
+    <div id={id} className={squareClassNames} >
+      <img src={squareSkin} className={c.backgroundImg} alt={squareColorOrder} />
       <div onClick={() => squareOnClick()} className={c.figureContainer}>
         {
-          <Figures activeSkin={activeSkin} squareContent={squareContent} />
+          <Figures
+            figureSide={squareContent.side}
+            figureType={squareContent.type} />
         }
       </div>
     </div>

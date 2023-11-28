@@ -1,5 +1,5 @@
 .component {
-    --squareSide: 82px;
+    --squareSide: 83px;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
@@ -20,19 +20,18 @@
         border: 2px solid black;
         width: calc(var(--squareSide) * 8 + var(--borderGap));
         height: calc(var(--squareSide) * 8 + var(--borderGap));
-        background-color: rgb(255, 219, 143);
+        background-image: url("../../../img/whiteTerraria.svg");
     }
-
+    
     --borderGap: 115px;
-
+    
     .secondTableBorder {
         position: absolute;
         z-index: -3;
         width: var(--borderWidth);
         height: var(--borderWidth);
-        background: rgb(255, 255, 255);
-        background: radial-gradient(circle, rgba(255, 255, 255, 1) 0%, rgb(207, 170, 90) 82%);
         border-radius: 10px;
+        background-image: url("../../../img/blackTerraria.svg");
     }
 
     .tableCorners {
