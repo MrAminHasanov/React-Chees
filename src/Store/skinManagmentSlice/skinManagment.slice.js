@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import skinsSvg from "./skinsSvg/skinsSvg"
+import skins from "./skins/skins"
 
 const initialState = {
     selectedSkinKey: "Rpg-Chess",
-    selectedSkin: skinsSvg["Rpg-Chess"],
-    skinsList: Object.keys(skinsSvg)
+    selectedSkin: skins["Rpg-Chess"],
+    skinsList: Object.keys(skins)
 }        
 
 export const skinManagmentSlice = createSlice({
@@ -13,7 +13,7 @@ export const skinManagmentSlice = createSlice({
     reducers: {
         setTableSkin: (state, { payload: selectedSkin }) => {
             state.selectedSkinKey = selectedSkin;
-            state.selectedSkin = skinsSvg[selectedSkin];
+            state.selectedSkin = skins[selectedSkin];
         },
     }
 });

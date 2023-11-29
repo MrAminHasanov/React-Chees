@@ -1,5 +1,5 @@
-import { figures } from "./addFigureMove"
-import { posToId } from "./id_posFunctions"
+import { figures } from "./updateFigureMove/toolFunction/addFigureMove"
+import { posToId } from "./updateFigureMove/toolFunction/id_posFunctions"
 
 const isKingCanBeated = (props) => {
     if (canKnightBeatKing(props)) return true
@@ -103,7 +103,6 @@ const canPawnBeatKing = ({ tableContent, kingPos, kingSide }) => {
         (rightDioganalSquareFigure?.type === figures.pawn)
     if (isInLeftDiognalaSquareEnemyPawn) return true
     if (isInRightDiognalaSquareEnemyPawn) return true
-
 }
 
 export default isKingCanBeated

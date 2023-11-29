@@ -18,7 +18,7 @@ const figureMovesCalculator = {
 }
 
 export const updateFigureMove = (state) => {
-    const contents = state.content;
+    const contents = { ...state.content };
     const figureTurn = state.figureTurn;
     state.figureMove = {};
 

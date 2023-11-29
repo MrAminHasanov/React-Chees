@@ -1,9 +1,10 @@
 import rpgFiguresSvg from "./rpgFiguresSvg/rpgFiguresSvg";
 import rpgSquaresSvg from "./rpgSquaresSvg/rpgSquaresSvg";
 
-const rpgSvg = {
+const rpgSkin = {
     figures: rpgFiguresSvg,
-    squares: rpgSquaresSvg
+    squares: rpgSquaresSvg,
+    skinClassName: "rpgStyle"
 }
 
-export default rpgSvg
+export default rpgSkin

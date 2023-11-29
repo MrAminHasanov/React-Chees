@@ -1,4 +1,4 @@
-import isKingCanBeated from "./isKingCanBeated";
+import isKingCanBeated from "../../isKingCanBeated";
 import { idToPos } from "./id_posFunctions";
 
 export const figures = { pawn: "Pawn", knight: "Knight", rook: "Rook", bishop: "Bishop", queen: "Queen", king: "King" };
