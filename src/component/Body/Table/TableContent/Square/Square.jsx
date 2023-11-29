@@ -45,6 +45,11 @@ function Square({ id, squareMathColor }) {
   return (
     <div id={id} className={squareClassNames} >
       <img src={squareSkin} className={c.backgroundImg} alt={squareColorOrder} />
+      {
+      squareColorOrder === "black" ?
+      <div className={c.imgBlack}></div>:
+      <div className={c.imgWhite}></div>
+      }
       <div onClick={() => squareOnClick()} className={c.figureContainer}>
         {
           <Figures

@@ -22,6 +22,28 @@
     padding-bottom: 4px;
 }
 
+.imgBlack {
+    // opacity: 0.2;
+    z-index: -1;
+    top: 1px;
+    position: absolute;
+    background-color: rgba(62, 100, 236, 0.363);
+    width: 100%;
+    height: 100%;
+    content: " ";
+}
+
+// .imgWhite {
+
+//     z-index: -1;
+//     top: 1px;
+//     position: absolute;
+//     background-color: rgba(97, 97, 97, 0.28);
+//     width: 100%;
+//     height: 100%;
+//     content: " ";
+// }
+
 .moveableSquare {
     .figureContainer::after {
         content: " ";
