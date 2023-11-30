@@ -20,7 +20,7 @@
         border: 2px solid black;
         width: calc(var(--squareSide) * 8 + var(--borderGap));
         height: calc(var(--squareSide) * 8 + var(--borderGap));
-        background-image: url("../../../img/whiteTerraria.svg");
+        background-image: var(--tableBorderSvg) ;
     }
     
     --borderGap: 115px;
@@ -31,7 +31,7 @@
         width: var(--borderWidth);
         height: var(--borderWidth);
         border-radius: 10px;
-        background-image: url("../../../img/blackTerraria.svg");
+        background-image: var(--tableOutlineSvg);
     }
 
     .tableCorners {

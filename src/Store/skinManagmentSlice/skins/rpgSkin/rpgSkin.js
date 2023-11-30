@@ -1,10 +1,13 @@
 import rpgFiguresSvg from "./rpgFiguresSvg/rpgFiguresSvg";
 import rpgSquaresSvg from "./rpgSquaresSvg/rpgSquaresSvg";
+import rpgTableSvg from "./rpgTableSvg/rpgTableSvg";
+import rpgStyles from "./rpgStyles.module.scss"
 
 const rpgSkin = {
-    figures: rpgFiguresSvg,
+    table: rpgTableSvg,
     squares: rpgSquaresSvg,
-    skinClassName: "rpgStyle"
+    figures: rpgFiguresSvg,
+    styles: rpgStyles,
 }
 
 export default rpgSkin
