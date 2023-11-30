@@ -2,15 +2,25 @@
     border: 4px solid black;
     transition: .4s ease border-color;
     position: relative;
+
+    &::after {
+        position: absolute;
+        z-index: -1;
+        top: 1px;
+        width: 100%;
+        height: 100%;
+        content: " ";
+    }
 }
 
-.backgroundImg {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    bottom: 0%;
+.whiteSquare::after {
+    background-color: rgba(123, 182, 29, 0.28);
 }
+
+.blackSquare::after {
+    background-color: rgba(96, 255, 4, 0.195);
+}
+
 
 .figureContainer {
     background-color: transparent;
@@ -36,26 +46,30 @@
     }
 }
 
+.backgroundImg{
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    position: absolute;
+}
 // #region rpgStyle
-.rpgStyle {
-    &__choosedFigure {
-        border-color: rgb(134 39 159);
-    }
+.choosedFigure {
+    border-color: rgb(134 39 159);
+}
 
-    &__takeableFigure {
-        border-color: rgb(85, 255, 43);
-    }
+.takeableFigure {
+    border-color: rgb(85, 255, 43);
+}
 
-    &__blackFigureMoveableSquare {
-        .figureContainer::after {
-            background-color: rgb(58, 105, 192);
-        }
+.blackFigureMoveableSquare {
+    .figureContainer::after {
+        background-color: rgb(58, 105, 192);
     }
+}
 
-    &__whiteFigureMoveableSquare {
-        .figureContainer::after {
-            background-color: rgb(223, 37, 27);
-        }
+.whiteFigureMoveableSquare {
+    .figureContainer::after {
+        background-color: rgb(223, 37, 27);
     }
 }
 

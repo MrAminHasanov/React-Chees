@@ -1,7 +1,6 @@
 import classNames from 'classnames';
 import { useActions } from '../../../../../Hooks/useActions/useActions';
 import { useSelector } from 'react-redux';
-import c from './Square.module.scss';
 
 import Figures from './Figures/Figures';
 
@@ -15,17 +14,22 @@ function Square({ id, squareMathColor }) {
   const isThisFigureSideTurn = chessTurn === squareContent?.side;
   const squareColorOrder = squareMathColor === 0 ? "white" : "black";
   const squareSkin = useSelector(state => state.skinManagment.selectedSkin.squares[squareColorOrder]);
-  const skinClassName = useSelector(state => state.skinManagment.selectedSkin.skinClassName)
+  const skinStyles = useSelector(state => state.skinManagment.selectedSkin.styles)
 
   const { selectFigure, moveFigure } = useActions();
 
   const isEmptySquare = squareContent?.type === undefined;
 
-  let squareClassNames = classNames(c.component);
+  let squareClassNames = classNames(
+    skinStyles.component ,
+    squareColorOrder === "white"
+      ? skinStyles.whiteSquare
+      : skinStyles.blackSquare);
+
   let squareOnClick = () => moveFigure(id);
 
   if (isChoosedFigure) {
-    squareClassNames += " " + c[`${skinClassName}__choosedFigure`];
+    squareClassNames += " " + skinStyles.choosedFigure;
     squareOnClick = () => "";
   }
   else if (isThisFigureSideTurn) {
@@ -33,19 +37,19 @@ function Square({ id, squareMathColor }) {
   }
   else if (isMoveableSquare) {
     if (isEmptySquare) {
-      squareClassNames += " " + c.moveableSquare;
+      squareClassNames += " " + skinStyles.moveableSquare;
       const isWhiteFiguresTurn = chessTurn;
-      if (isWhiteFiguresTurn) squareClassNames += " " + c[`${skinClassName}__whiteFigureMoveableSquare`]
-      else squareClassNames += " " + c[`${skinClassName}__blackFigureMoveableSquare`]
+      if (isWhiteFiguresTurn) squareClassNames += " " + skinStyles.whiteFigureMoveableSquare;
+      else squareClassNames += " " + skinStyles.blackFigureMoveableSquare;
     }
     else
-      squareClassNames += " " + c[`${skinClassName}__takeableFigure`];
+      squareClassNames += " " + skinStyles.takeableFigure;
   }
 
   return (
     <div id={id} className={squareClassNames} >
-      <img src={squareSkin} className={c.backgroundImg} alt={squareColorOrder} />
-      <div onClick={() => squareOnClick()} className={c.figureContainer}>
+      <img src={squareSkin} className={skinStyles.backgroundImg} alt={squareColorOrder} />
+      <div onClick={() => squareOnClick()} className={skinStyles.figureContainer}>
         {
           <Figures
             figureSide={squareContent.side}
