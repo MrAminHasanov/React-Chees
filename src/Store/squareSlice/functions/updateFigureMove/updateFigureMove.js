@@ -5,8 +5,8 @@ import { pawnMove } from "./figureMoveCalculator/pawnMove";
 import { queenMove } from "./figureMoveCalculator/queenMove";
 import { rookMove } from "./figureMoveCalculator/rookMove";
 
-import { figures } from "./toolFunction/addFigureMove";
-import { idToPos } from "./toolFunction/id_posFunctions";
+import { figures } from "../toolFunction/addFigureMove";
+import { idToPos } from "../toolFunction/id_posFunctions";
 
 const figureMovesCalculator = {
     [figures.pawn]: (state, choosedFigure, id, contents) => pawnMove(state, choosedFigure, id, contents),
@@ -23,6 +23,7 @@ export const updateFigureMove = (state) => {
     state.figureMove = {};
 
     Object.values(contents).forEach((square, id) => {
+        state.figureMove[id] = {}
         if (square.side === figureTurn) {
             const choosedFigure = {
                 side: figureTurn,

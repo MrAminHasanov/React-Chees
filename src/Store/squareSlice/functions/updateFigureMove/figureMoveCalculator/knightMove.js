@@ -1,5 +1,5 @@
-import { addFigureMove } from "../toolFunction/addFigureMove";
-import { posToId } from "../toolFunction/id_posFunctions";
+import { addFigureMove } from "../../toolFunction/addFigureMove";
+import { posToId } from "../../toolFunction/id_posFunctions";
 
 export const knightMove = (state, choosedFigure, id, contents) => {
     for (let xDrt = -1; xDrt <= 1; xDrt += 2) {

@@ -1,5 +1,5 @@
-import { addFigureMove, figures } from "../toolFunction/addFigureMove";
-import { posToId } from "../toolFunction/id_posFunctions";
+import { addFigureMove, figures } from "../../toolFunction/addFigureMove";
+import { posToId } from "../../toolFunction/id_posFunctions";
 
 const sides = { white: true, black: false };
 

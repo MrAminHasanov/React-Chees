@@ -1,5 +1,5 @@
-import { figures } from "./updateFigureMove/toolFunction/addFigureMove"
-import { posToId } from "./updateFigureMove/toolFunction/id_posFunctions"
+import { figures } from "./toolFunction/addFigureMove"
+import { posToId } from "./toolFunction/id_posFunctions"
 
 const isKingCanBeated = (props) => {
     if (canKnightBeatKing(props)) return true

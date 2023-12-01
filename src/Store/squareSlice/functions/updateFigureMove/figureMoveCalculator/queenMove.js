@@ -1,5 +1,5 @@
-import { addFigureMove } from "../toolFunction/addFigureMove";
-import { posToId } from "../toolFunction/id_posFunctions";
+import { addFigureMove } from "../../toolFunction/addFigureMove";
+import { posToId } from "../../toolFunction/id_posFunctions";
 
 export const queenMove = (state, choosedFigure, id, contents) => {
     const startX = choosedFigure.pos.x;

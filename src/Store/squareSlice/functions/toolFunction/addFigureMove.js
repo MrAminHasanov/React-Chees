@@ -1,4 +1,4 @@
-import isKingCanBeated from "../../isKingCanBeated";
+import isKingCanBeated from "../isKingCanBeated";
 import { idToPos } from "./id_posFunctions";
 
 export const figures = { pawn: "Pawn", knight: "Knight", rook: "Rook", bishop: "Bishop", queen: "Queen", king: "King" };
@@ -26,7 +26,6 @@ export const addFigureMove = (state, figureId, canMoveTo, specialMoves = {}) => 
 
     const moveVariattion = buildMoveVariattion(state, figureId, canMoveTo, potentialMove);
     if (!isKingCanBeated(moveVariattion)) {
-        if (state.figureMove[figureId] === undefined) state.figureMove[figureId] = {}
         state.figureMove[figureId][canMoveTo] = potentialMove
     }
 }

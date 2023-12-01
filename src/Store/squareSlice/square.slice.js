@@ -1,8 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import tableStartContent from "./JSON/figuresStart.json";
 import figureStartMove from "./JSON/figureStartMove.json";
-import { updateFigureMove } from "./functions/updateFigureMove/updateFigureMove";
+
 import checkWinCondition from "./functions/checkWinCondition";
+import { updateFigureMove } from "./functions/updateFigureMove/updateFigureMove"
 
 const sides = { white: true, black: false };
 
