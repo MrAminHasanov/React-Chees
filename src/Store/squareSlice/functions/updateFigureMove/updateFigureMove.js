@@ -24,7 +24,6 @@ export const updateFigureMove = (state) => {
 
     Object.values(contents).forEach((square, id) => {
         if (square.side === figureTurn) {
-            state.figureMove[id] = {}
             const choosedFigure = {
                 side: figureTurn,
                 type: contents[id].type,

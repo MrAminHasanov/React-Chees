@@ -5,7 +5,7 @@ export const figures = { pawn: "Pawn", knight: "Knight", rook: "Rook", bishop: "
 
 export const addFigureMove = (state, figureId, canMoveTo, specialMoves = {}) => {
     if (canMoveTo === "squareNotExists") return
-    const potentialMove = {};
+    const potentialMove = { history: state.moveHistory };
 
     if (specialMoves.deleteFrom !== undefined) {
         potentialMove.deleteFrom = specialMoves.deleteFrom
@@ -26,6 +26,7 @@ export const addFigureMove = (state, figureId, canMoveTo, specialMoves = {}) => 
 
     const moveVariattion = buildMoveVariattion(state, figureId, canMoveTo, potentialMove);
     if (!isKingCanBeated(moveVariattion)) {
+        if (state.figureMove[figureId] === undefined) state.figureMove[figureId] = {}
         state.figureMove[figureId][canMoveTo] = potentialMove
     }
 }

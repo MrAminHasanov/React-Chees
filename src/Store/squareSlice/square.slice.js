@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import tableStartContent from "./JSON/figuresStart.json";
 import figureStartMove from "./JSON/figureStartMove.json";
 import { updateFigureMove } from "./functions/updateFigureMove/updateFigureMove";
+import checkWinCondition from "./functions/checkWinCondition";
 
 const sides = { white: true, black: false };
 
@@ -25,7 +26,8 @@ export const squearesSlice = createSlice({
   reducers: {
     selectFigure: (state, { payload: id }) => {
       state.choosedFigureId = id;
-      state.moveableSquares = state.figureMove[id]
+      if (id === null) state.moveableSquares = {}
+      else state.moveableSquares = state.figureMove[id]
     },
     moveFigure: (state, { payload: goTo }) => {
       const moveInformation = state.moveableSquares[goTo];
@@ -50,6 +52,7 @@ export const squearesSlice = createSlice({
 
         state.figureTurn = !state.figureTurn
         state.moveHistory = [...state.moveHistory, state.content];
+        checkWinCondition(state.figureMove)
         updateFigureMove(state);
       }
       state.choosedFigureId = null;
