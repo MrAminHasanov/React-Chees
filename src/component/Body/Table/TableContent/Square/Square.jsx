@@ -1,5 +1,4 @@
 import classNames from 'classnames';
-import { useEffect } from 'react';
 import { useActions } from '../../../../../Hooks/useActions/useActions';
 import { useSelector } from 'react-redux';
 
@@ -17,7 +16,6 @@ function Square({ id, squareMathColor }) {
   const squareSkin = useSelector(state => state.skinManagment.selectedSkin.squares[squareColorOrder]);
   const skinStyles = useSelector(state => state.skinManagment.selectedSkin.squareStyles)
   const emptySquareMoveBalsSkins = useSelector(state => state.skinManagment.selectedSkin.emptySquareMove)
-  const test = useSelector(state=> state.squaresList.figureMove)
   const { selectFigure, moveFigure } = useActions();
 
   const isEmptySquare = squareContent?.type === undefined;

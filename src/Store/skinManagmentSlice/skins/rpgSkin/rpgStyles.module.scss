@@ -18,7 +18,8 @@
 .moveableSquare {
     &::before {
         content: " ";
-        --ballRadiues: 35px;
+        --ballRadiues: 32px;
+        opacity: 0.7;
         background-image: var(--moveBall);
         width: var(--ballRadiues);
         height: var(--ballRadiues);
