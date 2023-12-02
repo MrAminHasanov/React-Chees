@@ -6,7 +6,6 @@ const isKingCanBeated = (props) => {
     if (canBishoopOrQueenBeatKing(props)) return true
     if (canRookOrQueenBeatKing(props)) return true
     if (canPawnBeatKing(props)) return true
-
     return false
 }
 

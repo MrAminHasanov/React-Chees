@@ -14,6 +14,8 @@ const initialState = {
   moveableSquares: {},
   choosedFigureId: null,
   moveHistory: [tableStartContent],
+  isMoveExist: true,
+  whoWin: undefined,
   kingsId: {
     [sides.white]: 60,
     [sides.black]: 4
@@ -53,8 +55,8 @@ export const squearesSlice = createSlice({
 
         state.figureTurn = !state.figureTurn
         state.moveHistory = [...state.moveHistory, state.content];
-        checkWinCondition(state.figureMove)
         updateFigureMove(state);
+        checkWinCondition(state)
       }
       state.choosedFigureId = null;
       state.moveableSquares = {};

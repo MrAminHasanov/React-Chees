@@ -17,7 +17,7 @@ function Square({ id, squareMathColor }) {
   const skinStyles = useSelector(state => state.skinManagment.selectedSkin.squareStyles)
   const emptySquareMoveBalsSkins = useSelector(state => state.skinManagment.selectedSkin.emptySquareMove)
   const { selectFigure, moveFigure } = useActions();
-
+  
   const isEmptySquare = squareContent?.type === undefined;
 
   let moveSquareBall = "none";

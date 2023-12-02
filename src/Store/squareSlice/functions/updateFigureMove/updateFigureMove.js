@@ -20,6 +20,7 @@ const figureMovesCalculator = {
 export const updateFigureMove = (state) => {
     const contents = { ...state.content };
     const figureTurn = state.figureTurn;
+    state.isMoveExist = false;
     state.figureMove = {};
 
     Object.values(contents).forEach((square, id) => {

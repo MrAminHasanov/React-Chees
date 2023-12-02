@@ -6,7 +6,7 @@ function Figures({ figureType, figureSide }) {
 
     return (
         figureSvg !== undefined &&
-        (<img src={figureSvg} alt={figureType} />)
+        (<img style={{userSelect:"none"}} src={figureSvg} alt={figureType} />)
     )
 }
 

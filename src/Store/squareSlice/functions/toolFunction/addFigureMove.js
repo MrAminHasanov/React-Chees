@@ -26,6 +26,7 @@ export const addFigureMove = (state, figureId, canMoveTo, specialMoves = {}) => 
 
     const moveVariattion = buildMoveVariattion(state, figureId, canMoveTo, potentialMove);
     if (!isKingCanBeated(moveVariattion)) {
+        state.isMoveExist = true
         state.figureMove[figureId][canMoveTo] = potentialMove
     }
 }
@@ -34,7 +35,6 @@ const buildMoveVariattion = (state, figureId, canMoveTo, potentailMove) => {
     const moveVariattion = { ...state.content };
     moveVariattion[canMoveTo] = state.content[figureId];
     moveVariattion[figureId] = {};
-    let kingPos;
 
     const needDeleteFrom = potentailMove.deleteFrom !== undefined;
     if (needDeleteFrom) {
@@ -42,20 +42,14 @@ const buildMoveVariattion = (state, figureId, canMoveTo, potentailMove) => {
         moveVariattion[deletedFigureId] = {};
     }
 
-    if (potentailMove.changeKingPos !== undefined) {
-        kingPos = idToPos(canMoveTo);
-    } else {
-        const kingSide = state.figureTurn;
-        kingPos = idToPos(state.kingsId[kingSide]);
-    }
+    const kingPos = potentailMove.changeKingPos !== undefined
+        ? idToPos(canMoveTo)
+        : idToPos(state.kingsId[state.figureTurn]);
 
-    state.test = { ...moveVariattion }
     return {
         tableContent: moveVariattion,
         kingPos: kingPos,
         kingSide: state.figureTurn,
-        figureId: figureId
     }
-
 }
 
