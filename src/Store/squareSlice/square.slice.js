@@ -8,18 +8,18 @@ import { updateFigureMove } from "./functions/updateFigureMove/updateFigureMove"
 const sides = { white: true, black: false };
 
 const initialState = {
-  content: tableStartContent,
-  figureTurn: sides.white,
-  figureMove: figureStartMove,
-  moveableSquares: {},
-  choosedFigureId: null,
+  content: { ...tableStartContent },
+  figureMove: { ...figureStartMove },
   moveHistory: [tableStartContent],
-  isMoveExist: true,
-  whoWin: undefined,
+  moveableSquares: {},
+  figureTurn: sides.white,
+  choosedFigureId: null,
   kingsId: {
     [sides.white]: 60,
     [sides.black]: 4
-  }
+  },
+  isMoveExist: true,
+  whoWin: undefined
 };
 
 
@@ -27,6 +27,18 @@ export const squearesSlice = createSlice({
   name: "squaresList",
   initialState,
   reducers: {
+    restartGame: (state) => {
+      state.figureTurn = sides.white
+      state.content = { ...tableStartContent }
+      state.figureMove = { ...figureStartMove }
+      state.moveHistory = [tableStartContent]
+      state.isMoveExist = true
+      state.whoWin = undefined
+      state.kingsId = {
+        [sides.white]: 60,
+        [sides.black]: 4
+      }
+    },
     selectFigure: (state, { payload: id }) => {
       state.choosedFigureId = id;
       if (id === null) state.moveableSquares = {}
