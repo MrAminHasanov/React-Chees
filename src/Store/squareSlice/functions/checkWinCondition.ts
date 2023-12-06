@@ -1,12 +1,13 @@
-import isKingCanBeated from "./isKingCanBeated"
-import { idToPos } from "./toolFunction/id_posFunctions";
+import isKingCanBeated from "./isKingCanBeated.ts"
+import { idToPos } from "./toolFunction/id_posFunctions.ts";
+import { contentInter, kingCanBeatedProps, stateIntarface } from "../Types/stateInterface.ts";
 
-const checkWinCondition = (state) => {
-    const isMoveExis = state.isMoveExist;
+const checkWinCondition = (state: stateIntarface): void => {
+    const isMoveExis: boolean = state.isMoveExist;
     if (!isMoveExis) {
-        const kingProps = {
+        const kingProps: kingCanBeatedProps = {
             tableContent: { ...state.content },
-            kingPos: idToPos(state.kingsId[state.figureTurn]),
+            kingPos: idToPos(state.kingsId[String(state.figureTurn)]),
             kingSide: state.figureTurn,
         }
 
@@ -20,19 +21,18 @@ const checkWinCondition = (state) => {
         }
     }
 
-    const moveHistory = { ...state.moveHistory };
-    if (checkDrawBecauseRepeat(moveHistory)) {
+    if (checkDrawBecauseRepeat({ ...state.moveHistory })) {
         state.whoWin = "draw";
     }
 }
 
-const checkDrawBecauseRepeat = (moveHistory) => {
-    const movesCount = Object.keys(moveHistory).length - 1;
+const checkDrawBecauseRepeat = (moveHistory: Array<contentInter>): boolean => {
+    const movesCount: number = Object.keys(moveHistory).length - 1;
     if (movesCount > 7) {
-        const isLastMoveEqualToFoureMoveBefore =
+        const isLastMoveEqualToFoureMoveBefore: boolean =
             JSON.stringify(moveHistory[movesCount]) ===
             JSON.stringify(moveHistory[movesCount - 4])
-        const isFoureMoveBeforeEqualToEightMoveBefore =
+        const isFoureMoveBeforeEqualToEightMoveBefore: boolean =
             JSON.stringify(moveHistory[movesCount - 4]) ===
             JSON.stringify(moveHistory[movesCount - 8])
         if (
@@ -42,7 +42,5 @@ const checkDrawBecauseRepeat = (moveHistory) => {
     }
     return false
 }
-
-
 
 export default checkWinCondition;

@@ -1,0 +1,18 @@
+.component {
+  position: absolute;
+  list-style: none;
+  transform: translateY(4px);
+}
+.component li {
+  padding: 4px;
+  border: 1px solid black;
+  background-color: white;
+  font-size: 16px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+.component .activeLi {
+  cursor: pointer;
+  background-color: rgb(232, 232, 232);
+}/*# sourceMappingURL=SkinList.module.css.map */

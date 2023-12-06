@@ -19,7 +19,7 @@ function Table() {
       <div className={c.secondTableBorder} style={{ "--tableOutlineSvg": `url(${tableBorders.outline})` }}></div>
       <TableContent />
       {
-        gameResult !== undefined &&
+        gameResult !== "undefined" &&
         <ResultInformation whoWin={gameResult} />
       }
     </div>
