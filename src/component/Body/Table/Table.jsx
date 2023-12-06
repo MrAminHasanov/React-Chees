@@ -3,10 +3,11 @@ import { useSelector } from 'react-redux';
 
 import c from './Table.module.scss'
 import TableContent from './TableContent/TableContent'
+import ResultInformation from "./ResultInformation/ResultInformation"
 
 function Table() {
   const tableBorders = useSelector(state => state.skinManagment.selectedSkin.table);
-  const resultInforimation = useSelector(state => state.squaresList.whoWin);
+  const gameResult = useSelector(state => state.squaresList.whoWin);
 
   return (
     <div className={c.component}>
@@ -17,7 +18,10 @@ function Table() {
       <div className={c.tableBorder} style={{ "--tableBorderSvg": `url(${tableBorders.border})` }}></div>
       <div className={c.secondTableBorder} style={{ "--tableOutlineSvg": `url(${tableBorders.outline})` }}></div>
       <TableContent />
-      
+      {
+        gameResult !== "undefined" &&
+        <ResultInformation whoWin={gameResult} />
+      }
     </div>
   )
 }

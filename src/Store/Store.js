@@ -1,5 +1,5 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import { reducer as squaresListReducer } from "./squareSlice/square.slice";
+import { reducer as squaresListReducer } from "./squareSlice/square.slice.ts";
 import { reducer as skinManagmentReducer } from "./skinManagmentSlice/skinManagment.slice";
 
 const reducers = combineReducers({
