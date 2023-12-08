@@ -20,6 +20,14 @@ interface figureMove {
     [figureId: string]: moveableSquares
 }
 
+interface castlingCondition {
+    [kingSide: string]: {
+        "isKingMove": boolean,
+        "isLeftRookMove": boolean,
+        "isRightRookMove": boolean
+    }
+}
+
 export interface stateIntarface {
     moveableSquares: moveableSquares,
     choosedFigureId: number | string,
@@ -29,7 +37,8 @@ export interface stateIntarface {
     figureTurn: boolean,
     kingsId: kingsIdInter,
     content: contentInter,
-    whoWin: string | boolean
+    whoWin: string | boolean,
+    castlingCondition: castlingCondition
 }
 // #endregion
 
@@ -63,7 +72,10 @@ export interface moveInfo {
     "deleteFrom"?: number,
     "changedKingSide"?: boolean,
     "alsoMoveTo"?: number,
-    "canMoveTo": number | string
+    "kingMove"?: boolean,
+    "leftRookMove"?:boolean,
+    "rightRookMove"?:boolean,
+    "canMoveTo": number | string,
 }
 
 export interface kingCanBeatedProps {

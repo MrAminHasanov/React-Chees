@@ -11,9 +11,8 @@ export const knightMove = ({ state, choosedFigure, id, contents }: figureMovePro
                 const moveableSquareId: number | string = posToId(xTest, yTest);
 
                 const isInSquareNotAlliedFigure: boolean = contents[moveableSquareId]?.side !== choosedFigure.side;
-                const isSquareExist: boolean = moveableSquareId !== null;
 
-                if (isInSquareNotAlliedFigure && isSquareExist) {
+                if (isInSquareNotAlliedFigure) {
                     addFigureMove(state, id, { canMoveTo: moveableSquareId })
                 }
             }

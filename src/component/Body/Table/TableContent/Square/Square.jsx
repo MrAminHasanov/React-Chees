@@ -17,8 +17,22 @@ function Square({ id, squareMathColor }) {
   const skinStyles = useSelector(state => state.skinManagment.selectedSkin.squareStyles)
   const emptySquareMoveBalsSkins = useSelector(state => state.skinManagment.selectedSkin.emptySquareMove)
   const { selectFigure, moveFigure } = useActions();
-  
+
   const isEmptySquare = squareContent?.type === undefined;
+
+  const draggableStates = {
+    "draggable": false,
+    "onDragOver": (e) => e.preventDefault(),
+    "onDrop": (e) => {
+      e.preventDefault()
+      selectFigure(null)
+    }
+  };
+
+  if (isThisFigureSideTurn) {
+    draggableStates.draggable = true;
+    draggableStates.onDragStart = () => selectFigure(id)
+  }
 
   let moveSquareBall = "none";
   let squareClassNames = classNames(
@@ -27,16 +41,17 @@ function Square({ id, squareMathColor }) {
       ? skinStyles.whiteSquare
       : skinStyles.blackSquare);
 
-  let squareOnClick = () => moveFigure(id);
+  let squareOnClick = () => selectFigure(null);
 
   if (isChoosedFigure) {
     squareClassNames += " " + skinStyles.choosedFigure;
-    squareOnClick = () => selectFigure(null);
   }
   else if (isThisFigureSideTurn) {
     squareOnClick = () => selectFigure(id);
   }
   else if (isMoveableSquare) {
+    squareOnClick = () => moveFigure(id);
+    draggableStates.onDrop = () => moveFigure(id);
     if (isEmptySquare) {
       squareClassNames += ` ` + skinStyles.moveableSquare
       moveSquareBall = emptySquareMoveBalsSkins[chessTurn]
@@ -49,10 +64,12 @@ function Square({ id, squareMathColor }) {
       style={{
         "--backgroundeImg": `url(${squareSkin})`,
         "--moveBall": `url(${moveSquareBall})`
-      }}>
+      }}
+    >
       <div
         onClick={() => squareOnClick()}
         className={skinStyles.figureContainer}
+        {...draggableStates}
       >
         {
           <Figures

@@ -7,6 +7,7 @@ const result = {
   "false": "Black Win",
   "draw": "Game is draw"
 }
+
 function ResultInformation({ whoWin }) {
   const { restartGame } = useActions()
 

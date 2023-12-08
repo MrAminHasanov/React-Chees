@@ -1,9 +1,0 @@
-.component {
-  padding: 10px 20px;
-  width: 100%;
-  display: flex;
-  background: rgb(224, 177, 124);
-  background: linear-gradient(90deg, rgb(201, 127, 42) 13%, rgb(216, 167, 112) 61%);
-  align-items: center;
-  justify-content: space-between;
-}/*# sourceMappingURL=Header.module.css.map */

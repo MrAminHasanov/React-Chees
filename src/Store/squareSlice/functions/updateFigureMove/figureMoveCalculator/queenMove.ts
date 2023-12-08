@@ -1,8 +1,8 @@
-import { squareContentInter } from "../../../Types/stateInterface.ts";
+import { figureMoveProps, squareContentInter } from "../../../Types/stateInterface.ts";
 import { addFigureMove } from "../../toolFunction/addFigureMove.ts";
 import { posToId } from "../../toolFunction/id_posFunctions.ts";
 
-export const queenMove = ({ state, choosedFigure, id, contents }):void => {
+export const queenMove = ({ state, choosedFigure, id, contents }: figureMoveProps): void => {
     const startX: number = choosedFigure.pos.x;
     const startY: number = choosedFigure.pos.y;
     for (let corOrder = -1; corOrder <= 1; corOrder += 2) {

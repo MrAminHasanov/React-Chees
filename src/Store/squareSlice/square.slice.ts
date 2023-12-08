@@ -20,6 +20,18 @@ const initialState: stateIntarface = {
     [sides.white]: 60,
     [sides.black]: 4
   },
+  castlingCondition: {
+    [sides.white]: {
+      "isKingMove": false,
+      "isLeftRookMove": false,
+      "isRightRookMove": false
+    },
+    [sides.black]: {
+      "isKingMove": false,
+      "isLeftRookMove": false,
+      "isRightRookMove": false
+    }
+  },
   isMoveExist: true,
   whoWin: "undefined"
 };
@@ -39,6 +51,18 @@ export const squearesSlice = createSlice({
         [sides.white]: 60,
         [sides.black]: 4
       }
+      state.castlingCondition = {
+        [sides.white]: {
+          "isKingMove": false,
+          "isLeftRookMove": false,
+          "isRightRookMove": false
+        },
+        [sides.black]: {
+          "isKingMove": false,
+          "isLeftRookMove": false,
+          "isRightRookMove": false
+        }
+      }
     },
     selectFigure: (state: stateIntarface, { payload: id }) => {
       state.choosedFigureId = id;
@@ -47,34 +71,44 @@ export const squearesSlice = createSlice({
     },
     moveFigure: (state: stateIntarface, { payload: goTo }) => {
       const moveInformation: moveInfo = state.moveableSquares[goTo];
-      const isMoveExis: boolean = moveInformation !== undefined;
+      const choosedFigureId: any = state.choosedFigureId;
 
-      if (isMoveExis) {
-        const choosedFigureId: any = state.choosedFigureId;
-        state.content[goTo] = state.content[choosedFigureId];
-        state.content[choosedFigureId] = {};
+      state.content[goTo] = state.content[choosedFigureId];
+      state.content[choosedFigureId] = {};
 
-        const needDeleteFrom: boolean =
-          moveInformation.deleteFrom !== undefined;
-        const needChangeKingPos: boolean =
-          moveInformation.changedKingSide !== undefined;
+      const needDeleteFrom: boolean =
+        moveInformation.deleteFrom !== undefined;
+      const needChangeKingPos: boolean =
+        moveInformation.changedKingSide !== undefined;
 
-        if (needDeleteFrom) {
-          const needDeleteFigureId: any = moveInformation.deleteFrom;
-          state.content[needDeleteFigureId] = {};
-        }
-        else if (needChangeKingPos) {
-          const kingSide: any = moveInformation.changedKingSide;
-          state.kingsId[kingSide] = goTo;
-        }
-
-        state.figureTurn = !state.figureTurn
-        state.moveHistory = [...state.moveHistory, state.content];
-        updateFigureMove(state);
-        checkWinCondition(state)
+      if (needDeleteFrom) {
+        const needDeleteFigureId: any = moveInformation.deleteFrom;
+        state.content[needDeleteFigureId] = {};
       }
+
+      if (needChangeKingPos) {
+        const kingSide: any = moveInformation.changedKingSide;
+        state.kingsId[kingSide] = goTo;
+      }
+
+      if (moveInformation.kingMove) {
+        state.castlingCondition[String(state.figureTurn)].isKingMove = true
+      }
+
+      if (moveInformation.leftRookMove) {
+        state.castlingCondition[String(state.figureTurn)].isLeftRookMove = true
+      }
+
+      if (moveInformation.rightRookMove) {
+        state.castlingCondition[String(state.figureTurn)].isRightRookMove = true
+      }
+
+      state.figureTurn = !state.figureTurn
+      state.moveHistory = [...state.moveHistory, state.content];
       state.choosedFigureId = "notChosedFigure";
       state.moveableSquares = {};
+      updateFigureMove(state);
+      checkWinCondition(state)
     }
   }
 });

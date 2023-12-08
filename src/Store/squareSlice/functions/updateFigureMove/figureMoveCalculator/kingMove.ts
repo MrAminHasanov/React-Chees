@@ -12,7 +12,7 @@ export const kingMove = ({ state, choosedFigure, id, contents }: figureMoveProps
             const potentialSquareId: number | string = posToId(xCounter, yCounter);
             const square: squareContentInter = contents[potentialSquareId];
             if (square?.side !== choosedFigure.side) {
-                addFigureMove(state, id, { changedKingSide: choosedFigure.side, canMoveTo: potentialSquareId })
+                addFigureMove(state, id, { changedKingSide: choosedFigure.side, canMoveTo: potentialSquareId, kingMove: true })
             }
         }
     }

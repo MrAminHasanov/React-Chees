@@ -13,6 +13,11 @@
         height: 100%;
         content: " ";
     }
+
+    img {
+        pointer-events: none;
+        user-select: none;
+    }
 }
 
 .moveableSquare {
@@ -51,6 +56,12 @@
     justify-content: space-evenly;
     align-items: flex-end;
     padding-bottom: 4px;
+    user-select: none;
+    cursor: grab;
+}
+
+.whiteBorder {
+    border-color: white;
 }
 
 // #region rpgStyle

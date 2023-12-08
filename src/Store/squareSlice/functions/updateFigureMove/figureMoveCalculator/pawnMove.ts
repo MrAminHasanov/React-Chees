@@ -1,11 +1,11 @@
 import { figures } from "../../../Types/connstEnums.ts";
-import { pos, squareContentInter } from "../../../Types/stateInterface.ts";
+import { figureMoveProps, pos, squareContentInter } from "../../../Types/stateInterface.ts";
 import { addFigureMove } from "../../toolFunction/addFigureMove.ts";
 import { posToId } from "../../toolFunction/id_posFunctions.ts";
 
 const sides = { white: true, black: false };
 
-export const pawnMove = ({ state, choosedFigure, id, contents }): void => {
+export const pawnMove = ({ state, choosedFigure, id, contents }: figureMoveProps): void => {
     //переменая для коректировки напраления движения пешки в зависимости от его стороны 
     const pawnDirection: number = choosedFigure.side === sides.black ? 1 : -1;
     // #region verifyMoveDirectly
