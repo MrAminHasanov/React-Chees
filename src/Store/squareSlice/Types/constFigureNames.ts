@@ -1,6 +1,17 @@
-export const enum figuresName { pawn = "Pawn", knight = "Knight", rook = "Rook", bishop = "Bishop", queen = "Queen", king = "King" };
-export const enum sides { white = true, black = false };
-export const figures = {
+import { squareContentInter } from "./stateInterface";
+
+export const figuresName: { [figureName: string]: string } =
+    { pawn: "Pawn", knight: "Knight", rook: "Rook", bishop: "Bishop", queen: "Queen", king: "King" };
+export const sides: {
+    white: true,
+    black: false
+} =
+{
+    white: true,
+    black: false
+};
+
+export const figures: { [figureName: string]: squareContentInter } = {
     "whitePawn": {
         type: figuresName.pawn,
         side: sides.white

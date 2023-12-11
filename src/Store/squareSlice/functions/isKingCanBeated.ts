@@ -1,4 +1,4 @@
-import { figuresName } from "../Types/connstEnums.ts"
+import { figuresName } from "../Types/constFigureNames.ts"
 import { kingCanBeatedProps, squareContentInter } from "../Types/stateInterface.ts"
 import { posToId } from "./toolFunction/id_posFunctions.ts"
 

@@ -6,7 +6,7 @@ import { queenMove } from "./calcFiguresMove/queenMove.ts";
 import { rookMove } from "./calcFiguresMove/rookMove.ts";
 
 import { idToPos } from "../toolFunction/id_posFunctions.ts";
-import { figuresName } from "../../Types/connstEnums.ts";
+import { figuresName } from "../../Types/constFigureNames.ts";
 import { stateIntarface, squareContentInter, figureMoveProps, choosedFigureForUpdateMove } from "../../Types/stateInterface.ts"
 
 const figureMovesCalculator = {

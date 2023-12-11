@@ -7,9 +7,7 @@ import checkWinCondition from "./functions/checkWinCondition.ts";
 import { updateFigureMove } from "./functions/updateFigureMove/updateFigureMove.ts"
 
 import { stateIntarface, moveInfo } from "./Types/stateInterface.ts";
-import { sides } from "./Types/connstEnums.ts";
-
-console.log(tableStartContent);
+import { figures, sides } from "./Types/constFigureNames.ts";
 
 const initialState: stateIntarface = {
   content: { ...tableStartContent },
@@ -19,16 +17,16 @@ const initialState: stateIntarface = {
   figureTurn: sides.white,
   choosedFigureId: "notChosedFigure",
   kingsId: {
-    [sides.white]: 60,
-    [sides.black]: 4
+    [String(sides.white)]: 60,
+    [String(sides.black)]: 4
   },
   castlingCondition: {
-    [sides.white]: {
+    [String(sides.white)]: {
       "isKingMove": false,
       "isLeftRookMove": false,
       "isRightRookMove": false
     },
-    [sides.black]: {
+    [String(sides.black)]: {
       "isKingMove": false,
       "isLeftRookMove": false,
       "isRightRookMove": false
@@ -37,9 +35,6 @@ const initialState: stateIntarface = {
   isMoveExist: true,
   whoWin: "undefined"
 };
-// initialState.content["49"].side = Boolean(sides.black);
-// console.log(initialState.content["49"].side);
-
 
 export const squearesSlice = createSlice({
   name: "squaresList",
@@ -81,11 +76,11 @@ export const squearesSlice = createSlice({
       const choosedFigureId: any = state.choosedFigureId;
 
       state.content[goTo] = state.content[choosedFigureId];
-      state.content[choosedFigureId] = {};
+      state.content[choosedFigureId] = figures.emptySquare;
 
       if ("deleteFrom" in moveInformation) {
         const needDeleteFigureId: any = moveInformation.deleteFrom;
-        state.content[needDeleteFigureId] = {};
+        state.content[needDeleteFigureId] = figures.emptySquare;
       }
 
       if ("changedKingSide" in moveInformation) {

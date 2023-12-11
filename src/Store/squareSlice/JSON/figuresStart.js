@@ -1,4 +1,4 @@
-import { figures } from "../Types/connstEnums.ts"
+import { figures } from "../Types/constFigureNames.ts"
 
 const figureStartPos = {
     "0": figures.blackRook,

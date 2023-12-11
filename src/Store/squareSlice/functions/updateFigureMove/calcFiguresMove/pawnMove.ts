@@ -1,4 +1,4 @@
-import { figuresName } from "../../../Types/connstEnums.ts";
+import { figuresName } from "../../../Types/constFigureNames.ts";
 import { figureMoveProps, pos, squareContentInter } from "../../../Types/stateInterface.ts";
 import { addFigureMove } from "../../toolFunction/addFigureMove.ts";
 import { posToId } from "../../toolFunction/id_posFunctions.ts";
