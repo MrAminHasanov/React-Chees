@@ -25,7 +25,7 @@ function Square({ id, squareMathColor }) {
     "onDragOver": (e) => e.preventDefault(),
     "onDrop": (e) => {
       e.preventDefault()
-      selectFigure(null)
+      selectFigure("notChosedFigure")
     }
   };
 
@@ -41,7 +41,7 @@ function Square({ id, squareMathColor }) {
       ? skinStyles.whiteSquare
       : skinStyles.blackSquare);
 
-  let squareOnClick = () => selectFigure(null);
+  let squareOnClick = () => selectFigure("notChosedFigure");
 
   if (isChoosedFigure) {
     squareClassNames += " " + skinStyles.choosedFigure;

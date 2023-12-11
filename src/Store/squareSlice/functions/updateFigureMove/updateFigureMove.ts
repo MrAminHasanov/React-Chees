@@ -1,21 +1,21 @@
-import { bishopMove } from "./figureMoveCalculator/bishopMove.ts";
-import { kingMove } from "./figureMoveCalculator/kingMove.ts";
-import { knightMove } from "./figureMoveCalculator/knightMove.ts";
-import { pawnMove } from "./figureMoveCalculator/pawnMove.ts";
-import { queenMove } from "./figureMoveCalculator/queenMove.ts";
-import { rookMove } from "./figureMoveCalculator/rookMove.ts";
+import { bishopMove } from "./calcFiguresMove/bishopMove.ts";
+import { kingMove } from "./calcFiguresMove/kingMove.ts";
+import { knightMove } from "./calcFiguresMove/knightMove.ts";
+import { pawnMove } from "./calcFiguresMove/pawnMove.ts";
+import { queenMove } from "./calcFiguresMove/queenMove.ts";
+import { rookMove } from "./calcFiguresMove/rookMove.ts";
 
 import { idToPos } from "../toolFunction/id_posFunctions.ts";
-import { figures } from "../../Types/connstEnums.ts";
+import { figuresName } from "../../Types/connstEnums.ts";
 import { stateIntarface, squareContentInter, figureMoveProps, choosedFigureForUpdateMove } from "../../Types/stateInterface.ts"
 
 const figureMovesCalculator = {
-    [figures.pawn]: (figureMoveProps: figureMoveProps) => pawnMove(figureMoveProps),
-    [figures.rook]: (figureMoveProps: figureMoveProps) => rookMove(figureMoveProps),
-    [figures.king]: (figureMoveProps: figureMoveProps) => kingMove(figureMoveProps),
-    [figures.queen]: (figureMoveProps: figureMoveProps) => queenMove(figureMoveProps),
-    [figures.bishop]: (figureMoveProps: figureMoveProps) => bishopMove(figureMoveProps),
-    [figures.knight]: (figureMoveProps: figureMoveProps) => knightMove(figureMoveProps)
+    [figuresName.pawn]: (figureMoveProps: figureMoveProps) => pawnMove(figureMoveProps),
+    [figuresName.rook]: (figureMoveProps: figureMoveProps) => rookMove(figureMoveProps),
+    [figuresName.king]: (figureMoveProps: figureMoveProps) => kingMove(figureMoveProps),
+    [figuresName.queen]: (figureMoveProps: figureMoveProps) => queenMove(figureMoveProps),
+    [figuresName.bishop]: (figureMoveProps: figureMoveProps) => bishopMove(figureMoveProps),
+    [figuresName.knight]: (figureMoveProps: figureMoveProps) => knightMove(figureMoveProps)
 }
 
 export const updateFigureMove = (state: stateIntarface): void => {

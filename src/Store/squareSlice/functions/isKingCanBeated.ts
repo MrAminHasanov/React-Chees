@@ -1,13 +1,14 @@
-import { figures } from "../Types/connstEnums.ts"
+import { figuresName } from "../Types/connstEnums.ts"
 import { kingCanBeatedProps, squareContentInter } from "../Types/stateInterface.ts"
 import { posToId } from "./toolFunction/id_posFunctions.ts"
 
 const isKingCanBeated = (props: kingCanBeatedProps): boolean => {
-    if (canKnightBeatKing(props)) return true
-    if (canBishoopOrQueenBeatKing(props)) return true
-    if (canRookOrQueenBeatKing(props)) return true
-    if (canPawnBeatKing(props)) return true
-    return false
+    return (
+        canKnightBeatKing(props) ||
+        canBishoopOrQueenBeatKing(props) ||
+        canRookOrQueenBeatKing(props) ||
+        canPawnBeatKing(props)
+    )
 }
 
 const canKnightBeatKing = ({ tableContent, kingPos, kingSide }: kingCanBeatedProps): boolean => {
@@ -20,7 +21,7 @@ const canKnightBeatKing = ({ tableContent, kingPos, kingSide }: kingCanBeatedPro
                 if (dangerSquareId !== "squareNotExists") {
                     const dangerSquareContent: squareContentInter = tableContent[dangerSquareId];
                     const isInDangerSquareEnemyKnight: boolean =
-                        dangerSquareContent?.type === figures.knight &&
+                        dangerSquareContent?.type === figuresName.knight &&
                         dangerSquareContent?.side === !kingSide
                     if (isInDangerSquareEnemyKnight) return true
                 }
@@ -49,7 +50,7 @@ const canBishoopOrQueenBeatKing = ({ tableContent, kingPos, kingSide }: kingCanB
 
                 const isInSquareDangerFigure: boolean =
                     dangerSquare.side === !kingSide &&
-                    (dangerSquare.type === figures.queen || dangerSquare.type === figures.bishop);
+                    (dangerSquare.type === figuresName.queen || dangerSquare.type === figuresName.bishop);
                 if (isInSquareDangerFigure) {
                     return true
                 }
@@ -80,7 +81,7 @@ const canRookOrQueenBeatKing = ({ tableContent, kingPos, kingSide }: kingCanBeat
 
                 const isInSquareEnemyFigure: boolean =
                     dangerSquare.side === !kingSide &&
-                    (dangerSquare.type === figures.rook || dangerSquare.type === figures.queen);
+                    (dangerSquare.type === figuresName.rook || dangerSquare.type === figuresName.queen);
                 if (isInSquareEnemyFigure) {
                     return true
                 }
@@ -100,13 +101,12 @@ const canPawnBeatKing = ({ tableContent, kingPos, kingSide }: kingCanBeatedProps
     const rightDioganalSquareFigure: squareContentInter = tableContent[rightDioganalSquareId]
     const isInLeftDiognalaSquareEnemyPawn: boolean =
         leftDioganalSquareFigure?.side === !kingSide &&
-        (leftDioganalSquareFigure?.type === figures.pawn);
+        (leftDioganalSquareFigure?.type === figuresName.pawn);
     const isInRightDiognalaSquareEnemyPawn: boolean =
         rightDioganalSquareFigure?.side === !kingSide &&
-        (rightDioganalSquareFigure?.type === figures.pawn)
-    if (isInLeftDiognalaSquareEnemyPawn) return true
-    if (isInRightDiognalaSquareEnemyPawn) return true
-    return false
+        (rightDioganalSquareFigure?.type === figuresName.pawn)
+
+    return (isInLeftDiognalaSquareEnemyPawn || isInRightDiognalaSquareEnemyPawn)
 }
 
 export default isKingCanBeated

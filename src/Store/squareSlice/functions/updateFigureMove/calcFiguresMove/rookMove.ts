@@ -20,23 +20,15 @@ export const rookMove = ({ state, choosedFigure, id, contents }: figureMoveProps
                     canMoveTo: testSquareId,
                 }
 
-                if (state.figureTurn) {
-                    if (startY === 8) {
-                        if (startX === 1) {
-                            moveInfoProps.leftRookMove = true
-                        } else if (startX === 8) {
-                            moveInfoProps.rightRookMove = true
-                        }
-                    }
-                } else {
-                    if (startY === 1) {
-                        if (startX === 1) {
-                            moveInfoProps.leftRookMove = true
-                        } else if (startX === 8) {
-                            moveInfoProps.rightRookMove = true
-                        }
+                const rookSideHeight = choosedFigure.side ? 8 : 1;
+                if (startY === rookSideHeight) {
+                    if (startX === 1) {
+                        moveInfoProps.leftRookMove = true
+                    } else if (startX === 8) {
+                        moveInfoProps.rightRookMove = true
                     }
                 }
+
 
                 if (isSquareEmpty) {
                     addFigureMove(state, id, moveInfoProps)

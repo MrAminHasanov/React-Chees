@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import tableStartContent from "./JSON/figuresStart.json";
+import tableStartContent from "./JSON/figuresStart.js";
 import figureStartMove from "./JSON/figureStartMove.json";
 
 import checkWinCondition from "./functions/checkWinCondition.ts";
@@ -9,12 +9,14 @@ import { updateFigureMove } from "./functions/updateFigureMove/updateFigureMove.
 import { stateIntarface, moveInfo } from "./Types/stateInterface.ts";
 import { sides } from "./Types/connstEnums.ts";
 
+console.log(tableStartContent);
+
 const initialState: stateIntarface = {
   content: { ...tableStartContent },
   figureMove: { ...figureStartMove },
   moveHistory: [tableStartContent],
   moveableSquares: {},
-  figureTurn: Boolean(sides.white),
+  figureTurn: sides.white,
   choosedFigureId: "notChosedFigure",
   kingsId: {
     [sides.white]: 60,
@@ -35,6 +37,9 @@ const initialState: stateIntarface = {
   isMoveExist: true,
   whoWin: "undefined"
 };
+// initialState.content["49"].side = Boolean(sides.black);
+// console.log(initialState.content["49"].side);
+
 
 export const squearesSlice = createSlice({
   name: "squaresList",
@@ -66,8 +71,10 @@ export const squearesSlice = createSlice({
     },
     selectFigure: (state: stateIntarface, { payload: id }) => {
       state.choosedFigureId = id;
-      if (id === null) state.moveableSquares = {}
-      else state.moveableSquares = state.figureMove[id]
+      state.moveableSquares =
+        id === "notChosedFigure"
+          ? {}
+          : state.figureMove[id]
     },
     moveFigure: (state: stateIntarface, { payload: goTo }) => {
       const moveInformation: moveInfo = state.moveableSquares[goTo];
@@ -76,17 +83,12 @@ export const squearesSlice = createSlice({
       state.content[goTo] = state.content[choosedFigureId];
       state.content[choosedFigureId] = {};
 
-      const needDeleteFrom: boolean =
-        moveInformation.deleteFrom !== undefined;
-      const needChangeKingPos: boolean =
-        moveInformation.changedKingSide !== undefined;
-
-      if (needDeleteFrom) {
+      if ("deleteFrom" in moveInformation) {
         const needDeleteFigureId: any = moveInformation.deleteFrom;
         state.content[needDeleteFigureId] = {};
       }
 
-      if (needChangeKingPos) {
+      if ("changedKingSide" in moveInformation) {
         const kingSide: any = moveInformation.changedKingSide;
         state.kingsId[kingSide] = goTo;
       }
@@ -114,4 +116,5 @@ export const squearesSlice = createSlice({
 });
 
 export const { actions, reducer } = squearesSlice;
+
 

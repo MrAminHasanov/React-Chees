@@ -27,13 +27,12 @@ const buildKingProps =
         moveVariattion[moveInfo.canMoveTo] = state.content[figureId];
         moveVariattion[figureId] = {};
 
-        const needDeleteFrom: boolean = moveInfo.deleteFrom !== undefined;
-        if (needDeleteFrom) {
+        if ("deleteFrom" in moveInfo) {
             const deletedFigureId: any = moveInfo.deleteFrom;
             moveVariattion[deletedFigureId] = {};
         }
 
-        const kingPos: pos = moveInfo.changedKingSide !== undefined
+        const kingPos: pos = "kingMove" in moveInfo
             ? idToPos(moveInfo.canMoveTo)
             : idToPos(state.kingsId[String(state.figureTurn)]);
 

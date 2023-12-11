@@ -13,12 +13,11 @@ const checkWinCondition = (state: stateIntarface): void => {
 
         if (isKingCanBeated(kingProps)) {
             state.whoWin = !state.figureTurn;
-            return
         }
         else {
             state.whoWin = "draw";
-            return
         }
+        return
     }
 
     if (checkDrawBecauseRepeat({ ...state.moveHistory })) {
@@ -35,10 +34,10 @@ const checkDrawBecauseRepeat = (moveHistory: Array<contentInter>): boolean => {
         const isFoureMoveBeforeEqualToEightMoveBefore: boolean =
             JSON.stringify(moveHistory[movesCount - 4]) ===
             JSON.stringify(moveHistory[movesCount - 8])
-        if (
+        return (
             isLastMoveEqualToFoureMoveBefore &&
             isFoureMoveBeforeEqualToEightMoveBefore
-        ) return true;
+        );
     }
     return false
 }

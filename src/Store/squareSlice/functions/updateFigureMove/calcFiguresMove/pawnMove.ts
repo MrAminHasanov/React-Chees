@@ -1,4 +1,4 @@
-import { figures } from "../../../Types/connstEnums.ts";
+import { figuresName } from "../../../Types/connstEnums.ts";
 import { figureMoveProps, pos, squareContentInter } from "../../../Types/stateInterface.ts";
 import { addFigureMove } from "../../toolFunction/addFigureMove.ts";
 import { posToId } from "../../toolFunction/id_posFunctions.ts";
@@ -44,10 +44,10 @@ export const pawnMove = ({ state, choosedFigure, id, contents }: figureMoveProps
     const rightSquare: squareContentInter = contents[rightSquareId];
 
     const isInLeftSquareEnemyPawn: boolean =
-        leftSquare?.type === figures.pawn &&
+        leftSquare?.type === figuresName.pawn &&
         leftSquare?.side === !choosedFigure.side;
     const isInRightSquareEnemyPawn: boolean =
-        rightSquare?.type === figures.pawn &&
+        rightSquare?.type === figuresName.pawn &&
         rightSquare?.side === !choosedFigure.side;
 
     if (isInLeftSquareEnemyPawn || isInRightSquareEnemyPawn) {
@@ -62,7 +62,7 @@ export const pawnMove = ({ state, choosedFigure, id, contents }: figureMoveProps
 
         const prevMove: object = state.moveHistory[state.moveHistory.length - 2];
         const pawnStartPosId: number | string = posToId(pawnPos.x, pawnPos.y + 2 * pawnDirection);
-        const wasPawnInStart: boolean = prevMove[pawnStartPosId]?.type === figures.pawn;
+        const wasPawnInStart: boolean = prevMove[pawnStartPosId]?.type === figuresName.pawn;
         if (wasPawnInStart) {
             const DioganalSquareId: number | string = posToId(pawnPos.x, pawnPos.y + 1 * pawnDirection);
             addFigureMove(state, id, { deleteFrom: pawnId, canMoveTo: DioganalSquareId });
