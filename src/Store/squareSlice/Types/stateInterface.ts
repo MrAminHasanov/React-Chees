@@ -71,10 +71,13 @@ export interface figureMoveProps {
 export interface moveInfo {
     "deleteFrom"?: number,
     "changedKingSide"?: boolean,
-    "alsoMoveTo"?: number,
+    "alsoMoveTo"?: {
+        from: number,
+        to: number
+    },
     "kingMove"?: boolean,
-    "leftRookMove"?:boolean,
-    "rightRookMove"?:boolean,
+    "leftRookMove"?: boolean,
+    "rightRookMove"?: boolean,
     "canMoveTo": number | string,
 }
 

@@ -1,0 +1,58 @@
+{
+    "blackPawn": [
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+    ],
+    "blackRook": [
+        0,
+        7
+    ],
+    "blackBishop": [
+        2,
+        5
+    ],
+    "blackKnight": [
+        6,
+        1
+    ],
+    "blackQueen": [
+        3
+    ],
+    "blackKing": [
+        4
+    ],
+    "whitePawn": [
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55
+    ],
+    "whiteRook": [
+        56,
+        63
+    ],
+    "whiteBishop": [
+        58,
+        61
+    ],
+    "whiteKnight": [
+        57,
+        62
+    ],
+    "whiteQueen": [
+        59
+    ],
+    "whiteKing": [
+        60
+    ]
+}

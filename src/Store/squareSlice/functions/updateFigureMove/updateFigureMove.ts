@@ -7,7 +7,7 @@ import { rookMove } from "./calcFiguresMove/rookMove.ts";
 
 import { idToPos } from "../toolFunction/id_posFunctions.ts";
 import { figuresName } from "../../Types/constFigureNames.ts";
-import { stateIntarface, squareContentInter, figureMoveProps, choosedFigureForUpdateMove } from "../../Types/stateInterface.ts"
+import { stateIntarface, squareContentInter, figureMoveProps, choosedFigureForUpdateMove, contentInter } from "../../Types/stateInterface.ts"
 
 const figureMovesCalculator = {
     [figuresName.pawn]: (figureMoveProps: figureMoveProps) => pawnMove(figureMoveProps),
@@ -19,7 +19,7 @@ const figureMovesCalculator = {
 }
 
 export const updateFigureMove = (state: stateIntarface): void => {
-    const contents: object = { ...state.content };
+    const contents: contentInter = { ...state.content };
     const figureTurn: boolean = state.figureTurn;
     state.isMoveExist = false;
     state.figureMove = {};
@@ -29,7 +29,7 @@ export const updateFigureMove = (state: stateIntarface): void => {
         if (square.side === figureTurn) {
             const choosedFigure: choosedFigureForUpdateMove = {
                 side: figureTurn,
-                type: contents[id].type,
+                type: String(contents[id].type),
                 pos: idToPos(id)
             }
             figureMovesCalculator[choosedFigure.type]({ state, choosedFigure, id, contents })

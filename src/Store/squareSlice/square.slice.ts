@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import tableStartContent from "./JSON/figuresStart.js";
+import tableStartJSON from "./JSON/figuresStart.json";
 import figureStartMove from "./JSON/figureStartMove.json";
 
 import checkWinCondition from "./functions/checkWinCondition.ts";
@@ -8,11 +8,14 @@ import { updateFigureMove } from "./functions/updateFigureMove/updateFigureMove.
 
 import { stateIntarface, moveInfo } from "./Types/stateInterface.ts";
 import { figures, sides } from "./Types/constFigureNames.ts";
+import transformJsonToTableContent from "./functions/toolFunction/transformJsonTable.ts";
 
+
+const tableStartFigures = transformJsonToTableContent(tableStartJSON)
 const initialState: stateIntarface = {
-  content: { ...tableStartContent },
+  content: { ...tableStartFigures },
   figureMove: { ...figureStartMove },
-  moveHistory: [tableStartContent],
+  moveHistory: [tableStartFigures],
   moveableSquares: {},
   figureTurn: sides.white,
   choosedFigureId: "notChosedFigure",
@@ -42,22 +45,22 @@ export const squearesSlice = createSlice({
   reducers: {
     restartGame: (state: stateIntarface) => {
       state.figureTurn = Boolean(sides.white)
-      state.content = { ...tableStartContent }
+      state.content = { ...tableStartFigures }
       state.figureMove = { ...figureStartMove }
-      state.moveHistory = [tableStartContent]
+      state.moveHistory = [tableStartFigures]
       state.isMoveExist = true
       state.whoWin = "undefined"
       state.kingsId = {
-        [sides.white]: 60,
-        [sides.black]: 4
+        [String(sides.white)]: 60,
+        [String(sides.black)]: 4
       }
       state.castlingCondition = {
-        [sides.white]: {
+        [String(sides.white)]: {
           "isKingMove": false,
           "isLeftRookMove": false,
           "isRightRookMove": false
         },
-        [sides.black]: {
+        [String(sides.black)]: {
           "isKingMove": false,
           "isLeftRookMove": false,
           "isRightRookMove": false
@@ -92,12 +95,21 @@ export const squearesSlice = createSlice({
         state.castlingCondition[String(state.figureTurn)].isKingMove = true
       }
 
+      if ("alsoMoveTo" in moveInformation) {
+        const goToId: any = moveInformation.alsoMoveTo?.to;
+        const fromToId: any = moveInformation.alsoMoveTo?.from;
+        state.content[goToId] = state.content[fromToId];
+        state.content[fromToId] = figures.emptySquare
+      }
+
       if (moveInformation.leftRookMove) {
-        state.castlingCondition[String(state.figureTurn)].isLeftRookMove = true
+        const figureSide: string = String(state.figureTurn);
+        state.castlingCondition[figureSide].isLeftRookMove = true;
       }
 
       if (moveInformation.rightRookMove) {
-        state.castlingCondition[String(state.figureTurn)].isRightRookMove = true
+        const figureSide: string = String(state.figureTurn);
+        state.castlingCondition[figureSide].isRightRookMove = true;
       }
 
       state.figureTurn = !state.figureTurn
