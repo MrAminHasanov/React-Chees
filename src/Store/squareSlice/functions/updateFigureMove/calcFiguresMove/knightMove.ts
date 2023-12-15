@@ -8,12 +8,13 @@ export const knightMove = ({ state, choosedFigure, id, contents }: figureMovePro
             for (let diogDrt = -1; diogDrt <= 1; diogDrt += 2) {
                 const xTest: number = choosedFigure.pos.x + ((1.5 + (diogDrt * 0.5)) * xDrt);
                 const yTest: number = choosedFigure.pos.y + ((1.5 - (diogDrt * 0.5)) * yDrt);
-                const moveableSquareId: number | string = posToId(xTest, yTest);
+                if (xTest > 0 && xTest < 9 && yTest > 0 && yTest < 9) {
+                    const moveableSquareId: number = posToId(xTest, yTest);
+                    const isInSquareNotAlliedFigure: boolean = contents[moveableSquareId]?.side !== choosedFigure.side;
 
-                const isInSquareNotAlliedFigure: boolean = contents[moveableSquareId]?.side !== choosedFigure.side;
-
-                if (isInSquareNotAlliedFigure) {
-                    addFigureMove(state, id, { canMoveTo: moveableSquareId })
+                    if (isInSquareNotAlliedFigure) {
+                        addFigureMove(state, id, { canMoveTo: moveableSquareId })
+                    }
                 }
             }
         }

@@ -10,10 +10,12 @@ export const kingMove = ({ state, choosedFigure, id, contents }: figureMoveProps
         for (let yCof = -1; yCof <= 1; ++yCof) {
             const xCounter: number = startX + xCof;
             const yCounter: number = startY + yCof;
-            const potentialSquareId: number | string = posToId(xCounter, yCounter);
-            const square: squareContentInter = contents[potentialSquareId];
-            if (square?.side !== choosedFigure.side) {
-                addFigureMove(state, id, { changedKingSide: choosedFigure.side, canMoveTo: potentialSquareId, kingMove: true })
+            if (xCounter > 0 && xCounter < 9 && yCounter > 0 && yCounter < 9) {
+                const potentialSquareId: number = posToId(xCounter, yCounter);
+                const square: squareContentInter = contents[potentialSquareId];
+                if (square?.side !== choosedFigure.side) {
+                    addFigureMove(state, id, { changedKingSide: choosedFigure.side, canMoveTo: potentialSquareId, kingMove: true })
+                }
             }
         }
     }
@@ -25,11 +27,11 @@ export const kingMove = ({ state, choosedFigure, id, contents }: figureMoveProps
             state.castlingCondition[String(choosedFigure.side)].isRightRookMove;
         const isLeftRookMove: boolean =
             state.castlingCondition[String(choosedFigure.side)].isLeftRookMove;
-            
+
         if (!isRightRookMove) {
             let isSquaresBetweenKingRookEmpty: boolean = true;
             for (let xCounter: number = 6; xCounter < 8; ++xCounter) {
-                const potentialSquareId: any = posToId(xCounter, startY);
+                const potentialSquareId: number = posToId(xCounter, startY);
                 const potentialSquare: squareContentInter = contents[potentialSquareId]
                 const isSquareEmpty: boolean = potentialSquare?.side === undefined;
                 if (!isSquareEmpty) {
@@ -49,9 +51,9 @@ export const kingMove = ({ state, choosedFigure, id, contents }: figureMoveProps
                 const isKingBeAttacekWhileMove: boolean = isKingCanBeated(isKingCanBeatedProps)
                 debugger
                 if (!isKingBeAttacekWhileMove) {
-                    const kingCastingSquareId: any = posToId(choosedFigure.pos.x + 2, choosedFigure.pos.y);
-                    const rightRookId: any = posToId(8, choosedFigure.pos.y);
-                    const rightRookGoTo: any = posToId(6, choosedFigure.pos.y)
+                    const kingCastingSquareId: number = posToId(choosedFigure.pos.x + 2, choosedFigure.pos.y);
+                    const rightRookId: number = posToId(8, choosedFigure.pos.y);
+                    const rightRookGoTo: number = posToId(6, choosedFigure.pos.y)
                     addFigureMove(state, id,
                         {
                             changedKingSide: choosedFigure.side, canMoveTo: kingCastingSquareId,
@@ -63,7 +65,7 @@ export const kingMove = ({ state, choosedFigure, id, contents }: figureMoveProps
         if (!isLeftRookMove) {
             let isSquaresBetweenKingRookEmpty: boolean = true;
             for (let xCounter: number = 2; xCounter < 5; ++xCounter) {
-                const potentialSquareId: any = posToId(xCounter, startY);
+                const potentialSquareId: number = posToId(xCounter, startY);
                 const potentialSquare: squareContentInter = contents[potentialSquareId]
                 const isSquareEmpty: boolean = potentialSquare?.side === undefined;
                 if (!isSquareEmpty) {
@@ -81,10 +83,10 @@ export const kingMove = ({ state, choosedFigure, id, contents }: figureMoveProps
                     kingSide: choosedFigure.side
                 }
                 const isKingBeAttacekWhileMove: boolean = isKingCanBeated(isKingCanBeatedProps);
-                const leftRookId: any = posToId(1, choosedFigure.pos.y);
+                const leftRookId: number = posToId(1, choosedFigure.pos.y);
                 if (!isKingBeAttacekWhileMove) {
-                    const kingCastingSquareId = posToId(choosedFigure.pos.x - 2, choosedFigure.pos.y);
-                    const leftRookGoTo: any = posToId(4, choosedFigure.pos.y)
+                    const kingCastingSquareId: number = posToId(choosedFigure.pos.x - 2, choosedFigure.pos.y);
+                    const leftRookGoTo: number = posToId(4, choosedFigure.pos.y)
                     addFigureMove(state, id,
                         {
                             changedKingSide: choosedFigure.side, canMoveTo: kingCastingSquareId,

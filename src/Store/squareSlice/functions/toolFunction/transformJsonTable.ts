@@ -2,7 +2,8 @@ import { contentInter } from './../../Types/stateInterface';
 import { figures } from "../../Types/constFigureNames.ts"
 
 const transformJsonToTableContent = (json: { [figureName: string]: Array<number> }) => {
-    const content: contentInter = {};
+    const content: contentInter = new Array(64);
+
     Object.keys(figures).forEach((figureKey: string): void => {
         if (figureKey !== "emptySquare") {
             json[figureKey].forEach((squareId: number): void => {
@@ -16,6 +17,7 @@ const transformJsonToTableContent = (json: { [figureName: string]: Array<number>
             }
         }
     })
+
     return (content)
 }
 

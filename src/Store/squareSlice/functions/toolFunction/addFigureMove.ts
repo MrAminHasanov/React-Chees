@@ -8,8 +8,6 @@ export const addFigureMove = (
     figureId: number,
     moveInfo: moveInfo
 ): void => {
-    if (moveInfo.canMoveTo === "squareNotExists") return
-
     const moveVariattion: kingCanBeatedProps = buildKingProps(state, figureId, moveInfo);
     if (!isKingCanBeated(moveVariattion)) {
         state.isMoveExist = true

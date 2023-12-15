@@ -7,12 +7,12 @@ export const rookMove = ({ state, choosedFigure, id, contents }: figureMoveProps
     const startY: number = choosedFigure.pos.y;
     for (let corOrder = -1; corOrder <= 1; corOrder += 2) {
         for (let yxDrt = -1; yxDrt <= 1; yxDrt += 2) {
-            let xCounter: number = startX;
-            let yCounter: number = startY;
+            let xCounter: number = startX + ((1 + corOrder) / 2) * yxDrt;
+            let yCounter: number = startY + ((-1 + corOrder) / -2) * yxDrt;
             while ((xCounter > 0 && xCounter < 9) && (yCounter > 0 && yCounter < 9)) {
+                const testSquareId: number = posToId(xCounter, yCounter);
                 xCounter += ((1 + corOrder) / 2) * yxDrt;
                 yCounter += ((-1 + corOrder) / -2) * yxDrt;
-                const testSquareId: number | string = posToId(xCounter, yCounter);
                 const square: squareContentInter = contents[testSquareId];
 
                 const isSquareEmpty: boolean = square?.side === undefined;

@@ -4,9 +4,8 @@ export interface squareContentInter {
     type?: string
 }
 
-export interface contentInter {
-    [key: string]: squareContentInter
-}
+export type contentInter = Array<squareContentInter>
+
 
 export interface kingsIdInter {
     [kingSide: string]: number,
@@ -38,7 +37,8 @@ export interface stateIntarface {
     kingsId: kingsIdInter,
     content: contentInter,
     whoWin: string | boolean,
-    castlingCondition: castlingCondition
+    castlingCondition: castlingCondition,
+    needTransformPawn: boolean | number
 }
 // #endregion
 

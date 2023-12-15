@@ -17,8 +17,9 @@ const initialState: stateIntarface = {
   figureMove: { ...figureStartMove },
   moveHistory: [tableStartFigures],
   moveableSquares: {},
-  figureTurn: sides.white,
+  figureTurn: Boolean(sides.white),
   choosedFigureId: "notChosedFigure",
+  needTransformPawn: false,
   kingsId: {
     [String(sides.white)]: 60,
     [String(sides.black)]: 4
@@ -48,7 +49,7 @@ export const squearesSlice = createSlice({
       state.content = { ...tableStartFigures }
       state.figureMove = { ...figureStartMove }
       state.moveHistory = [tableStartFigures]
-      state.isMoveExist = true
+      state.needTransformPawn = false
       state.whoWin = "undefined"
       state.kingsId = {
         [String(sides.white)]: 60,
@@ -76,7 +77,7 @@ export const squearesSlice = createSlice({
     },
     moveFigure: (state: stateIntarface, { payload: goTo }) => {
       const moveInformation: moveInfo = state.moveableSquares[goTo];
-      const choosedFigureId: any = state.choosedFigureId;
+      const choosedFigureId: number | string = state.choosedFigureId;
 
       state.content[goTo] = state.content[choosedFigureId];
       state.content[choosedFigureId] = figures.emptySquare;
@@ -118,10 +119,11 @@ export const squearesSlice = createSlice({
       state.moveableSquares = {};
       updateFigureMove(state);
       checkWinCondition(state)
+    },
+    transformPawn: (state: stateIntarface, { payload: { pawnId, figureType } }) => {
+      state.content[pawnId] = figures[figureType]
     }
   }
 });
 
 export const { actions, reducer } = squearesSlice;
-
-

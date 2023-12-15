@@ -17,8 +17,8 @@ const canKnightBeatKing = ({ tableContent, kingPos, kingSide }: kingCanBeatedPro
             for (let diogDrt = -1; diogDrt <= 1; diogDrt += 2) {
                 const xTest: number = kingPos.x + ((1.5 + (diogDrt * 0.5)) * xDrt);
                 const yTest: number = kingPos.y + ((1.5 - (diogDrt * 0.5)) * yDrt);
-                const dangerSquareId: number | string = posToId(xTest, yTest);
-                if (dangerSquareId !== "squareNotExists") {
+                const dangerSquareId: number = posToId(xTest, yTest);
+                if (xTest > 0 && xTest < 9 && yTest > 0 && yTest < 9) {
                     const dangerSquareContent: squareContentInter = tableContent[dangerSquareId];
                     const isInDangerSquareEnemyKnight: boolean =
                         dangerSquareContent?.type === figuresName.knight &&
@@ -36,12 +36,12 @@ const canBishoopOrQueenBeatKing = ({ tableContent, kingPos, kingSide }: kingCanB
     const startY: number = kingPos.y;
     for (let xDrt = -1; xDrt <= 1; xDrt += 2) {
         for (let yDrt = -1; yDrt <= 1; yDrt += 2) {
-            let xCounter: number = startX;
-            let yCounter: number = startY;
+            let xCounter: number = startX + xDrt;
+            let yCounter: number = startY + yDrt;
             while ((xCounter > 0 && xCounter < 9) && (yCounter > 0 && yCounter < 9)) {
+                const dangerSquareId: number = posToId(xCounter, yCounter);
                 xCounter += xDrt;
                 yCounter += yDrt;
-                const dangerSquareId: number | string = posToId(xCounter, yCounter);
                 const dangerSquare: squareContentInter = tableContent[dangerSquareId];
                 const isSquareEmpty: boolean = dangerSquare?.side === undefined;
                 if (isSquareEmpty) {
@@ -66,12 +66,12 @@ const canRookOrQueenBeatKing = ({ tableContent, kingPos, kingSide }: kingCanBeat
     const startY: number = kingPos.y;
     for (let corOrder = -1; corOrder <= 1; corOrder += 2) {
         for (let yxDrt = -1; yxDrt <= 1; yxDrt += 2) {
-            let xCounter: number = startX;
-            let yCounter: number = startY;
+            let xCounter: number = startX + ((1 + corOrder) / 2) * yxDrt;
+            let yCounter: number = startY + ((-1 + corOrder) / -2) * yxDrt;
             while ((xCounter > 0 && xCounter < 9) && (yCounter > 0 && yCounter < 9)) {
+                const dangerSquareId: number = posToId(xCounter, yCounter);
                 xCounter += ((1 + corOrder) / 2) * yxDrt;
                 yCounter += ((-1 + corOrder) / -2) * yxDrt;
-                const dangerSquareId: number | string = posToId(xCounter, yCounter);
                 const dangerSquare: squareContentInter = tableContent[dangerSquareId];
 
                 const isSquareEmpty: boolean = dangerSquare?.side === undefined;
@@ -95,8 +95,8 @@ const canRookOrQueenBeatKing = ({ tableContent, kingPos, kingSide }: kingCanBeat
 const canPawnBeatKing = ({ tableContent, kingPos, kingSide }: kingCanBeatedProps): boolean => {
     const pawnDirection: number = kingSide ? -1 : 1;
 
-    const leftDioganalSquareId: number | string = posToId(kingPos.x + 1, kingPos.y + 1 * pawnDirection);
-    const rightDioganalSquareId: number | string = posToId(kingPos.x - 1, kingPos.y + 1 * pawnDirection);
+    const leftDioganalSquareId: number = posToId(kingPos.x + 1, kingPos.y + 1 * pawnDirection);
+    const rightDioganalSquareId: number = posToId(kingPos.x - 1, kingPos.y + 1 * pawnDirection);
     const leftDioganalSquareFigure: squareContentInter = tableContent[leftDioganalSquareId]
     const rightDioganalSquareFigure: squareContentInter = tableContent[rightDioganalSquareId]
     const isInLeftDiognalaSquareEnemyPawn: boolean =
