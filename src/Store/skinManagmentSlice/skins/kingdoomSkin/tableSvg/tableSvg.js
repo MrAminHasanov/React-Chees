@@ -1,9 +1,9 @@
 import tableBorder from "./tableBorder.svg";
 import tableOutLine from "./tableOutLine.svg";
 
-const rpgTableSvg = {
+const tableSvg = {
     outline: tableOutLine,
     border: tableBorder
 }
 
-export default rpgTableSvg
+export default tableSvg

@@ -127,3 +127,4 @@ export const squearesSlice = createSlice({
 });
 
 export const { actions, reducer } = squearesSlice;
+

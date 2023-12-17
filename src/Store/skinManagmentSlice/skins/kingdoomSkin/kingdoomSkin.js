@@ -4,7 +4,7 @@ import tableSvg from "./tableSvg/tableSvg";
 import styles from "./styles.module.scss"
 import emptyFigureMove from "./emptySquareMoveSvg/emptyFigureMove"
 
-const rpgSkin = {
+const kingdoomSkin = {
     table: tableSvg,
     squares: squaresSvg,
     figures: figuresSvg,
@@ -12,4 +12,4 @@ const rpgSkin = {
     emptySquareMove: emptyFigureMove
 }
 
-export default rpgSkin
+export default kingdoomSkin

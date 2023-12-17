@@ -1,9 +1,9 @@
 import redBall from "./redBall.svg";
 import blueBall from "./blueBall.svg";
 
-const rpgEmptyFigureMoveSvgs = {
+const desertEmptyFigureMoveSvgs = {
     true: redBall,
     false: blueBall
 }
 
-export default rpgEmptyFigureMoveSvgs
+export default desertEmptyFigureMoveSvgs
