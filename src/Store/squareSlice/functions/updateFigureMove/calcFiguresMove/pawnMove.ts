@@ -26,14 +26,19 @@ export const pawnMove = ({ state, choosedFigure, id, contents }: figureMoveProps
     }
     // #endregion
     // #region verifyDioganalBeating
-    const leftDioganalSquareId: number = posToId(choosedFigure.pos.x + 1, choosedFigure.pos.y + 1 * pawnDirection);
-    const rightDioganalSquareId: number = posToId(choosedFigure.pos.x - 1, choosedFigure.pos.y + 1 * pawnDirection);
-    const isLeftDiognalaSquareEnemy: boolean = contents[leftDioganalSquareId]?.side === !choosedFigure.side;
-    const isRightDiognalaSquareEnemy: boolean = contents[rightDioganalSquareId]?.side === !choosedFigure.side;
-    if (isLeftDiognalaSquareEnemy)
-        addFigureMove(state, id, { canMoveTo: leftDioganalSquareId });
-    if (isRightDiognalaSquareEnemy)
-        addFigureMove(state, id, { canMoveTo: rightDioganalSquareId });
+    if (choosedFigure.pos.x + 1 > 0 && choosedFigure.pos.x + 1 < 9) {
+        const leftDioganalSquareId: number = posToId(choosedFigure.pos.x + 1, choosedFigure.pos.y + 1 * pawnDirection);
+        const isLeftDiognalaSquareEnemy: boolean = contents[leftDioganalSquareId]?.side === !choosedFigure.side;
+        if (isLeftDiognalaSquareEnemy)
+            addFigureMove(state, id, { canMoveTo: leftDioganalSquareId });
+    }
+
+    if (choosedFigure.pos.x - 1 > 0 && choosedFigure.pos.x - 1 < 9) {
+        const rightDioganalSquareId: number = posToId(choosedFigure.pos.x - 1, choosedFigure.pos.y + 1 * pawnDirection);
+        const isRightDiognalaSquareEnemy: boolean = contents[rightDioganalSquareId]?.side === !choosedFigure.side;
+        if (isRightDiognalaSquareEnemy)
+            addFigureMove(state, id, { canMoveTo: rightDioganalSquareId });
+    }
     // #endregion
     // #region verifySpecialBeat
     const leftSquarePos: pos = { x: choosedFigure.pos.x - 1, y: choosedFigure.pos.y };

@@ -2,8 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 import skins from "./skins/skins"
 
 const initialState = {
-    selectedSkinKey: "Kingdoom-Chess",
-    selectedSkin: skins["Kingdoom-Chess"],
+    selectedSkinKey: "Rpg-Chess",
+    selectedSkin: skins["Rpg-Chess"],
     skinsList: Object.keys(skins)
 }        
 

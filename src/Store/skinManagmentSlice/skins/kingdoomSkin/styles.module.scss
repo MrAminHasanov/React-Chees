@@ -38,13 +38,13 @@
     }
 }
 
-// .whiteSquare::after {
-//     background-color: rgba(226, 226, 23, 0.28);
-// }
+.whiteSquare::after {
+    background-color: rgba(246, 246, 246, 0.22);
+}
 
-// .blackSquare::after {
-//     background-color: rgba(118, 14, 30, 0.28);
-// }
+.blackSquare::after {
+    background-color: rgba(0, 0, 0, 0.356);
+}
 
 .figureContainer {
     position: relative;
