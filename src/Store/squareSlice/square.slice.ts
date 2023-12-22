@@ -12,6 +12,7 @@ import transformJsonToTableContent from "./functions/toolFunction/transformJsonT
 
 
 const tableStartFigures = transformJsonToTableContent(tableStartJSON)
+
 const initialState: stateIntarface = {
   content: { ...tableStartFigures },
   figureMove: { ...figureStartMove },
@@ -119,6 +120,11 @@ export const squearesSlice = createSlice({
       state.moveableSquares = {};
       updateFigureMove(state);
       checkWinCondition(state)
+      const async = async (a) => {
+        return a
+      }
+      console.log(async("hi"));
+
     },
     transformPawn: (state: stateIntarface, { payload: { pawnId, figureType } }) => {
       state.content[pawnId] = figures[figureType]
@@ -127,3 +133,8 @@ export const squearesSlice = createSlice({
 });
 
 export const { actions, reducer } = squearesSlice;
+
+const a = new Promise(resolve => resolve(1))
+  .then(result => console.log(result))
+
+console.log(a);
