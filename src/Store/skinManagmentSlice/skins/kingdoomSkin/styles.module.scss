@@ -39,11 +39,13 @@
 }
 
 .whiteSquare::after {
-    background-color: rgba(246, 246, 246, 0.22);
+    // background-color: rgba(246, 246, 246, 0.22);
+    background-color: #ff837336;
 }
 
 .blackSquare::after {
-    background-color: rgba(0, 0, 0, 0.356);
+    // background-color: rgba(0, 0, 0, 0.356);
+    background-color: #ff8f0030;
 }
 
 .figureContainer {
