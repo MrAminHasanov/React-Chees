@@ -1,4 +1,4 @@
-import "./App.module.scss";
+import "./App.scss";
 
 import Header from "./Header/Header";
 import Body from "./Body/Body";

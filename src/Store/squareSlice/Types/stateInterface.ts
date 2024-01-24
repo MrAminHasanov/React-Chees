@@ -40,6 +40,7 @@ export interface stateIntarface {
     castlingCondition: castlingCondition,
     needTransformPawn: boolean | number
 }
+
 // #endregion
 
 //#region gobal interfacs
@@ -79,6 +80,7 @@ export interface moveInfo {
     "leftRookMove"?: boolean,
     "rightRookMove"?: boolean,
     "canMoveTo": number | string,
+    "pawnTransformEvent"?: boolean
 }
 
 export interface kingCanBeatedProps {
