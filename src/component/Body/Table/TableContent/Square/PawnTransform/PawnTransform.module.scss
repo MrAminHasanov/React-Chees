@@ -1,6 +1,6 @@
 .component {
-    width: 250px;
-    height: 250px;
+    width: 240px;
+    height: 240px;
     bottom: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -34,28 +34,28 @@
         left: 50%;
         top: 8px;
         transform: translateX(-50%);
-        padding: 8px 20px;
+        padding: 8px 12px;
     }
 
     .Bishop {
         left: 8px;
         top: 50%;
         transform: translateY(-50%);
-        padding: 8px 22px;
+        padding: 8px 10px;
     }
 
     .Rook {
         left: calc(100% - 8px);
         top: 50%;
         transform: translate(-100%, -50%);
-        padding: 8px 22px;
+        padding: 8px 10px;
     }
 
     .Queen {
         left: 50%;
         top: calc(100% - 8px);
         transform: translate(-50%, -100%);
-        padding: 12px;
+        padding: 12px 14px;
     }
 
 }

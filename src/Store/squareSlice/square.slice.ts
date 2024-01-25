@@ -17,7 +17,7 @@ const initialState: stateIntarface = {
   figureMove: { ...figureStartMove },
   moveHistory: [tableStartFigures],
   moveableSquares: {},
-  figureTurn: Boolean(sides.white),
+  figureTurn: sides.white,
   choosedFigureId: "notChosedFigure",
   needTransformPawn: false,
   kingsId: {
@@ -37,7 +37,7 @@ const initialState: stateIntarface = {
     }
   },
   isMoveExist: true,
-  whoWin: "undefined"
+  whoWin: "undefined",
 };
 
 export const squearesSlice = createSlice({
@@ -45,7 +45,7 @@ export const squearesSlice = createSlice({
   initialState,
   reducers: {
     restartGame: (state: stateIntarface) => {
-      state.figureTurn = Boolean(sides.white)
+      state.figureTurn = sides.white;
       state.content = { ...tableStartFigures }
       state.figureMove = { ...figureStartMove }
       state.moveHistory = [tableStartFigures]

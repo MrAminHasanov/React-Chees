@@ -4,7 +4,7 @@ import { useActions } from "../../../../../../Hooks/useActions/useActions.js"
 
 import Figures from "../Figures/Figures.jsx"
 import { figuresName } from "../../../../../../Store/squareSlice/Types/constFigureNames.ts"
-const sides = { "true": "white", "false": "black" }
+import { sides } from "../../../../../../Store/squareSlice/Types/constFigureNames.ts"
 
 function PawnTransform({ squareId }) {
     const figureSide = useSelector(state => state.squaresList.figureTurn);
@@ -18,7 +18,7 @@ function PawnTransform({ squareId }) {
                     (typeName !== "King" && typeName !== "Pawn") &&
                     <div
                         className={`${c.figure} ${c[typeName]}`}
-                        onClick={() => transformPawn({ transformTo: `${sides[figureSide]}${typeName}`, transformSquareId: squareId })}
+                        onClick={() => transformPawn({ transformTo: `${sides.keyOf(figureSide)}${typeName}`, transformSquareId: squareId })}
                         key={key} >
                         <Figures figureType={typeName} figureSide={figureSide} />
                     </div>

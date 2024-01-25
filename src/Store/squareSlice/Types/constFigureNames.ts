@@ -4,11 +4,15 @@ export const figuresName: { [figureName: string]: string } =
     { pawn: "Pawn", knight: "Knight", rook: "Rook", bishop: "Bishop", queen: "Queen", king: "King" };
 export const sides: {
     white: true,
-    black: false
+    black: false,
+    keyOf: Function
 } =
 {
     white: true,
-    black: false
+    black: false,
+    keyOf(value: boolean): string {
+        return value ? "white" : "black"
+    }
 };
 
 export const figures: { [figureName: string]: squareContentInter } = {
