@@ -39,7 +39,10 @@ function Square({ id, squareMathColor }) {
     }
   };
 
-  let moveSquareBall = "none";
+  let squareImgUrl = {
+    "--backgroundeImg": `url(${squareSkin})`,
+  };
+  
   let squareClassNames = classNames(
     squareStyle.component,
     squareColorOrder === "white"
@@ -65,8 +68,8 @@ function Square({ id, squareMathColor }) {
       squareOnClick = () => moveFigure(id);
       draggableStates.onDrop = () => moveFigure(id);
       if (isEmptySquare) {
-        squareClassNames += ` ` + squareStyle.moveableSquare
-        moveSquareBall = emptySquareMoveBalsSkins[chessTurn]
+        squareClassNames += ` ` + squareStyle.moveableSquare;
+        squareImgUrl["--moveBall"] = `url(${emptySquareMoveBalsSkins[chessTurn]})`;
       }
       else squareClassNames += " " + squareStyle.takeableFigure;
     }
@@ -74,10 +77,7 @@ function Square({ id, squareMathColor }) {
 
   return (
     <div id={id} className={squareClassNames}
-      style={{
-        "--backgroundeImg": `url(${squareSkin})`,
-        "--moveBall": `url(${moveSquareBall})`
-      }}
+      style={squareImgUrl}
     >
       <div
         onClick={() => squareOnClick()}
