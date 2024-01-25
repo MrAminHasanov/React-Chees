@@ -10,7 +10,6 @@ import { stateIntarface, moveInfo } from "./Types/stateInterface.ts";
 import { figures, sides } from "./Types/constFigureNames.ts";
 import transformJsonToTableContent from "./functions/toolFunction/transformJsonTable.ts";
 
-
 const tableStartFigures = transformJsonToTableContent(tableStartJSON)
 
 const initialState: stateIntarface = {
