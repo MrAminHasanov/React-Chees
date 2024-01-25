@@ -81,7 +81,6 @@ export const squearesSlice = createSlice({
       const { transformTo, transformSquareId } = payload;
       const pawnId = state.choosedFigureId;
 
-      console.log(figures[transformTo]);
       state.content[pawnId] = figures[transformTo];
       state.needTransformPawn = false;
 

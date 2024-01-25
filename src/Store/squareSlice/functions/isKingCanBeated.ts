@@ -7,7 +7,8 @@ const isKingCanBeated = (props: kingCanBeatedProps): boolean => {
         canKnightBeatKing(props) ||
         canBishoopOrQueenBeatKing(props) ||
         canRookOrQueenBeatKing(props) ||
-        canPawnBeatKing(props)
+        canPawnBeatKing(props) ||
+        canKingBeatKing(props)
     )
 }
 
@@ -107,6 +108,22 @@ const canPawnBeatKing = ({ tableContent, kingPos, kingSide }: kingCanBeatedProps
         (rightDioganalSquareFigure?.type === figuresName.pawn)
 
     return (isInLeftDiognalaSquareEnemyPawn || isInRightDiognalaSquareEnemyPawn)
+}
+
+const canKingBeatKing = ({ tableContent, kingPos, kingSide }: kingCanBeatedProps): boolean => {
+    for (let xCof = -1; xCof <= 1; ++xCof) {
+        for (let yCof = -1; yCof <= 1; ++yCof) {
+            const xCounter: number = kingPos.x + xCof;
+            const yCounter: number = kingPos.y + yCof;
+            if (xCounter > 0 && xCounter < 9 && yCounter > 0 && yCounter < 9) {
+                const dangerSquareId: number = posToId(xCounter, yCounter);
+                const square: squareContentInter = tableContent[dangerSquareId];
+                const isEnemyKingSquare = square.type === "King" && square.side !== kingSide;
+                if (isEnemyKingSquare) return true
+            }
+        }
+    }
+    return false
 }
 
 export default isKingCanBeated
