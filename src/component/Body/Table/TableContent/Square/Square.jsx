@@ -1,3 +1,5 @@
+import squareStyle from "./Square.module.scss";
+
 import classNames from 'classnames';
 import { useActions } from '../../../../../Hooks/useActions/useActions';
 import { useSelector } from 'react-redux';
@@ -17,8 +19,12 @@ function Square({ id, squareMathColor }) {
 
   const squareColorOrder = squareMathColor === 0 ? "white" : "black";
   const squareSkin = useSelector(state => state.skinManagment.selectedSkin.squares[squareColorOrder]);
-  const skinStyles = useSelector(state => state.skinManagment.selectedSkin.squareStyles)
+  const skinStyle = useSelector(state => state.skinManagment.selectedSkin.squareStyles)
   const emptySquareMoveBalsSkins = useSelector(state => state.skinManagment.selectedSkin.emptySquareMove)
+
+  Object.entries(skinStyle).forEach(([styleKey, style]) => {
+    squareStyle[styleKey] = style;
+  })
 
   const { selectFigure, moveFigure } = useActions();
 
@@ -35,14 +41,13 @@ function Square({ id, squareMathColor }) {
 
   let moveSquareBall = "none";
   let squareClassNames = classNames(
-    skinStyles.component,
+    squareStyle.component,
     squareColorOrder === "white"
-      ? skinStyles.whiteSquare
-      : skinStyles.blackSquare);
-  let squareOnClick;
-  if (needTransfromPawn) {
-    squareOnClick = () => { };
-  } else {
+      ? squareStyle.whiteSquare
+      : squareStyle.blackSquare);
+  let squareOnClick = () => { };
+
+  if (!needTransfromPawn) {
     if (isThisFigureSideTurn) {
       draggableStates.draggable = true;
       draggableStates.onDragStart = () => selectFigure(id)
@@ -51,7 +56,7 @@ function Square({ id, squareMathColor }) {
     squareOnClick = () => selectFigure("notChosedFigure");
 
     if (isChoosedFigure) {
-      squareClassNames += " " + skinStyles.choosedFigure;
+      squareClassNames += " " + squareStyle.choosedFigure;
     }
     else if (isThisFigureSideTurn) {
       squareOnClick = () => selectFigure(id);
@@ -60,12 +65,13 @@ function Square({ id, squareMathColor }) {
       squareOnClick = () => moveFigure(id);
       draggableStates.onDrop = () => moveFigure(id);
       if (isEmptySquare) {
-        squareClassNames += ` ` + skinStyles.moveableSquare
+        squareClassNames += ` ` + squareStyle.moveableSquare
         moveSquareBall = emptySquareMoveBalsSkins[chessTurn]
       }
-      else squareClassNames += " " + skinStyles.takeableFigure;
+      else squareClassNames += " " + squareStyle.takeableFigure;
     }
   }
+
   return (
     <div id={id} className={squareClassNames}
       style={{
@@ -75,7 +81,7 @@ function Square({ id, squareMathColor }) {
     >
       <div
         onClick={() => squareOnClick()}
-        className={skinStyles.figureContainer}
+        className={squareStyle.figureContainer}
         {...draggableStates}
       >
         {
