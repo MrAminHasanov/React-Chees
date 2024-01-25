@@ -1,5 +1,5 @@
 .component {
-    --squareSide: 83px;
+    --squareSide: 74px;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
@@ -14,7 +14,7 @@
     --borderWidth:calc(var(--squareSide) * 8 + var(--borderGap));
 
     .tableBorder {
-        --borderGap: 50px;
+        --borderGap: 40px;
         position: absolute;
         z-index: 1;
         border: 2px solid black;
@@ -24,7 +24,7 @@
 
     }
 
-    --borderGap: 115px;
+    --borderGap: 95px;
 
     .secondTableBorder {
         position: absolute;

@@ -3,13 +3,15 @@ import squaresSvg from "./squaresSvg/squaresSvg";
 import tableSvg from "./tableSvg/tableSvg";
 import styles from "./styles.module.scss"
 import emptyFigureMove from "./emptySquareMoveSvg/emptyFigureMove"
+import figureSize from "./figureSize";
 
 const snovSkin = {
     table: tableSvg,
     squares: squaresSvg,
     figures: figuresSvg,
     squareStyles: styles,
-    emptySquareMove: emptyFigureMove
+    emptySquareMove: emptyFigureMove,
+    figureSize: figureSize
 }
 
 export default snovSkin

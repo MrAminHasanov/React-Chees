@@ -16,7 +16,6 @@ function Square({ id, squareMathColor }) {
   const isThisFigureSideTurn = chessTurn === squareContent?.side;
   const needTransfromPawn = useSelector(state => state.squaresList.needTransformPawn)
 
-
   const squareColorOrder = squareMathColor === 0 ? "white" : "black";
   const squareSkin = useSelector(state => state.skinManagment.selectedSkin.squares[squareColorOrder]);
   const skinStyle = useSelector(state => state.skinManagment.selectedSkin.squareStyles)
@@ -42,7 +41,7 @@ function Square({ id, squareMathColor }) {
   let squareImgUrl = {
     "--backgroundeImg": `url(${squareSkin})`,
   };
-  
+
   let squareClassNames = classNames(
     squareStyle.component,
     squareColorOrder === "white"
@@ -77,13 +76,11 @@ function Square({ id, squareMathColor }) {
 
   return (
     <div id={id} className={squareClassNames}
-      style={squareImgUrl}
-    >
+      style={squareImgUrl}>
       <div
         onClick={() => squareOnClick()}
         className={squareStyle.figureContainer}
-        {...draggableStates}
-      >
+        {...draggableStates}>
         {
           <Figures
             figureSide={squareContent.side}

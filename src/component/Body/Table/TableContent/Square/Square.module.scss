@@ -1,5 +1,5 @@
 .component {
-    border: 4px solid black;
+    border: 3px solid black;
     transition: .4s ease border-color;
     position: relative;
     background-image: var(--backgroundeImg);
@@ -49,7 +49,10 @@
     align-items: flex-end;
     padding-bottom: 4px;
     user-select: none;
-    cursor: grab;
+
+    &[draggable=true] {
+        cursor: grab;
+    }
 }
 
 .choosedFigure {
