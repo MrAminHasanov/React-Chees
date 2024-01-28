@@ -3,11 +3,9 @@ import { createSlice } from "@reduxjs/toolkit";
 import tableStartJSON from "./JSON/figuresStart.json";
 import figureStartMove from "./JSON/figureStartMove.json";
 
-import checkWinCondition from "./functions/checkWinCondition.ts";
-import { updateFigureMove } from "./functions/updateFigureMove/updateFigureMove.ts"
-
-import { stateIntarface, moveInfo } from "./Types/stateInterface.ts";
+import { stateIntarface } from "./Types/stateInterface.ts";
 import { figures, sides } from "./Types/constFigureNames.ts";
+import moveFigure from "./functions/moveFigure/moveFigure.ts";
 import transformJsonToTableContent from "./functions/toolFunction/transformJsonTable.ts";
 
 const tableStartFigures = transformJsonToTableContent(tableStartJSON)
@@ -38,6 +36,11 @@ const initialState: stateIntarface = {
   },
   isMoveExist: true,
   whoWin: "undefined",
+  playerTime: {
+    [String(sides.white)]: 10 * 1000 * 60,
+    [String(sides.black)]: 10 * 1000 * 60,
+  },
+  isGameStared: false
 };
 
 export const squearesSlice = createSlice({
@@ -46,11 +49,17 @@ export const squearesSlice = createSlice({
   reducers: {
     restartGame: (state: stateIntarface) => {
       state.figureTurn = sides.white;
-      state.content = { ...tableStartFigures }
-      state.figureMove = { ...figureStartMove }
-      state.moveHistory = [tableStartFigures]
-      state.needTransformPawn = false
-      state.whoWin = "undefined"
+      state.content = { ...tableStartFigures };
+      state.figureMove = { ...figureStartMove };
+      state.moveHistory = [tableStartFigures];
+      state.needTransformPawn = false;
+      state.needTransformPawn = false;
+      state.whoWin = "undefined";
+      state.isGameStared = false;
+      state.playerTime = {
+        [String(sides.white)]: 10 * 1000 * 60,
+        [String(sides.black)]: 10 * 1000 * 60,
+      }
       state.kingsId = {
         [String(sides.white)]: 60,
         [String(sides.black)]: 4
@@ -73,9 +82,9 @@ export const squearesSlice = createSlice({
       state.moveableSquares =
         id === "notChosedFigure"
           ? {}
-          : state.figureMove[id]
+          : state.figureMove[id];
     },
-    moveFigure: moveFigure,
+    moveFigure,
     transformPawn: (state: stateIntarface, { payload }) => {
       const { transformTo, transformSquareId } = payload;
       const pawnId = state.choosedFigureId;
@@ -84,61 +93,20 @@ export const squearesSlice = createSlice({
       state.needTransformPawn = false;
 
       delete state.moveableSquares[transformSquareId].pawnTransformEvent;
-      moveFigure(state, { payload: transformSquareId })
+      moveFigure(state, { payload: transformSquareId });
+    },
+    decrimnetTimerTime: (state: stateIntarface) => {
+      const playerSide = state.figureTurn;
+      const playerTime = state.playerTime[String(playerSide)];
+      if (playerTime < 1) {
+        state.whoWin = !playerSide;
+        state.isGameStared = false;
+        state.playerTime[String(playerSide)] = 0;
+      } else {
+        state.playerTime[String(playerSide)] = playerTime - 1000;
+      }
     }
   }
 });
 
-function moveFigure(state: stateIntarface, { payload: goTo }) {
-  const moveInformation: moveInfo = state.moveableSquares[goTo];
-  const choosedFigureId: number | string = state.choosedFigureId;
-
-  if ("pawnTransformEvent" in moveInformation) {
-    state.needTransformPawn = goTo;
-    return
-  }
-
-  state.content[goTo] = state.content[choosedFigureId];
-  state.content[choosedFigureId] = figures.emptySquare;
-
-  if ("deleteFrom" in moveInformation) {
-    const needDeleteFigureId: any = moveInformation.deleteFrom;
-    state.content[needDeleteFigureId] = figures.emptySquare;
-  }
-
-  if ("changedKingSide" in moveInformation) {
-    const kingSide: any = moveInformation.changedKingSide;
-    state.kingsId[kingSide] = goTo;
-  }
-
-  if (moveInformation.kingMove) {
-    state.castlingCondition[String(state.figureTurn)].isKingMove = true;
-  }
-
-  if ("alsoMoveTo" in moveInformation) {
-    const goToId: any = moveInformation.alsoMoveTo?.to;
-    const fromToId: any = moveInformation.alsoMoveTo?.from;
-    state.content[goToId] = state.content[fromToId];
-    state.content[fromToId] = figures.emptySquare;
-  }
-
-  if (moveInformation.leftRookMove) {
-    const figureSide: string = String(state.figureTurn);
-    state.castlingCondition[figureSide].isLeftRookMove = true;
-  }
-
-  if (moveInformation.rightRookMove) {
-    const figureSide: string = String(state.figureTurn);
-    state.castlingCondition[figureSide].isRightRookMove = true;
-  }
-
-  state.figureTurn = !state.figureTurn
-  state.moveHistory = [...state.moveHistory, state.content];
-  state.choosedFigureId = "notChosedFigure";
-  state.moveableSquares = {};
-  updateFigureMove(state);
-  checkWinCondition(state);
-}
-
 export const { actions, reducer } = squearesSlice;
-

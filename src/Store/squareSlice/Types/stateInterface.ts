@@ -38,7 +38,11 @@ export interface stateIntarface {
     content: contentInter,
     whoWin: string | boolean,
     castlingCondition: castlingCondition,
-    needTransformPawn: boolean | number
+    needTransformPawn: boolean | number,
+    playerTime: {
+        [playerSide: string]: number,
+    },
+    isGameStared: boolean
 }
 
 // #endregion

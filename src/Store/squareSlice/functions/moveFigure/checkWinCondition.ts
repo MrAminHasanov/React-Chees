@@ -1,6 +1,6 @@
-import isKingCanBeated from "./isKingCanBeated.ts"
-import { idToPos } from "./toolFunction/id_posFunctions.ts";
-import { contentInter, kingCanBeatedProps, stateIntarface } from "../Types/stateInterface.ts";
+import isKingCanBeated from "../isKingCanBeated.ts"
+import { idToPos } from "../toolFunction/id_posFunctions.ts";
+import { contentInter, kingCanBeatedProps, stateIntarface } from "../../Types/stateInterface.ts";
 
 const checkWinCondition = (state: stateIntarface): void => {
     const isMoveExis: boolean = state.isMoveExist;
@@ -38,7 +38,7 @@ const checkDrawBecauseRepeat = (moveHistory: Array<contentInter>): boolean => {
             isLastMoveEqualToFoureMoveBefore &&
             isFoureMoveBeforeEqualToEightMoveBefore
         );
-    }
+    };
     return false
 }
 
