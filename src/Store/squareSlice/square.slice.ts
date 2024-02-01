@@ -102,17 +102,15 @@ export const squearesSlice = createSlice({
       if (playerTime < 1) {
         state.whoWin = !playerSide;
         state.isGameStarted = false;
-        state.playerTime[String(playerSide)] = 0;
       } else {
-        state.playerTime[String(playerSide)] = playerTime - 1000;
+        state.playerTime[String(playerSide)] -= 1000;
       }
     },
     surend: (state) => {
       state.whoWin = !state.figureTurn;
     },
     addTime: (state) => {
-      state.playerTime[String(state.figureTurn)] =
-        state.playerTime[String(state.figureTurn)] + 30 * 1000
+      state.playerTime[String(state.figureTurn)] += 30 * 1000
     },
     prevMove: (state) => {
       if (state.moveHistory.length > 1) {

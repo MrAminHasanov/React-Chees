@@ -46,7 +46,7 @@ const moveFigure = (state: stateIntarface, { payload: goTo }) => {
         state.castlingCondition[figureSide].isRightRookMove = true;
     }
 
-    state.isGameStared = true;
+    state.isGameStarted = true;
     state.figureTurn = !state.figureTurn;
     state.moveHistory = [...state.moveHistory, state.content];
     state.choosedFigureId = "notChosedFigure";
