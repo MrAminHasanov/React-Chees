@@ -1,28 +1,10 @@
 const figureSize = {
-    "Pawn": {
-        "width": "55px",
-        "height": "55px"
-    },
-    "Rook": {
-        "width": "55px",
-        "height": "55px"
-    },
-    "Bishop": {
-        "width": "55px",
-        "height": "55px"
-    },
-    "Knight": {
-        "width": "55px",
-        "height": "55px"
-    },
-    "Queen": {
-        "width": "55px",
-        "height": "55px"
-    },
-    "King": {
-        "width": "55px",
-        "height": "55px"
-    }
+    "Pawn": "79%",
+    "Rook": "88%",
+    "Bishop": "82%",
+    "Knight": "87%",
+    "Queen": "88%",
+    "King": "86%"
 }
 
 export default figureSize

@@ -42,7 +42,7 @@ export interface stateIntarface {
     playerTime: {
         [playerSide: string]: number,
     },
-    isGameStared: boolean
+    isGameStarted: boolean
 }
 
 // #endregion

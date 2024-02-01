@@ -1,17 +1,11 @@
 .component {
-    --squareSide: 74px;
+    --squareSide: 82px;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
+    width: var(--tableSide);
 
-    .table {
-        display: grid;
-        grid-template-columns: repeat(8, var(--squareSide));
-        grid-template-rows: repeat(8, var(--squareSide));
-        border: 3px solid black;
-    }
-
-    --borderWidth:calc(var(--squareSide) * 8 + var(--borderGap));
+    --tableSide: calc(var(--squareSide) * 8 + var(--borderGap));
 
     .tableBorder {
         --borderGap: 40px;
@@ -26,11 +20,11 @@
 
     --borderGap: 95px;
 
-    .secondTableBorder {
+    .tableOutline {
         position: absolute;
         z-index: 0;
-        width: var(--borderWidth);
-        height: var(--borderWidth);
+        width: var(--tableSide);
+        height: var(--tableSide);
         border-radius: 10px;
         background-image: var(--tableOutlineSvg);
     }
@@ -38,12 +32,12 @@
     .tableCorners {
         position: absolute;
         z-index: 2;
-        width: var(--borderWidth);
-        height: var(--borderWidth);
+        width: var(--tableSide);
+        height: var(--tableSide);
 
         .corner {
             background-color: black;
-            width: calc(var(--borderWidth) * 1.401);
+            width: calc(var(--tableSide) * 1.401);
             height: 2px;
             position: absolute;
             top: 50%;
@@ -58,5 +52,11 @@
             left: -20%;
             transform: rotate(-45deg);
         }
+    }
+}
+
+@media only screen and (max-width: 1420px) {
+    .component {
+        --squareSide: 74px;
     }
 }

@@ -1,0 +1,25 @@
+.component {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    background-color: white;
+    border: 1px solid black;
+
+    .button {
+        padding: 4px 12px;
+        cursor: pointer;
+        background-color: transparent;
+        border: none;
+        height: 100%;
+
+        &:hover {
+            background: white;
+            background: linear-gradient(90deg, rgb(255, 255, 255) 1%, rgb(206, 206, 206) 50%, rgb(255, 255, 255) 100%);
+        }
+    }
+
+    img {
+        width: 26px;
+        color: black;
+    }
+}

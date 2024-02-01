@@ -11,8 +11,7 @@ function Figures({ figureType, figureSide }) {
         (<img
             style={{
                 userSelect: "none",
-                width: figureSize.width,
-                height: figureSize.height
+                height: figureSize,
             }}
             src={figureSvg} alt={figureType} />)
     )

@@ -5,7 +5,7 @@ const initialState = {
     selectedSkinKey: "Rpg-Chess",
     selectedSkin: skins["Rpg-Chess"],
     skinsList: Object.keys(skins)
-}        
+}
 
 export const skinManagmentSlice = createSlice({
     name: "skinManagment",

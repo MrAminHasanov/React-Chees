@@ -1,3 +1,4 @@
+import { updateFigureMove } from './functions/updateFigureMove/updateFigureMove.ts';
 import { createSlice } from "@reduxjs/toolkit";
 
 import tableStartJSON from "./JSON/figuresStart.json";
@@ -37,10 +38,10 @@ const initialState: stateIntarface = {
   isMoveExist: true,
   whoWin: "undefined",
   playerTime: {
-    [String(sides.white)]: 10 * 1000 * 60,
-    [String(sides.black)]: 10 * 1000 * 60,
+    [String(sides.white)]: 1 * 1000 * 60,
+    [String(sides.black)]: 1 * 1000 * 60,
   },
-  isGameStared: false
+  isGameStarted: false
 };
 
 export const squearesSlice = createSlice({
@@ -55,7 +56,7 @@ export const squearesSlice = createSlice({
       state.needTransformPawn = false;
       state.needTransformPawn = false;
       state.whoWin = "undefined";
-      state.isGameStared = false;
+      state.isGameStarted = false;
       state.playerTime = {
         [String(sides.white)]: 10 * 1000 * 60,
         [String(sides.black)]: 10 * 1000 * 60,
@@ -100,11 +101,29 @@ export const squearesSlice = createSlice({
       const playerTime = state.playerTime[String(playerSide)];
       if (playerTime < 1) {
         state.whoWin = !playerSide;
-        state.isGameStared = false;
+        state.isGameStarted = false;
         state.playerTime[String(playerSide)] = 0;
       } else {
         state.playerTime[String(playerSide)] = playerTime - 1000;
       }
+    },
+    surend: (state) => {
+      state.whoWin = !state.figureTurn;
+    },
+    addTime: (state) => {
+      state.playerTime[String(state.figureTurn)] =
+        state.playerTime[String(state.figureTurn)] + 30 * 1000
+    },
+    prevMove: (state) => {
+      if (state.moveHistory.length > 1) {
+        state.content = state.moveHistory[state.moveHistory.length - 2];
+        state.figureTurn = !state.figureTurn;
+        state.moveHistory.pop();
+        updateFigureMove(state);
+      }
+    },
+    pauseGame: (state) => {
+      state.isGameStarted = !state.isGameStarted;
     }
   }
 });
