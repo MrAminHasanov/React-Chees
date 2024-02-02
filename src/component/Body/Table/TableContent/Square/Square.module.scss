@@ -21,6 +21,7 @@
 }
 
 .moveableSquare {
+    cursor: pointer;
     &::before {
         content: " ";
         --ballRadiues: 29px;

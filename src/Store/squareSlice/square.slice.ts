@@ -9,12 +9,10 @@ import { figures, sides } from "./Types/constFigureNames.ts";
 import moveFigure from "./functions/moveFigure/moveFigure.ts";
 import transformJsonToTableContent from "./functions/toolFunction/transformJsonTable.ts";
 
-const tableStartFigures = transformJsonToTableContent(tableStartJSON)
-
 const initialState: stateIntarface = {
-  content: { ...tableStartFigures },
+  content: transformJsonToTableContent(tableStartJSON),
   figureMove: { ...figureStartMove },
-  moveHistory: [tableStartFigures],
+  moveHistory: [transformJsonToTableContent(tableStartJSON)],
   moveableSquares: {},
   figureTurn: sides.white,
   choosedFigureId: "notChosedFigure",
@@ -50,13 +48,14 @@ export const squearesSlice = createSlice({
   reducers: {
     restartGame: (state: stateIntarface) => {
       state.figureTurn = sides.white;
-      state.content = { ...tableStartFigures };
+      state.content = transformJsonToTableContent(tableStartJSON);
       state.figureMove = { ...figureStartMove };
-      state.moveHistory = [tableStartFigures];
+      state.moveHistory = [transformJsonToTableContent(tableStartJSON)];
       state.needTransformPawn = false;
       state.needTransformPawn = false;
       state.whoWin = "undefined";
       state.isGameStarted = false;
+      state.moveableSquares = {};
       state.playerTime = {
         [String(sides.white)]: 10 * 1000 * 60,
         [String(sides.black)]: 10 * 1000 * 60,
@@ -77,6 +76,7 @@ export const squearesSlice = createSlice({
           "isRightRookMove": false
         }
       }
+      state.choosedFigureId = "notChosedFigure";
     },
     selectFigure: (state: stateIntarface, { payload: id }) => {
       state.choosedFigureId = id;
@@ -122,7 +122,8 @@ export const squearesSlice = createSlice({
     },
     pauseGame: (state) => {
       state.isGameStarted = !state.isGameStarted;
-    }
+    },
+    
   }
 });
 

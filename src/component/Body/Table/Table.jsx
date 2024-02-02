@@ -5,6 +5,9 @@ import c from './Table.module.scss'
 import TableContent from './TableContent/TableContent'
 import ResultInformation from "./ResultInformation/ResultInformation"
 
+const numbers = [8, 7, 6, 5, 4, 3, 2, 1];
+const worlds = ["a", "b", "c", "d", "e", "f", "g", "h"];
+
 function Table() {
   const tableBorders = useSelector(state => state.skinManagment.selectedSkin.table);
   const gameResult = useSelector(state => state.squaresList.whoWin);
@@ -17,6 +20,20 @@ function Table() {
       </div>
       <div className={c.tableBorder} style={{ "--tableBorderSvg": `url(${tableBorders.border})` }}></div>
       <div className={c.tableOutline} style={{ "--tableOutlineSvg": `url(${tableBorders.outline})` }}></div>
+      <div className={c.tableCordinats}>
+        <div className={c.tableNumbers}>
+          {
+            numbers.map((number, key) =>
+              <span key={key} className={c.number}>{number}</span>)
+          }
+        </div>
+        <div className={c.tableWorlds}>
+          {
+            worlds.map((world, key) =>
+              <span key={key} className={c.world}>{world}</span>)
+          }
+        </div>
+      </div>
       <TableContent />
       {
         gameResult !== "undefined" && <ResultInformation whoWin={gameResult} />

@@ -19,7 +19,10 @@
     }
 
     .figure {
+        height: calc(var(--squareSide) + var(--figureHeightPadding));
         position: absolute;
+        display: flex;
+        align-items: center;
         z-index: 3;
         border-radius: 48px;
         cursor: pointer;
@@ -31,13 +34,15 @@
     }
 
     .Knight {
+        --figureHeightPadding: 12px;
         left: 50%;
         top: 8px;
         transform: translateX(-50%);
-        padding: 8px 12px;
+        padding: 8px var(--figureHeightPadding);
     }
 
     .Bishop {
+        --figureHeightPadding: 10px;
         left: 8px;
         top: 50%;
         transform: translateY(-50%);
@@ -45,6 +50,7 @@
     }
 
     .Rook {
+        --figureHeightPadding: 10px;
         left: calc(100% - 8px);
         top: 50%;
         transform: translate(-100%, -50%);
@@ -52,6 +58,7 @@
     }
 
     .Queen {
+        --figureHeightPadding: 14px;
         left: 50%;
         top: calc(100% - 8px);
         transform: translate(-50%, -100%);

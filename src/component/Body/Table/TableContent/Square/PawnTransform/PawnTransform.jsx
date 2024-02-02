@@ -13,7 +13,7 @@ function PawnTransform({ squareId }) {
     return (
         <div className={c.component}>
             <div className={c.background}></div>
-            {
+            {   
                 Object.values(figuresName).map((typeName, key) =>
                     (typeName !== "King" && typeName !== "Pawn") &&
                     <div
