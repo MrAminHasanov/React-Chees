@@ -6,4 +6,7 @@
     background: linear-gradient(90deg, rgba(201, 127, 42, 1) 13%, rgb(216, 167, 112)61%);
     align-items: center;
     justify-content: space-between;
+    @media only screen and (max-width:1000px){
+        padding: 6px 10px;
+    }
 }

@@ -17,4 +17,10 @@
         background-color: rgb(232, 232, 232);
     }
 
+    
+    @media only screen and (max-width:1000px) {
+        li{
+            font-size: 12px;
+        }
+    }
 }

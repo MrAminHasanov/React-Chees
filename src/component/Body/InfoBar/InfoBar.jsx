@@ -4,7 +4,7 @@ import Timer from "./Timer/Timer";
 
 function InfoBar() {
     return (
-        <div className={c.component}>
+        <div className={`${c.component} infoBar`}>
             <Timer />
             <Buttons />
         </div>

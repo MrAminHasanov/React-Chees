@@ -14,7 +14,10 @@ function PlayerTimer({ playerSide }) {
         <div
             className={`${c.component} ${c[`${sides.keyOf(playerSide)}Timer`]}`}
             style={{
-                width: figureTurn === playerSide ? "100%" : `${UITime.length * 13 + 20}px`,
+                width:
+                    figureTurn === playerSide
+                        ? "100%"
+                        : `calc(${UITime.length} * var(--letterSize) + var(--timerPadding) * 2)`,
                 "--colorShade": playerMinutes < 1 ? Math.floor(230 * (60 - playerSecond) / 60) : 0
             }}>
             <span>

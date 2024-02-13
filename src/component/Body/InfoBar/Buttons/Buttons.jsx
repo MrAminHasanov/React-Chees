@@ -14,16 +14,16 @@ function Buttons() {
     return (
         <div className={c.component}>
             <button onClick={() => prevMove()} className={c.button}>
-                <img src={backMoveImg} alt="backMove" />
+                <img className={c.icon} src={backMoveImg} alt="backMove" />
             </button>
             <button onClick={() => pauseGame()} className={c.button}>
-                <img src={isGameStarted ? pauseImg : resumeImg} alt="pause/resume" />
+                <img className={c.icon} src={isGameStarted ? pauseImg : resumeImg} alt="pause/resume" />
             </button>
             <button onClick={() => addTime()} className={c.button}>
-                <img src={addTimeImg} alt="addTime" />
+                <img className={c.icon} src={addTimeImg} alt="addTime" />
             </button>
             <button onClick={() => surend()} className={c.button}>
-                <img src={surendImg} alt="surendImg" />
+                <img className={c.icon} src={surendImg} alt="surendImg" />
             </button>
         </div>
     )

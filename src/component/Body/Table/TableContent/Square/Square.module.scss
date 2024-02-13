@@ -22,9 +22,10 @@
 
 .moveableSquare {
     cursor: pointer;
+
     &::before {
         content: " ";
-        --ballRadiues: 29px;
+        --ballRadiues: calc(var(--squareSide) / 10 * 4);
         opacity: 0.7;
         background-image: var(--moveBall);
         width: var(--ballRadiues);
@@ -71,5 +72,11 @@
 
     100% {
         clip-path: circle(100%);
+    }
+}
+
+@media only screen and (max-aspect-ratio: 1) {
+    .component {
+        border: 2px solid black;
     }
 }

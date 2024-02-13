@@ -11,6 +11,7 @@ import Figures from './Figures/Figures';
 function Square({ id, squareMathColor }) {
   const squareContent = useSelector(state => state.squaresList.content[id]);
   const chessTurn = useSelector(state => state.squaresList.figureTurn);
+  const whoWin = useSelector(state => state.squaresList.whoWin);
   const isChoosedFigure = useSelector(state => state.squaresList.choosedFigureId === id);
   const isMoveableSquare = useSelector(state => !!state.squaresList.moveableSquares[id])
   const isThisFigureSideTurn = chessTurn === squareContent?.side;
@@ -26,7 +27,6 @@ function Square({ id, squareMathColor }) {
   })
 
   const { selectFigure, moveFigure } = useActions();
-
   const isEmptySquare = squareContent?.type === undefined;
 
   const draggableStates = {
@@ -49,7 +49,7 @@ function Square({ id, squareMathColor }) {
       : squareStyle.blackSquare);
   let squareOnClick = () => { };
 
-  if (!needTransfromPawn) {
+  if (!needTransfromPawn && whoWin === "undefined") {
     if (isThisFigureSideTurn) {
       draggableStates.draggable = true;
       draggableStates.onDragStart = () => selectFigure(id)

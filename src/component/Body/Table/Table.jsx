@@ -21,13 +21,13 @@ function Table() {
       <div className={c.tableBorder} style={{ "--tableBorderSvg": `url(${tableBorders.border})` }}></div>
       <div className={c.tableOutline} style={{ "--tableOutlineSvg": `url(${tableBorders.outline})` }}></div>
       <div className={c.tableCordinats}>
-        <div className={c.tableNumbers}>
+        <div className={c.cordinatNumbers}>
           {
             numbers.map((number, key) =>
               <span key={key} className={c.number}>{number}</span>)
           }
         </div>
-        <div className={c.tableWorlds}>
+        <div className={c.cordinatLetters}>
           {
             worlds.map((world, key) =>
               <span key={key} className={c.world}>{world}</span>)

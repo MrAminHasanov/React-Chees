@@ -2,4 +2,29 @@
     padding: 12em 0em;
     display: flex;
     justify-content: space-evenly;
+
+    --tableSide: calc(var(--squareSide) * 8 + var(--outlineGap) + var(--borderGap) + var(--cordinatsGap));
+    --cordinatsGap: calc(var(--squareSide) / 3 * 1.2);
+    --borderGap: calc(var(--squareSide) / 3);
+    --outlineGap: calc(var(--squareSide) / 2);
+    --squareSide: calc(78vh / 8);
+}
+
+@media only screen and (max-width: 1140px) {
+    .component {
+        padding: 6em 0em;
+    }
+}
+
+@media only screen and (max-aspect-ratio: 1) {
+    .component {
+        --squareSide: calc(80vw / 8);
+    }
+}
+
+@media only screen and (max-aspect-ratio: 1/0.7) {
+    .component {
+        flex-direction: column;
+        align-items: center;
+    }
 }
