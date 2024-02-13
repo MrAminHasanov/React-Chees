@@ -9,6 +9,7 @@
     position: absolute;
     left: calc(50% + var(--tableSide) / 2 + 20px);
     overflow: hidden;
+    user-select: none;
 }
 
 @media only screen and (max-aspect-ratio: 1/0.7) {
@@ -16,5 +17,6 @@
         margin-top: 10px;
         position: static;
         --infoBarSize: calc(var(--tableSide) / 1.5);
+        height: calc(var(--infoBarSize) * 1.3);
     }
 }

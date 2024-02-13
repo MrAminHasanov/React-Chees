@@ -12,7 +12,7 @@ import transformJsonToTableContent from "./functions/toolFunction/transformJsonT
 const initialState: stateIntarface = {
   content: transformJsonToTableContent(tableStartJSON),
   figureMove: { ...figureStartMove },
-  moveHistory: [transformJsonToTableContent(tableStartJSON)],
+  contentHistory: [transformJsonToTableContent(tableStartJSON)],
   moveableSquares: {},
   figureTurn: sides.white,
   choosedFigureId: "notChosedFigure",
@@ -39,7 +39,8 @@ const initialState: stateIntarface = {
     [String(sides.white)]: 1 * 1000 * 60,
     [String(sides.black)]: 1 * 1000 * 60,
   },
-  isGameStarted: false
+  isGameStarted: false,
+  moveHistory: []
 };
 
 export const squearesSlice = createSlice({
@@ -50,7 +51,7 @@ export const squearesSlice = createSlice({
       state.figureTurn = sides.white;
       state.content = transformJsonToTableContent(tableStartJSON);
       state.figureMove = { ...figureStartMove };
-      state.moveHistory = [transformJsonToTableContent(tableStartJSON)];
+      state.contentHistory = [transformJsonToTableContent(tableStartJSON)];
       state.needTransformPawn = false;
       state.needTransformPawn = false;
       state.whoWin = "undefined";
@@ -103,7 +104,7 @@ export const squearesSlice = createSlice({
         state.whoWin = !playerSide;
         state.isGameStarted = false;
       } else {
-        state.playerTime[String(playerSide)] -= 1000;
+        state.playerTime[String(playerSide)] -= 100;
       }
     },
     surend: (state) => {
@@ -113,9 +114,10 @@ export const squearesSlice = createSlice({
       state.playerTime[String(state.figureTurn)] += 30 * 1000
     },
     prevMove: (state) => {
-      if (state.moveHistory.length > 1) {
-        state.content = state.moveHistory[state.moveHistory.length - 2];
+      if (state.contentHistory.length > 1) {
+        state.content = state.contentHistory[state.contentHistory.length - 2];
         state.figureTurn = !state.figureTurn;
+        state.contentHistory.pop();
         state.moveHistory.pop();
         updateFigureMove(state);
       }
@@ -123,8 +125,8 @@ export const squearesSlice = createSlice({
     pauseGame: (state) => {
       state.isGameStarted = !state.isGameStarted;
     },
-    
   }
 });
 
 export const { actions, reducer } = squearesSlice;
+

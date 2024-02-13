@@ -2,6 +2,7 @@ import checkWinCondition from "./checkWinCondition.ts";
 import { updateFigureMove } from "../updateFigureMove/updateFigureMove.ts"
 import { stateIntarface, moveInfo } from "../../Types/stateInterface.ts";
 import { figures } from "../../Types/constFigureNames.ts";
+import { idToPos } from "../toolFunction/id_posFunctions.ts";
 
 const moveFigure = (state: stateIntarface, { payload: goTo }) => {
     const moveInformation: moveInfo = state.moveableSquares[goTo];
@@ -46,13 +47,23 @@ const moveFigure = (state: stateIntarface, { payload: goTo }) => {
         state.castlingCondition[figureSide].isRightRookMove = true;
     }
 
+    const figureStartPos = idToPos(state.choosedFigureId);
+    const figureStartCor = String.fromCharCode(96 + figureStartPos.x) + Math.abs(9 - figureStartPos.y)
+    const figureFinalPos = idToPos(goTo);
+    const figureFinalCor = String.fromCharCode(96 + figureFinalPos.x) + Math.abs(9 - figureFinalPos.y)
+
+    state.moveHistory.push({
+        movedFigure: moveInformation.figure,
+        movedFromTo: `${figureStartCor} ${figureFinalCor}`
+    })
     state.isGameStarted = true;
     state.figureTurn = !state.figureTurn;
-    state.moveHistory = [...state.moveHistory, state.content];
+    state.contentHistory = [...state.contentHistory, state.content];
     state.choosedFigureId = "notChosedFigure";
     state.moveableSquares = {};
     updateFigureMove(state);
     checkWinCondition(state);
 }
+
 
 export default moveFigure;

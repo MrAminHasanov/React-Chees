@@ -13,9 +13,9 @@ export const pawnMove = ({ state, choosedFigure, id, contents }: figureMoveProps
     const isNextSquareEmpty: boolean = contents[nextSquareId]?.side === undefined;
     if (isNextSquareEmpty) {
         if (choosedFigure.pos.y + pawnDirection === 1 || choosedFigure.pos.y + pawnDirection === 8)
-            addFigureMove(state, id, { canMoveTo: nextSquareId, pawnTransformEvent: true });
+            addFigureMove(state, id, { canMoveTo: nextSquareId, pawnTransformEvent: true, figure: figuresName.pawn });
         else
-            addFigureMove(state, id, { canMoveTo: nextSquareId });
+            addFigureMove(state, id, { canMoveTo: nextSquareId, figure: figuresName.pawn });
         const isThisPawnFirstMove: boolean =
             (choosedFigure.pos.y === 2 && choosedFigure.side === sides.black) ||
             (choosedFigure.pos.y === 7 && choosedFigure.side === sides.white)
@@ -23,7 +23,7 @@ export const pawnMove = ({ state, choosedFigure, id, contents }: figureMoveProps
             const afterNextSquareId: number = posToId(choosedFigure.pos.x, choosedFigure.pos.y + (2 * pawnDirection));
             const isAfterNextSquareEmpty: boolean = contents[afterNextSquareId]?.side === undefined;
             if (isAfterNextSquareEmpty) {
-                addFigureMove(state, id, { canMoveTo: afterNextSquareId })
+                addFigureMove(state, id, { canMoveTo: afterNextSquareId, figure: figuresName.pawn })
             }
         }
     }
@@ -34,9 +34,9 @@ export const pawnMove = ({ state, choosedFigure, id, contents }: figureMoveProps
         const isLeftDiognalaSquareEnemy: boolean = contents[leftDioganalSquareId]?.side === !choosedFigure.side;
         if (isLeftDiognalaSquareEnemy)
             if (choosedFigure.pos.y + pawnDirection === 1 || choosedFigure.pos.y + pawnDirection === 8)
-                addFigureMove(state, id, { canMoveTo: leftDioganalSquareId, pawnTransformEvent: true });
+                addFigureMove(state, id, { canMoveTo: leftDioganalSquareId, pawnTransformEvent: true, figure: figuresName.pawn });
             else
-                addFigureMove(state, id, { canMoveTo: leftDioganalSquareId });
+                addFigureMove(state, id, { canMoveTo: leftDioganalSquareId, figure: figuresName.pawn });
     }
 
     if (choosedFigure.pos.x - 1 > 0 && choosedFigure.pos.x - 1 < 9) {
@@ -44,9 +44,9 @@ export const pawnMove = ({ state, choosedFigure, id, contents }: figureMoveProps
         const isRightDiognalaSquareEnemy: boolean = contents[rightDioganalSquareId]?.side === !choosedFigure.side;
         if (isRightDiognalaSquareEnemy)
             if (choosedFigure.pos.y + pawnDirection === 1 || choosedFigure.pos.y + pawnDirection === 8)
-                addFigureMove(state, id, { canMoveTo: rightDioganalSquareId, pawnTransformEvent: true });
+                addFigureMove(state, id, { canMoveTo: rightDioganalSquareId, pawnTransformEvent: true, figure: figuresName.pawn });
             else
-                addFigureMove(state, id, { canMoveTo: rightDioganalSquareId });
+                addFigureMove(state, id, { canMoveTo: rightDioganalSquareId, figure: figuresName.pawn });
     }
     // #endregion
     // #region verifySpecialBeat
@@ -79,7 +79,7 @@ export const pawnMove = ({ state, choosedFigure, id, contents }: figureMoveProps
         const wasPawnInStart: boolean = prevMove[pawnStartPosId]?.type === figuresName.pawn;
         if (wasPawnInStart) {
             const DioganalSquareId: number = posToId(pawnPos.x, pawnPos.y + 1 * pawnDirection);
-            addFigureMove(state, id, { deleteFrom: pawnId, canMoveTo: DioganalSquareId });
+            addFigureMove(state, id, { deleteFrom: pawnId, canMoveTo: DioganalSquareId, figure: figuresName.pawn });
         }
     }
     //#endregion

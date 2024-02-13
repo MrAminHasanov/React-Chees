@@ -27,10 +27,15 @@ interface castlingCondition {
     }
 }
 
+export interface move {
+    movedFigure: string,
+    movedFromTo: string
+}
+
 export interface stateIntarface {
     moveableSquares: moveableSquares,
     choosedFigureId: number | string,
-    moveHistory: Array<contentInter>,
+    contentHistory: Array<contentInter>,
     isMoveExist: boolean,
     figureMove: figureMove,
     figureTurn: boolean,
@@ -42,7 +47,8 @@ export interface stateIntarface {
     playerTime: {
         [playerSide: string]: number,
     },
-    isGameStarted: boolean
+    isGameStarted: boolean,
+    moveHistory: Array<move>
 }
 
 // #endregion
@@ -84,7 +90,8 @@ export interface moveInfo {
     "leftRookMove"?: boolean,
     "rightRookMove"?: boolean,
     "canMoveTo": number | string,
-    "pawnTransformEvent"?: boolean
+    "pawnTransformEvent"?: boolean,
+    "figure": string,
 }
 
 export interface kingCanBeatedProps {

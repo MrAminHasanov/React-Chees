@@ -1,6 +1,7 @@
 import { figureMoveProps, moveInfo, squareContentInter } from "../../../Types/stateInterface.ts";
 import { addFigureMove } from "../../toolFunction/addFigureMove.ts";
 import { posToId } from "../../toolFunction/id_posFunctions.ts";
+import { figuresName } from "../../../Types/constFigureNames.ts";
 
 export const rookMove = ({ state, choosedFigure, id, contents }: figureMoveProps): void => {
     const startX: number = choosedFigure.pos.x;
@@ -18,6 +19,7 @@ export const rookMove = ({ state, choosedFigure, id, contents }: figureMoveProps
                 const isSquareEmpty: boolean = square?.side === undefined;
                 const moveInfoProps: moveInfo = {
                     canMoveTo: testSquareId,
+                    figure: figuresName.queen
                 }
 
                 const rookSideHeight = choosedFigure.side ? 8 : 1;

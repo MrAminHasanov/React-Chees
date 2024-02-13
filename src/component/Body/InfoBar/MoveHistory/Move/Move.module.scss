@@ -1,0 +1,10 @@
+.component {
+    background-color: rgb(253, 253, 253, 0.5);
+    border: 1px solid black;
+    padding: 2px 10px;
+    font-family: "Russo one";
+
+    &:nth-child(2n) {
+        background-color: rgba(143, 143, 143, 0.5);
+    }
+}

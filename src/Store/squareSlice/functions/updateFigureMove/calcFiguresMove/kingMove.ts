@@ -2,6 +2,7 @@ import { contentInter, figureMoveProps, kingCanBeatedProps, squareContentInter }
 import isKingCanBeated from "../../isKingCanBeated.ts";
 import { addFigureMove } from "../../toolFunction/addFigureMove.ts";
 import { posToId } from "../../toolFunction/id_posFunctions.ts";
+import { figuresName } from "../../../Types/constFigureNames.ts";
 
 export const kingMove = ({ state, choosedFigure, id, contents }: figureMoveProps) => {
     const startX: number = choosedFigure.pos.x;
@@ -14,7 +15,7 @@ export const kingMove = ({ state, choosedFigure, id, contents }: figureMoveProps
                 const potentialSquareId: number = posToId(xCounter, yCounter);
                 const square: squareContentInter = contents[potentialSquareId];
                 if (square?.side !== choosedFigure.side) {
-                    addFigureMove(state, id, { changedKingSide: choosedFigure.side, canMoveTo: potentialSquareId, kingMove: true })
+                    addFigureMove(state, id, { changedKingSide: choosedFigure.side, canMoveTo: potentialSquareId, kingMove: true, figure: figuresName.king })
                 }
             }
         }
@@ -56,7 +57,7 @@ export const kingMove = ({ state, choosedFigure, id, contents }: figureMoveProps
                     const rightRookGoTo: number = posToId(6, choosedFigure.pos.y)
                     addFigureMove(state, id,
                         {
-                            changedKingSide: choosedFigure.side, canMoveTo: kingCastingSquareId,
+                            changedKingSide: choosedFigure.side, canMoveTo: kingCastingSquareId, figure: figuresName.king,
                             kingMove: true, alsoMoveTo: { from: rightRookId, to: rightRookGoTo }
                         })
                 }
@@ -89,7 +90,7 @@ export const kingMove = ({ state, choosedFigure, id, contents }: figureMoveProps
                     const leftRookGoTo: number = posToId(4, choosedFigure.pos.y)
                     addFigureMove(state, id,
                         {
-                            changedKingSide: choosedFigure.side, canMoveTo: kingCastingSquareId,
+                            changedKingSide: choosedFigure.side, canMoveTo: kingCastingSquareId, figure: figuresName.king,
                             kingMove: true, alsoMoveTo: { from: leftRookId, to: leftRookGoTo }
                         })
                 }

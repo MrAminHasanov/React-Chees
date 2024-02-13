@@ -14,7 +14,7 @@ function Timer() {
 
     useEffect(() => {
         if (isGameStarted) {
-            intervalLink.current = setInterval(() => decrimnetTimerTime(), 1000)
+            intervalLink.current = setInterval(() => decrimnetTimerTime(), 100)
         } else {
             clearInterval(intervalLink.current)
         }

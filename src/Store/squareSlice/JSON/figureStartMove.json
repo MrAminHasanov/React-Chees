@@ -49,75 +49,93 @@
     "47": {},
     "48": {
         "32": {
-            "canMoveTo": 32
+            "canMoveTo": 32,
+            "figure": "Pawn"
         },
         "40": {
-            "canMoveTo": 40
+            "canMoveTo": 40,
+            "figure": "Pawn"
         }
     },
     "49": {
         "33": {
-            "canMoveTo": 33
+            "canMoveTo": 33,
+            "figure": "Pawn"
         },
         "41": {
-            "canMoveTo": 41
+            "canMoveTo": 41,
+            "figure": "Pawn"
         }
     },
     "50": {
         "34": {
-            "canMoveTo": 34
+            "canMoveTo": 34,
+            "figure": "Pawn"
         },
         "42": {
-            "canMoveTo": 42
+            "canMoveTo": 42,
+            "figure": "Pawn"
         }
     },
     "51": {
         "35": {
-            "canMoveTo": 35
+            "canMoveTo": 35,
+            "figure": "Pawn"
         },
         "43": {
-            "canMoveTo": 43
+            "canMoveTo": 43,
+            "figure": "Pawn"
         }
     },
     "52": {
         "36": {
-            "canMoveTo": 36
+            "canMoveTo": 36,
+            "figure": "Pawn"
         },
         "44": {
-            "canMoveTo": 44
+            "canMoveTo": 44,
+            "figure": "Pawn"
         }
     },
     "53": {
         "37": {
-            "canMoveTo": 37
+            "canMoveTo": 37,
+            "figure": "Pawn"
         },
         "45": {
-            "canMoveTo": 45
+            "canMoveTo": 45,
+            "figure": "Pawn"
         }
     },
     "54": {
         "38": {
-            "canMoveTo": 38
+            "canMoveTo": 38,
+            "figure": "Pawn"
         },
         "46": {
-            "canMoveTo": 46
+            "canMoveTo": 46,
+            "figure": "Pawn"
         }
     },
     "55": {
         "39": {
-            "canMoveTo": 39
+            "canMoveTo": 39,
+            "figure": "Pawn"
         },
         "47": {
-            "canMoveTo": 47
+            "canMoveTo": 47,
+            "figure": "Pawn"
         }
     },
     "56": {},
     "57": {
         "40": {
-            "canMoveTo": 40
+            "canMoveTo": 40,
+            "figure": "Knight"
         },
         "42": {
-            "canMoveTo": 42
+            "canMoveTo": 42,
+            "figure": "Knight"
         }
     },
     "58": {},
@@ -126,10 +144,12 @@
     "61": {},
     "62": {
         "45": {
-            "canMoveTo": 45
+            "canMoveTo": 45,
+            "figure": "Knight"
         },
         "47": {
-            "canMoveTo": 47
+            "canMoveTo": 47,
+            "figure": "Knight"
         }
     },
     "63": {}

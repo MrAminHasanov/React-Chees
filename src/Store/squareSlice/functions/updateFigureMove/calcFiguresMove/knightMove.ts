@@ -1,6 +1,7 @@
 import { figureMoveProps } from "../../../Types/stateInterface.ts";
 import { addFigureMove } from "../../toolFunction/addFigureMove.ts";
 import { posToId } from "../../toolFunction/id_posFunctions.ts";
+import { figuresName } from "../../../Types/constFigureNames.ts";
 
 export const knightMove = ({ state, choosedFigure, id, contents }: figureMoveProps): void => {
     for (let xDrt = -1; xDrt <= 1; xDrt += 2) {
@@ -13,7 +14,7 @@ export const knightMove = ({ state, choosedFigure, id, contents }: figureMovePro
                     const isInSquareNotAlliedFigure: boolean = contents[moveableSquareId]?.side !== choosedFigure.side;
 
                     if (isInSquareNotAlliedFigure) {
-                        addFigureMove(state, id, { canMoveTo: moveableSquareId })
+                        addFigureMove(state, id, { canMoveTo: moveableSquareId, figure: figuresName.knight })
                     }
                 }
             }

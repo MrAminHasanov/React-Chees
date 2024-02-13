@@ -1,3 +1,4 @@
+import { figuresName } from "../../../Types/constFigureNames.ts";
 import { figureMoveProps, squareContentInter } from "../../../Types/stateInterface.ts";
 import { addFigureMove } from "../../toolFunction/addFigureMove.ts";
 import { posToId } from "../../toolFunction/id_posFunctions.ts";
@@ -17,13 +18,13 @@ export const queenMove = ({ state, choosedFigure, id, contents }: figureMoveProp
 
                 const isSquareEmpty: boolean = square?.side === undefined;
                 if (isSquareEmpty) {
-                    addFigureMove(state, id, { canMoveTo: testSquareId })
+                    addFigureMove(state, id, { canMoveTo: testSquareId, figure: figuresName.queen })
                     continue
                 }
 
                 const isInSquareEnemyFigure: boolean = square.side === !choosedFigure.side;
                 if (isInSquareEnemyFigure) {
-                    addFigureMove(state, id, { canMoveTo: testSquareId })
+                    addFigureMove(state, id, { canMoveTo: testSquareId, figure: figuresName.queen })
                 }
                 break
             }
@@ -41,13 +42,13 @@ export const queenMove = ({ state, choosedFigure, id, contents }: figureMoveProp
                 const square: squareContentInter = contents[testSquareId];
                 const isSquareEmpty: boolean = square?.side === undefined;
                 if (isSquareEmpty) {
-                    addFigureMove(state, id, { canMoveTo: testSquareId });
+                    addFigureMove(state, id, { canMoveTo: testSquareId, figure: figuresName.queen });
                     continue
                 }
 
                 const isInSquareEnemyFigure: boolean = square.side === !choosedFigure.side;
                 if (isInSquareEnemyFigure) {
-                    addFigureMove(state, id, { canMoveTo: testSquareId })
+                    addFigureMove(state, id, { canMoveTo: testSquareId, figure: figuresName.queen })
                 }
                 break
             }

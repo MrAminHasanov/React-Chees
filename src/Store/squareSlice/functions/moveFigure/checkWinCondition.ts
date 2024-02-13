@@ -12,31 +12,31 @@ const checkWinCondition = (state: stateIntarface): void => {
         }
 
         if (isKingCanBeated(kingProps)) {
-            state.isGameStared = false;
+            state.isGameStarted = false;
             state.whoWin = !state.figureTurn;
         }
         else {
-            state.isGameStared = false;
+            state.isGameStarted = false;
             state.whoWin = "draw";
         }
         return
     }
 
-    if (checkDrawBecauseRepeat({ ...state.moveHistory })) {
-        state.isGameStared = false;
+    if (checkDrawBecauseRepeat({ ...state.contentHistory })) {
+        state.isGameStarted = false;
         state.whoWin = "draw";
     }
 }
 
-const checkDrawBecauseRepeat = (moveHistory: Array<contentInter>): boolean => {
-    const movesCount: number = Object.keys(moveHistory).length - 1;
+const checkDrawBecauseRepeat = (contentHistory: Array<contentInter>): boolean => {
+    const movesCount: number = Object.keys(contentHistory).length - 1;
     if (movesCount > 7) {
         const isLastMoveEqualToFoureMoveBefore: boolean =
-            JSON.stringify(moveHistory[movesCount]) ===
-            JSON.stringify(moveHistory[movesCount - 4])
+            JSON.stringify(contentHistory[movesCount]) ===
+            JSON.stringify(contentHistory[movesCount - 4])
         const isFoureMoveBeforeEqualToEightMoveBefore: boolean =
-            JSON.stringify(moveHistory[movesCount - 4]) ===
-            JSON.stringify(moveHistory[movesCount - 8])
+            JSON.stringify(contentHistory[movesCount - 4]) ===
+            JSON.stringify(contentHistory[movesCount - 8])
         return (
             isLastMoveEqualToFoureMoveBefore &&
             isFoureMoveBeforeEqualToEightMoveBefore
