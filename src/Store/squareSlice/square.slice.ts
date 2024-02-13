@@ -117,6 +117,8 @@ export const squearesSlice = createSlice({
       if (state.contentHistory.length > 1) {
         state.content = state.contentHistory[state.contentHistory.length - 2];
         state.figureTurn = !state.figureTurn;
+        state.moveableSquares = {};
+        state.choosedFigureId = "notChosedFigure";
         state.contentHistory.pop();
         state.moveHistory.pop();
         updateFigureMove(state);

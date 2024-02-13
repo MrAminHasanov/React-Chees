@@ -74,7 +74,7 @@ export const pawnMove = ({ state, choosedFigure, id, contents }: figureMoveProps
             pawnId = rightSquareId;
         }
 
-        const prevMove: object = state.moveHistory[state.moveHistory.length - 2];
+        const prevMove: object = state.contentHistory[state.contentHistory.length - 2];
         const pawnStartPosId: number = posToId(pawnPos.x, pawnPos.y + 2 * pawnDirection);
         const wasPawnInStart: boolean = prevMove[pawnStartPosId]?.type === figuresName.pawn;
         if (wasPawnInStart) {
