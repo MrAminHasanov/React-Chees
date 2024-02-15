@@ -1,11 +1,13 @@
 .component {
-    background-color: rgb(253, 253, 253, 0.5);
     border: 1px solid black;
     padding: 2px 10px;
     font-family: "Russo one";
-
+    background-color: rgba(0, 0, 0, 0.6);
+    color: rgb(224, 224, 224);
+    
     &:nth-child(2n) {
-        background-color: rgba(143, 143, 143, 0.5);
+        color:  black;
+        background-color: rgba(255, 255, 255, 0.6);
     }
 
     @media only screen and (min-aspect-ratio: 1/0.7) and (max-width:980px) {

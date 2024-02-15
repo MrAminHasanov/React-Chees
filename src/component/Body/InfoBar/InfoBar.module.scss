@@ -3,6 +3,8 @@
     width: var(--infoBarSize);
     height: calc(var(--infoBarSize) * 2);
 
+    display: flex;
+    flex-direction: column;
     background-color: rgb(165, 87, 42);
     border: 4px solid rgb(0, 0, 0);
     border-radius: 20px;

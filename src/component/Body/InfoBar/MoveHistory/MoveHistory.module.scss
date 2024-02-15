@@ -1,0 +1,13 @@
+.component{
+    overflow-y: scroll;
+    height: 100%;
+    &::-webkit-scrollbar{
+        width: 2px;
+        background-color: white;
+    }
+    &::-webkit-scrollbar-thumb{
+        background-color: black;
+        height: 3px;
+        border-radius: 0px 0px 12px 0px;
+    }
+}
