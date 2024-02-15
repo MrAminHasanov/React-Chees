@@ -7,4 +7,12 @@
     &:nth-child(2n) {
         background-color: rgba(143, 143, 143, 0.5);
     }
+
+    @media only screen and (min-aspect-ratio: 1/0.7) and (max-width:980px) {
+        font-size: 12px;
+    }
+
+    @media only screen and (min-aspect-ratio: 1/0.7) and (max-width:680px) {
+        font-size: 10px;
+    }
 }

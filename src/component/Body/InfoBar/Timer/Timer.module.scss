@@ -2,10 +2,8 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
-}
 
-@media only screen and (max-aspect-ratio: 1/0.7) {
-    .component {
+    @media only screen and (max-aspect-ratio: 1/0.7) {
         width: calc(var(--tableSide) / 1.5);
         position: absolute;
         transform: translateY(calc(-1 * (var(--tableSide)) - 14px - 100%));
