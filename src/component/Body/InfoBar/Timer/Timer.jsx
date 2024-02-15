@@ -7,18 +7,18 @@ import { useEffect, useRef } from 'react';
 import { useActions } from '../../../../Hooks/useActions/useActions.js';
 
 function Timer() {
-    const isGameStarted = useSelector(state => state.squaresList.isGameStarted);
+    const isTimerGoing = useSelector(state => state.squaresList.isTimerGoing);
     const intervalLink = useRef();
 
     const { decrimnetTimerTime } = useActions()
 
     useEffect(() => {
-        if (isGameStarted) {
+        if (isTimerGoing) {
             intervalLink.current = setInterval(() => decrimnetTimerTime(), 100)
         } else {
             clearInterval(intervalLink.current)
         }
-    }, [isGameStarted, decrimnetTimerTime])
+    }, [isTimerGoing, decrimnetTimerTime])
 
     return (
         <div className={c.component}>

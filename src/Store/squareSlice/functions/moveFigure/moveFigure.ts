@@ -56,7 +56,7 @@ const moveFigure = (state: stateIntarface, { payload: goTo }) => {
         movedFigure: moveInformation.figure,
         movedFromTo: `${figureStartCor} ${figureFinalCor}`
     })
-    state.isGameStarted = true;
+    state.isTimerGoing = true;
     state.figureTurn = !state.figureTurn;
     state.contentHistory = [...state.contentHistory, state.content];
     state.choosedFigureId = "notChosedFigure";

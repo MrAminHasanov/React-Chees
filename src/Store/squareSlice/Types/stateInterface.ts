@@ -47,7 +47,7 @@ export interface stateIntarface {
     playerTime: {
         [playerSide: string]: number,
     },
-    isGameStarted: boolean,
+    isTimerGoing: boolean,
     moveHistory: Array<move>
 }
 

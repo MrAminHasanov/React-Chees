@@ -39,7 +39,7 @@ const initialState: stateIntarface = {
     [String(sides.white)]: 1 * 1000 * 60,
     [String(sides.black)]: 1 * 1000 * 60,
   },
-  isGameStarted: false,
+  isTimerGoing: false,
   moveHistory: []
 };
 
@@ -55,8 +55,9 @@ export const squearesSlice = createSlice({
       state.needTransformPawn = false;
       state.needTransformPawn = false;
       state.whoWin = "undefined";
-      state.isGameStarted = false;
+      state.isTimerGoing = false;
       state.moveableSquares = {};
+      state.moveHistory = [];
       state.playerTime = {
         [String(sides.white)]: 10 * 1000 * 60,
         [String(sides.black)]: 10 * 1000 * 60,
@@ -102,13 +103,14 @@ export const squearesSlice = createSlice({
       const playerTime = state.playerTime[String(playerSide)];
       if (playerTime < 1) {
         state.whoWin = !playerSide;
-        state.isGameStarted = false;
+        state.isTimerGoing = false;
       } else {
         state.playerTime[String(playerSide)] -= 100;
       }
     },
     surend: (state) => {
       state.whoWin = !state.figureTurn;
+      state.isTimerGoing = false;
     },
     addTime: (state) => {
       state.playerTime[String(state.figureTurn)] += 30 * 1000
@@ -124,8 +126,8 @@ export const squearesSlice = createSlice({
         updateFigureMove(state);
       }
     },
-    pauseGame: (state) => {
-      state.isGameStarted = !state.isGameStarted;
+    switchGameTimer: (state) => {
+      state.isTimerGoing = !state.isTimerGoing;
     },
   }
 });

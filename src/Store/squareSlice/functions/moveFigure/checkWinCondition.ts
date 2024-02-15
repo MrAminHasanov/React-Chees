@@ -12,18 +12,18 @@ const checkWinCondition = (state: stateIntarface): void => {
         }
 
         if (isKingCanBeated(kingProps)) {
-            state.isGameStarted = false;
+            state.isTimerGoing = false;
             state.whoWin = !state.figureTurn;
         }
         else {
-            state.isGameStarted = false;
+            state.isTimerGoing = false;
             state.whoWin = "draw";
         }
         return
     }
 
     if (checkDrawBecauseRepeat({ ...state.contentHistory })) {
-        state.isGameStarted = false;
+        state.isTimerGoing = false;
         state.whoWin = "draw";
     }
 }

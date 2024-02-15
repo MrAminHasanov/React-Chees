@@ -8,21 +8,26 @@ import { useActions } from "../../../../Hooks/useActions/useActions";
 import { useSelector } from "react-redux";
 
 function Buttons() {
-    const isGameStarted = useSelector(state => state.squaresList.isGameStarted);
-    const { surend, addTime, prevMove, pauseGame } = useActions();
+    const isTimerGoing = useSelector(state => state.squaresList.isTimerGoing);
+    const isGameContinues = useSelector(state => state.squaresList.whoWin === "undefined")
+    const { surend, addTime, prevMove, switchGameTimer } = useActions();
 
+    const prevMoveHandleClick = isGameContinues ? () => prevMove() : () => { };
+    const switchGameTimerHandleClick = isGameContinues ? () => switchGameTimer() : () => { };
+    const addTimeHandleClick = isGameContinues ? () => addTime() : () => { };
+    const surendHandleClick = isGameContinues ? () => surend() : () => { };
     return (
         <div className={c.component}>
-            <button onClick={() => prevMove()} className={c.button}>
+            <button onClick={prevMoveHandleClick} className={c.button}>
                 <img className={c.icon} src={backMoveImg} alt="backMove" />
             </button>
-            <button onClick={() => pauseGame()} className={c.button}>
-                <img className={c.icon} src={isGameStarted ? pauseImg : resumeImg} alt="pause/resume" />
+            <button onClick={switchGameTimerHandleClick} className={c.button}>
+                <img className={c.icon} src={isTimerGoing ? pauseImg : resumeImg} alt="pause/resume" />
             </button>
-            <button onClick={() => addTime()} className={c.button}>
+            <button onClick={addTimeHandleClick} className={c.button}>
                 <img className={c.icon} src={addTimeImg} alt="addTime" />
             </button>
-            <button onClick={() => surend()} className={c.button}>
+            <button onClick={surendHandleClick} className={c.button}>
                 <img className={c.icon} src={surendImg} alt="surendImg" />
             </button>
         </div>
