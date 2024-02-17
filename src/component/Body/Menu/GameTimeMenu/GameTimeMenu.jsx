@@ -74,7 +74,7 @@ function GameTimeMenu({ goToMainMenu }) {
                 </div>
                 <button
                     onClick={onSubmite}
-                    className={c.confirmButton} type='submit'>Confirm</button>
+                    className={c.confirmButton} type='submit'>Play</button>
             </form>
         </div>
     )

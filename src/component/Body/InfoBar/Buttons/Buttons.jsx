@@ -11,13 +11,14 @@ import { squareSelectors } from "../../../../Store/squareSlice/squareSelectors.t
 
 function Buttons() {
     const isTimerGoing = useSelector(squareSelectors.isTimerGoing);
-    const isGameContinues = useSelector(squareSelectors.isGameContinues)
+    const isGameContinues = useSelector(squareSelectors.isGameContinues);
+    const isGameStarted = useSelector(squareSelectors.isGameStarted);
     const { surend, addTime, prevMove, switchGameTimer } = useActions();
 
-    const prevMoveHandleClick = isGameContinues ? () => prevMove() : () => { };
-    const switchGameTimerHandleClick = isGameContinues ? () => switchGameTimer() : () => { };
-    const addTimeHandleClick = isGameContinues ? () => addTime() : () => { };
-    const surendHandleClick = isGameContinues ? () => surend() : () => { };
+    const prevMoveHandleClick = isGameContinues && isGameStarted ? () => prevMove() : () => { };
+    const switchGameTimerHandleClick = isGameContinues && isGameStarted ? () => switchGameTimer() : () => { };
+    const addTimeHandleClick = isGameContinues && isGameStarted ? () => addTime() : () => { };
+    const surendHandleClick = isGameContinues && isGameStarted ? () => surend() : () => { };
     return (
         <div className={c.component}>
             <button onClick={prevMoveHandleClick} className={c.button}>
