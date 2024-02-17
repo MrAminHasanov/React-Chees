@@ -1,7 +1,8 @@
 .component {
-    padding: 12em 0em;
+    margin-top: 12em;
     display: flex;
     justify-content: space-evenly;
+    position: relative;
 
     --tableSide: calc(var(--squareSide) * 8 + var(--outlineGap) + var(--borderGap) + var(--cordinatsGap));
     --cordinatsGap: calc(var(--squareSide) / 3 * 1.2);
@@ -10,7 +11,7 @@
     --squareSide: calc(78vh / 8);
 
     @media only screen and (max-width: 1140px) {
-        padding: 6em 0em;
+        margin-top: 6em;
     }
 
     @media only screen and (max-aspect-ratio: 1) {

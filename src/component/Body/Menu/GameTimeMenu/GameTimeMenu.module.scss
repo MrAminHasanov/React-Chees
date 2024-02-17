@@ -53,6 +53,31 @@
         &:hover {
             background-color: rgb(139, 195, 54);
         }
+
+    }
+
+    @media only screen and (max-width:560px) {
+        .inputBox {
+            input {
+                padding: 4px;
+                font-size: 14px;
+            }
+            label{
+                font-size: 10px;
+            }
+        }
+
+        .prevButton {
+            width: 25px;
+        }
+
+        .timeForm {
+            padding-top: 20px;
+        }
+
+        .confirmButton {
+            font-size: 12px;
+        }
     }
 
     .icon {
