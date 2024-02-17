@@ -3,9 +3,8 @@ import prevPage from "../../../../img/prevPage.svg";
 import { useState } from 'react';
 import { useActions } from "../../../../Hooks/useActions/useActions"
 
-function GameTimeMenu({ setMenuPageNumber }) {
-    const prevPageHandleClick = () => setMenuPageNumber(0);
-    const { setGameTime, setTimeAddictionForMove, setGameStarting } = useActions()
+function GameTimeMenu({ goToMainMenu }) {
+    const { setGameTime, setTimeAddictionForMove, setGameStarting, restartGame } = useActions()
 
     const [inputGameTime, setInputGameTime] = useState("10:00");
     const [inputTimeAddictionForMove, setInputTimeAddictionForMove] = useState(0);
@@ -14,7 +13,8 @@ function GameTimeMenu({ setMenuPageNumber }) {
         e.preventDefault();
         setGameTime(inputGameTime);
         setTimeAddictionForMove(inputTimeAddictionForMove);
-        setGameStarting(true)
+        setGameStarting(true);
+        restartGame();
     }
 
     const onGameTimeChange = (e) => {
@@ -47,7 +47,7 @@ function GameTimeMenu({ setMenuPageNumber }) {
 
     return (
         <div className={c.component}>
-            <button className={c.prevButton} onClick={prevPageHandleClick}>
+            <button className={c.prevButton} onClick={goToMainMenu}>
                 <img src={prevPage} alt='prevPageIcon' className={c.icon}></img>
             </button>
             <form className={c.timeForm}>

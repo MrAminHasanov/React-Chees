@@ -1,7 +1,7 @@
 import c from './GameModeMenu.module.scss'
 
 function GameModeMenu({ setMenuPageNumber }) {
-    const singlePlayHandleClick = () => setMenuPageNumber(1);
+    const singlePlayHandleClick = () => setMenuPageNumber("timeMenu");
     return (
         <div className={c.component}>
             <button

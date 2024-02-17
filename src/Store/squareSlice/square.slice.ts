@@ -81,6 +81,7 @@ export const squearesSlice = createSlice({
       if (playerTime < 1) {
         state.whoWin = !playerSide;
         state.isTimerGoing = false;
+        state.isGameStarted = false;
       } else {
         state.playerTime[String(playerSide)] -= 100;
       }
@@ -88,6 +89,7 @@ export const squearesSlice = createSlice({
     surend: (state) => {
       state.whoWin = !state.figureTurn;
       state.isTimerGoing = false;
+      state.isGameStarted = false;
     },
     addTime: (state) => {
       state.playerTime[String(state.figureTurn)] += 30 * 1000;
@@ -123,7 +125,7 @@ export const squearesSlice = createSlice({
       state.isGameStarted = isGameStarted;
     },
     restartGame: (state: stateIntarface) => {
-      const initialStateClone = deepObjectCloning(initialState, ["gameTime", "timeAddictionForMove"]);
+      const initialStateClone = deepObjectCloning(initialState, ["gameTime", "timeAddictionForMove", "isGameStarted"]);
       Object.keys(initialStateClone).forEach((stateKey) => state[stateKey] = initialStateClone[stateKey])
     },
 

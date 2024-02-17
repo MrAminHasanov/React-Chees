@@ -9,14 +9,19 @@ import { squareSelectors } from "../../../../Store/squareSlice/squareSelectors.t
 
 function Timer() {
     const isTimerGoing = useSelector(squareSelectors.isTimerGoing);
-    const gameTime = useSelector(squareSelectors.gameTime);
-    const timeAddictionForMove = useSelector(squareSelectors.timeAddictionForMove);
+    const isGameStarted = useSelector(squareSelectors.isGameStarted);
+    const whoWin = useSelector(squareSelectors.whoWin);
 
     const intervalLink = useRef();
 
     const { decrimnetTimerTime, setPlayerTime } = useActions()
 
-    useEffect(() => { setPlayerTime() }, [gameTime, timeAddictionForMove, setPlayerTime])
+    useEffect(() => {
+        if (whoWin === "undefined" && isGameStarted) {
+            setPlayerTime()
+        }
+    },
+        [setPlayerTime, whoWin, isGameStarted])
 
     useEffect(() => {
         if (isTimerGoing) {
