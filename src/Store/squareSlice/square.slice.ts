@@ -8,15 +8,27 @@ import { stateIntarface } from "./Types/stateInterface.ts";
 import { figures, sides } from "./Types/constFigureNames.ts";
 import moveFigure from "./functions/moveFigure/moveFigure.ts";
 import transformJsonToTableContent from "./functions/toolFunction/transformJsonTable.ts";
+import { deepObjectCloning } from './functions/deepObjectCloning.ts';
 
 const initialState: stateIntarface = {
   content: transformJsonToTableContent(tableStartJSON),
   figureMove: { ...figureStartMove },
-  contentHistory: [transformJsonToTableContent(tableStartJSON)],
   moveableSquares: {},
-  figureTurn: sides.white,
+
   choosedFigureId: "notChosedFigure",
-  needTransformPawn: false,
+  figureTurn: sides.white,
+
+  gameTime: "1:0",
+  timeAddictionForMove: 5,
+  playerTime: {
+    [String(sides.white)]: 1 * 1000 * 60,
+    [String(sides.black)]: 1 * 1000 * 60,
+  },
+
+  moveHistory: [],
+  contentHistory: [transformJsonToTableContent(tableStartJSON)],
+
+  //only calculation params
   kingsId: {
     [String(sides.white)]: 60,
     [String(sides.black)]: 4
@@ -33,53 +45,18 @@ const initialState: stateIntarface = {
       "isRightRookMove": false
     }
   },
+  //status
+  needTransformPawn: false,
   isMoveExist: true,
   whoWin: "undefined",
-  playerTime: {
-    [String(sides.white)]: 1 * 1000 * 60,
-    [String(sides.black)]: 1 * 1000 * 60,
-  },
   isTimerGoing: false,
-  moveHistory: []
+  isGameStarted: false
 };
 
 export const squearesSlice = createSlice({
   name: "squaresList",
   initialState,
   reducers: {
-    restartGame: (state: stateIntarface) => {
-      state.figureTurn = sides.white;
-      state.content = transformJsonToTableContent(tableStartJSON);
-      state.figureMove = { ...figureStartMove };
-      state.contentHistory = [transformJsonToTableContent(tableStartJSON)];
-      state.needTransformPawn = false;
-      state.needTransformPawn = false;
-      state.whoWin = "undefined";
-      state.isTimerGoing = false;
-      state.moveableSquares = {};
-      state.moveHistory = [];
-      state.playerTime = {
-        [String(sides.white)]: 10 * 1000 * 60,
-        [String(sides.black)]: 10 * 1000 * 60,
-      }
-      state.kingsId = {
-        [String(sides.white)]: 60,
-        [String(sides.black)]: 4
-      }
-      state.castlingCondition = {
-        [String(sides.white)]: {
-          "isKingMove": false,
-          "isLeftRookMove": false,
-          "isRightRookMove": false
-        },
-        [String(sides.black)]: {
-          "isKingMove": false,
-          "isLeftRookMove": false,
-          "isRightRookMove": false
-        }
-      }
-      state.choosedFigureId = "notChosedFigure";
-    },
     selectFigure: (state: stateIntarface, { payload: id }) => {
       state.choosedFigureId = id;
       state.moveableSquares =
@@ -113,7 +90,7 @@ export const squearesSlice = createSlice({
       state.isTimerGoing = false;
     },
     addTime: (state) => {
-      state.playerTime[String(state.figureTurn)] += 30 * 1000
+      state.playerTime[String(state.figureTurn)] += 30 * 1000;
     },
     prevMove: (state) => {
       if (state.contentHistory.length > 1) {
@@ -129,6 +106,27 @@ export const squearesSlice = createSlice({
     switchGameTimer: (state) => {
       state.isTimerGoing = !state.isTimerGoing;
     },
+    setGameTime: (state: stateIntarface, { payload: gameTime }) => {
+      state.gameTime = gameTime;
+    },
+    setPlayerTime: (state: stateIntarface) => {
+      const [minutes, seconds] = state.gameTime.split(":");
+      state.playerTime = {
+        [String(sides.white)]: Number(minutes) * 1000 * 60 + Number(seconds) * 1000,
+        [String(sides.black)]: Number(minutes) * 1000 * 60 + Number(seconds) * 1000,
+      }
+    },
+    setTimeAddictionForMove: (state: stateIntarface, { payload: timeAddictionForMove }) => {
+      state.timeAddictionForMove = timeAddictionForMove;
+    },
+    setGameStarting: (state: stateIntarface, { payload: isGameStarted }) => {
+      state.isGameStarted = isGameStarted;
+    },
+    restartGame: (state: stateIntarface) => {
+      const initialStateClone = deepObjectCloning(initialState, ["gameTime", "timeAddictionForMove"]);
+      Object.keys(initialStateClone).forEach((stateKey) => state[stateKey] = initialStateClone[stateKey])
+    },
+
   }
 });
 

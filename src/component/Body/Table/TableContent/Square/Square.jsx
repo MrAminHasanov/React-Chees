@@ -4,23 +4,26 @@ import classNames from 'classnames';
 import { useActions } from '../../../../../Hooks/useActions/useActions';
 import { useSelector } from 'react-redux';
 import PawnTransform from './PawnTransform/PawnTransform';
+import { skinManagmentSelectors } from "../../../../../Store/skinManagmentSlice/skinManagmentSelectors.ts";
 
 import Figures from './Figures/Figures';
+import { squareSelectors } from "../../../../../Store/squareSlice/squareSelectors.ts";
 
 
 function Square({ id, squareMathColor }) {
-  const squareContent = useSelector(state => state.squaresList.content[id]);
-  const chessTurn = useSelector(state => state.squaresList.figureTurn);
-  const whoWin = useSelector(state => state.squaresList.whoWin);
-  const isChoosedFigure = useSelector(state => state.squaresList.choosedFigureId === id);
-  const isMoveableSquare = useSelector(state => !!state.squaresList.moveableSquares[id])
+  const squareContent = useSelector(state => squareSelectors.squareContent(state, id));
+  const chessTurn = useSelector(squareSelectors.figureSide);
+  const whoWin = useSelector(squareSelectors.whoWin);
+  const isChoosedFigure = useSelector(state => squareSelectors.isChoosedFigure(state, id));
+  const isMoveableSquare = useSelector(state => squareSelectors.isMoveableSquare(state, id))
   const isThisFigureSideTurn = chessTurn === squareContent?.side;
-  const needTransfromPawn = useSelector(state => state.squaresList.needTransformPawn)
+  const needTransfromPawn = useSelector(squareSelectors.needTransfromPawn)
 
   const squareColorOrder = squareMathColor === 0 ? "white" : "black";
-  const squareSkin = useSelector(state => state.skinManagment.selectedSkin.squares[squareColorOrder]);
-  const skinStyle = useSelector(state => state.skinManagment.selectedSkin.squareStyles)
-  const emptySquareMoveBalsSkins = useSelector(state => state.skinManagment.selectedSkin.emptySquareMove)
+
+  const squareSkin = useSelector(state => skinManagmentSelectors.squareSkin(state, squareColorOrder));
+  const skinStyle = useSelector(skinManagmentSelectors.skinStyle)
+  const emptySquareMoveBalsSkins = useSelector(skinManagmentSelectors.emptySquareMoveBalsSkins)
 
   Object.entries(skinStyle).forEach(([styleKey, style]) => {
     squareStyle[styleKey] = style;

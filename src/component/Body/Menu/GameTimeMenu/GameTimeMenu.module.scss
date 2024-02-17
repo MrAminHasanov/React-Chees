@@ -1,0 +1,61 @@
+.component {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    font-family: "Russo One";
+    height: 100%;
+    padding: 5px;
+
+    .timeForm {
+        display: flex;
+        flex-direction: column;
+        padding-top: 60px;
+        height: 100%;
+    }
+
+    .prevButton {
+        cursor: pointer;
+        position: absolute;
+        top: 0%;
+        left: 0%;
+        background-color: transparent;
+        border: none;
+        display: inline;
+        width: 40px;
+    }
+
+    .inputBox {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+
+        input {
+            width: 100%;
+            padding: 8px;
+            font-size: 18px;
+            color: rgb(81, 81, 81);
+            font-family: "Russo One";
+        }
+    }
+
+    .confirmButton {
+        margin-top: 10px;
+        font-size: 18px;
+        width: 100%;
+        font-family: "Russo One";
+        border-radius: 6px;
+        background-color: rgb(158, 215, 73);
+        padding: 4px 0px;
+        transition: 0.4s ease background-color;
+        cursor: pointer;
+
+        &:hover {
+            background-color: rgb(139, 195, 54);
+        }
+    }
+
+    .icon {
+        width: 100%;
+    }
+}

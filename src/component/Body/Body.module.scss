@@ -8,22 +8,16 @@
     --borderGap: calc(var(--squareSide) / 3);
     --outlineGap: calc(var(--squareSide) / 2);
     --squareSide: calc(78vh / 8);
-}
 
-@media only screen and (max-width: 1140px) {
-    .component {
+    @media only screen and (max-width: 1140px) {
         padding: 6em 0em;
     }
-}
 
-@media only screen and (max-aspect-ratio: 1) {
-    .component {
+    @media only screen and (max-aspect-ratio: 1) {
         --squareSide: calc(80vw / 8);
     }
-}
 
-@media only screen and (max-aspect-ratio: 1/0.7) {
-    .component {
+    @media only screen and (max-aspect-ratio: 1/0.7) {
         flex-direction: column;
         align-items: center;
     }

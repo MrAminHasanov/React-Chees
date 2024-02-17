@@ -14,7 +14,7 @@ export const skinManagmentSlice = createSlice({
         setTableSkin: (state, { payload: selectedSkin }) => {
             state.selectedSkinKey = selectedSkin;
             state.selectedSkin = skins[selectedSkin];
-        },
+        }
     }
 });
 

@@ -4,12 +4,14 @@ import surendImg from "../../../../img/infoBarButtons/flag-svgrepo-com.svg";
 import pauseImg from "../../../../img/infoBarButtons/pause-alt-svgrepo-com.svg";
 import resumeImg from "../../../../img/infoBarButtons/media-playback-start-svgrepo-com.svg";
 import addTimeImg from "../../../../img/infoBarButtons/time-add-svgrepo-com.svg";
+
 import { useActions } from "../../../../Hooks/useActions/useActions";
 import { useSelector } from "react-redux";
+import { squareSelectors } from "../../../../Store/squareSlice/squareSelectors.ts";
 
 function Buttons() {
-    const isTimerGoing = useSelector(state => state.squaresList.isTimerGoing);
-    const isGameContinues = useSelector(state => state.squaresList.whoWin === "undefined")
+    const isTimerGoing = useSelector(squareSelectors.isTimerGoing);
+    const isGameContinues = useSelector(squareSelectors.isGameContinues)
     const { surend, addTime, prevMove, switchGameTimer } = useActions();
 
     const prevMoveHandleClick = isGameContinues ? () => prevMove() : () => { };

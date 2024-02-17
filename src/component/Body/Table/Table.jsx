@@ -4,13 +4,15 @@ import { useSelector } from 'react-redux';
 import c from './Table.module.scss'
 import TableContent from './TableContent/TableContent'
 import ResultInformation from "./ResultInformation/ResultInformation"
+import { skinManagmentSelectors } from '../../../Store/skinManagmentSlice/skinManagmentSelectors.ts';
+import { squareSelectors } from '../../../Store/squareSlice/squareSelectors.ts';
 
 const numbers = [8, 7, 6, 5, 4, 3, 2, 1];
 const worlds = ["a", "b", "c", "d", "e", "f", "g", "h"];
 
 function Table() {
-  const tableBorders = useSelector(state => state.skinManagment.selectedSkin.table);
-  const gameResult = useSelector(state => state.squaresList.whoWin);
+  const tableBorders = useSelector(skinManagmentSelectors.tableBorders);
+  const gameResult = useSelector(squareSelectors.whoWin);
 
   return (
     <div className={c.component}>

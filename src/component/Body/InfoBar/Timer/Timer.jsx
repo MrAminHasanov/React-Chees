@@ -5,12 +5,18 @@ import { sides } from "../../../../Store/squareSlice/Types/constFigureNames.ts";
 import { useSelector } from 'react-redux';
 import { useEffect, useRef } from 'react';
 import { useActions } from '../../../../Hooks/useActions/useActions.js';
+import { squareSelectors } from "../../../../Store/squareSlice/squareSelectors.ts";
 
 function Timer() {
-    const isTimerGoing = useSelector(state => state.squaresList.isTimerGoing);
+    const isTimerGoing = useSelector(squareSelectors.isTimerGoing);
+    const gameTime = useSelector(squareSelectors.gameTime);
+    const timeAddictionForMove = useSelector(squareSelectors.timeAddictionForMove);
+
     const intervalLink = useRef();
 
-    const { decrimnetTimerTime } = useActions()
+    const { decrimnetTimerTime, setPlayerTime } = useActions()
+
+    useEffect(() => { setPlayerTime() }, [gameTime, timeAddictionForMove, setPlayerTime])
 
     useEffect(() => {
         if (isTimerGoing) {

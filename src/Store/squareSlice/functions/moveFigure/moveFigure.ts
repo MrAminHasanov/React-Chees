@@ -47,6 +47,8 @@ const moveFigure = (state: stateIntarface, { payload: goTo }) => {
         state.castlingCondition[figureSide].isRightRookMove = true;
     }
 
+
+    state.playerTime[String(state.figureTurn)] += state.timeAddictionForMove * 1000
     const figureStartPos = idToPos(state.choosedFigureId);
     const figureStartCor = String.fromCharCode(96 + figureStartPos.x) + Math.abs(9 - figureStartPos.y)
     const figureFinalPos = idToPos(goTo);

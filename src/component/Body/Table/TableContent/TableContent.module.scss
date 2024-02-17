@@ -1,6 +1,6 @@
 .component {
     display: grid;
     grid-template-columns: repeat(8, var(--squareSide));
-    grid-template-rows: repeat(8, var(--squareSide));
+    grid-template-rows: repeat(8, var(--squareSide));   
     z-index: 3;
 }   

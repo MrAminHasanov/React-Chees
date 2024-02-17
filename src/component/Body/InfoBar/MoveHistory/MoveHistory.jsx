@@ -1,9 +1,10 @@
 import { useSelector } from 'react-redux'
 import c from './MoveHistory.module.scss'
 import Move from './Move/Move';
+import { squareSelectors } from '../../../../Store/squareSlice/squareSelectors.ts';
 
 function MoveHistory() {
-    const moveHistory = useSelector(state => state.squaresList.moveHistory);
+    const moveHistory = useSelector(squareSelectors.moveHistory);
 
     return (
         <div className={c.component}>

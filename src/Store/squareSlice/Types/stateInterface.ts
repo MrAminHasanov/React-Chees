@@ -33,22 +33,30 @@ export interface move {
 }
 
 export interface stateIntarface {
-    moveableSquares: moveableSquares,
-    choosedFigureId: number | string,
-    contentHistory: Array<contentInter>,
-    isMoveExist: boolean,
-    figureMove: figureMove,
-    figureTurn: boolean,
-    kingsId: kingsIdInter,
     content: contentInter,
-    whoWin: string | boolean,
-    castlingCondition: castlingCondition,
-    needTransformPawn: boolean | number,
+    moveableSquares: moveableSquares,
+    figureMove: figureMove,
+
+    choosedFigureId: number | string,
+    figureTurn: boolean,
+
+    gameTime: string,
+    timeAddictionForMove: number,
     playerTime: {
         [playerSide: string]: number,
     },
+
+    moveHistory: Array<move>,
+    contentHistory: Array<contentInter>,
+
+    isMoveExist: boolean,
+    whoWin: string | boolean,
     isTimerGoing: boolean,
-    moveHistory: Array<move>
+    needTransformPawn: boolean | number,
+    isGameStarted: boolean
+
+    kingsId: kingsIdInter,
+    castlingCondition: castlingCondition,
 }
 
 // #endregion
