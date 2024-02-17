@@ -30,4 +30,22 @@
             background-color: rgb(139, 195, 54);
         }
     }
+
+    @media only screen and (max-width:620px) {
+        padding-top: 4px;
+
+        .gameResult {
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .menuButton {
+            margin-top: 4px;
+        }
+
+        .button {
+            padding: 2px 0px;
+            font-size: 14px;
+        }
+    }
 }

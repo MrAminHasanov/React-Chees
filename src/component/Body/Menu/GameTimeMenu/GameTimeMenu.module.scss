@@ -53,16 +53,20 @@
         &:hover {
             background-color: rgb(139, 195, 54);
         }
-
     }
 
-    @media only screen and (max-width:560px) {
+    .icon {
+        width: 100%;
+    }
+
+    @media only screen and (max-height:600px) {
         .inputBox {
             input {
                 padding: 4px;
                 font-size: 14px;
             }
-            label{
+
+            label {
                 font-size: 10px;
             }
         }
@@ -80,7 +84,46 @@
         }
     }
 
-    .icon {
-        width: 100%;
+    @media only screen and (max-width:600px) {
+        .inputBox {
+            input {
+                padding: 4px;
+                font-size: 14px;
+            }
+
+            label {
+                font-size: 10px;
+            }
+        }
+
+        .prevButton {
+            width: 25px;
+        }
+
+        .timeForm {
+            padding-top: 20px;
+        }
+
+        .confirmButton {
+            font-size: 12px;
+        }
+    }
+
+
+    @media only screen and (max-width:400px) {
+        .inputBox{
+            input{
+                font-size: 10px;
+            }
+        }
+
+        .prevButton{
+            width: 20px;
+        }
+
+        .confirmButton{
+            font-size: 10px;
+            padding: 2px 0px;
+        }
     }
 }
