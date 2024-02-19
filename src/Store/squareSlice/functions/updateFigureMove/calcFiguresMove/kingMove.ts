@@ -23,7 +23,13 @@ export const kingMove = ({ state, choosedFigure, id, contents }: figureMoveProps
     //#castingTest
     const isKingMove: boolean =
         state.castlingCondition[String(choosedFigure.side)].isKingMove;
-    if (!isKingMove) {
+    const isKingInDanger: boolean = isKingCanBeated({
+        tableContent: state.content,
+        kingSide: choosedFigure.side,
+        kingPos: choosedFigure.pos
+    })
+    
+    if (!isKingMove && !isKingInDanger) {
         const isRightRookMove: boolean =
             state.castlingCondition[String(choosedFigure.side)].isRightRookMove;
         const isLeftRookMove: boolean =

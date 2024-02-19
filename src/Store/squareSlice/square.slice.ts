@@ -128,9 +128,7 @@ export const squearesSlice = createSlice({
       const initialStateClone = deepObjectCloning(initialState, ["gameTime", "timeAddictionForMove", "isGameStarted"]);
       Object.keys(initialStateClone).forEach((stateKey) => state[stateKey] = initialStateClone[stateKey])
     },
-
   }
 });
 
 export const { actions, reducer } = squearesSlice;
-

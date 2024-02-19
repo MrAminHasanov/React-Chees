@@ -1,5 +1,5 @@
 .component {
-    margin-top: 12em;
+    margin: 12em 0px;
     display: flex;
     justify-content: space-evenly;
     position: relative;
@@ -11,7 +11,7 @@
     --squareSide: calc(78vh / 8);
 
     @media only screen and (max-width: 1140px) {
-        margin-top: 6em;
+        margin-top: 6em 0px;
     }
 
     @media only screen and (max-aspect-ratio: 1) {
