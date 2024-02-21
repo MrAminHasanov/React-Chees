@@ -2,11 +2,11 @@ import { useMemo } from "react";
 import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import { actions as squaresListActions } from "../../Store/squareSlice/square.slice.ts"
-import { actions as headerActions } from "../../Store/skinManagmentSlice/skinManagment.slice";
+import { actions as skinManagmentActions } from "../../Store/skinManagmentSlice/skinManagment.slice";
 
 const rootActions = {
     ...squaresListActions,
-    ...headerActions
+    ...skinManagmentActions
 };
 
 export const useActions = () => {
