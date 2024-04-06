@@ -7,4 +7,4 @@ npm start
 
 //Стэк: React/Redux-toolkit/scss/TypeScrypt  
 
-[//Сылка на дэплоймент](https://main--prismatic-stroopwafel-788676.netlify.app/)  
+[//Сылка на дэплоймент](https://main--prismatic-stroopwafel-788676.netlify.app/)   
